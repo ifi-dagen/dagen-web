@@ -5,7 +5,7 @@ import FAQAccordion from "@/components/FAQAccordion";
 
 export default function Page({ content, hsp, dagen, ettermiddagen, faqs }: { content: string, hsp: string, dagen: string, ettermiddagen: string, faqs: FAQ[] }) {
   return (
-    <main className="max-w-4xl mx-auto px-4 py-8 space-y-12">
+    <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-12">
       <div className="prose mx-auto text-center">
         <ReactMarkdown>{content}</ReactMarkdown>
       </div>

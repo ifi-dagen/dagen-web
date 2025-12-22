@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 export default function Home({ dagen, ettermiddagen }: { dagen: string, ettermiddagen: string }) {
   const router = useRouter();
   return (
-    <main className="max-w-6xl mx-auto px-4 py-8 space-y-12">
+    <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-12">
       
       {/* Dagen */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">

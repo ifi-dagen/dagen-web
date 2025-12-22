@@ -7,7 +7,7 @@ type InternGroup = {
 
 export default function Page({ content, internInfo, internGroups }: { content: string; internInfo: string; internGroups: InternGroup[] }) {
   return (
-    <main className="max-w-6xl mx-auto px-4 py-8">
+    <main className="max-w-7xl mx-auto px-4 md:px-6 py-8">
       <div className="prose max-w-xl mx-auto px-4 py-8">
         <ReactMarkdown>{content}</ReactMarkdown>
       </div>

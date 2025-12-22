@@ -18,7 +18,7 @@ export default function Header() {
     return (
         <header className="sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-gray-900/90 border-b border-gray-200 dark:border-gray-800">
             <div className="max-w-7xl mx-auto px-4 md:px-6">
-                <div className="flex items-center justify-between md:justify-center py-6 relative">
+                <div className="flex items-center justify-between md:justify-center py-6 relative min-h-[88px]">
 
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 md:mr-16">
@@ -27,7 +27,7 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop Menu */}
-                <nav className="hidden md:flex gap-8 font-medium">
+                <nav className="hidden md:flex gap-8 font-medium items-center">
                     {links.map((link) => (
                         <Link
                             key={link.href}

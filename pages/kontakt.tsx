@@ -1,6 +1,7 @@
 export default function Kontakt() {
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
+      <div className="max-w-3xl mx-auto">
       <h1 className="text-4xl font-bold text-(--primary) mb-8">
         Kontakt oss
       </h1>
@@ -69,6 +70,7 @@ export default function Kontakt() {
           * Skjemaet er kun en demo – innsending er ikke aktivert ennå.
         </p>
       </form>
+      </div>
     </div>
   );
 }

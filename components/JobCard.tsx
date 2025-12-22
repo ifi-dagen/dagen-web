@@ -39,7 +39,7 @@ export default function JobCard({ tittel, firma, frist, url, logo }: JobCardProp
                 tittel
             )}`}
         >
-            {/* Logo */}
+            {/* Logo, no alt to leave blank space if logo is missing / not added */}
             {logo && (
                 <img
                     src={`${router.basePath}/logos/${logo}`}

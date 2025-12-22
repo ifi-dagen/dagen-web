@@ -12,6 +12,6 @@ export function getJobListings() {
     }).data;
 
 
-    // Fjern tomme rader
+    // Filter out rows without URL
     return parsed.filter((job: any) => job.URL);
 }

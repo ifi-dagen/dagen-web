@@ -23,7 +23,7 @@ export default function Page({ content, members }: { content: string; members: M
 }
 
 export async function getStaticProps() {
-  const content = await getMarkdownContent("pages/om-oss");
+  const content = await getMarkdownContent("om-oss/om-oss");
   const members = await getMembers();
   return { props: { content, members } };
 }

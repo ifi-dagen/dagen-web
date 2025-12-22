@@ -39,7 +39,7 @@ export default function Page({ content, hsp, dagen, ettermiddagen, faqs }: { con
 }
 
 export async function getStaticProps() {
-  const pageInfo = await getMarkdownContent("pages/bedrift");
+  const pageInfo = await getMarkdownContent("bedrift/bedrift");
   const hsp = await getMarkdownContent("bedrift/HSP_utlysning");
   const dagen = await getMarkdownContent("bedrift/dagen");
   const ettermiddagen = await getMarkdownContent("bedrift/ettermiddagen");

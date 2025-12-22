@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 type MemberCardProps = {
     memberPicture?: string | null;
@@ -14,13 +15,16 @@ export default function MemberCard({ memberPicture, memberName, memberTitle, tit
         <div className="p-6 bg-white dark:bg-gray-800 rounded-lg text-center">
             {/* Bilde, white space lik bildestørrelse hvis ikke bilde */}
             {memberPicture ? (
-                <img
+                <Image
                     src={`${router.basePath}/${memberPicture}`}
                     alt={memberName}
-                    className="w-32 h-32 mx-auto mb-4 rounded-full object-cover"
+                    width={256}
+                    height={256}
+                    quality={95}
+                    className="w-40 h-40 mx-auto mb-4 rounded-full object-cover"
                 />
             ) : (
-                <div className="w-32 h-32 mx-auto mb-4" />
+                <div className="w-40 h-40 mx-auto mb-4" />
             )}
             {/* Navn, tittel og epost */}
             {/* h-14 i navn for å få tittel på lik linje ved korte og lange navn */}

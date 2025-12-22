@@ -3,7 +3,7 @@ import path from "path";
 import Papa from "papaparse";
 
 export function getJobListings() {
-    const filePath = path.join(process.cwd(), "content/jobs/stillingsannonser.csv");
+    const filePath = path.join(process.cwd(), "content/bedrift/stillingsannonser.csv");
 
     const file = fs.readFileSync(filePath, "utf8");
     const parsed = Papa.parse(file, {

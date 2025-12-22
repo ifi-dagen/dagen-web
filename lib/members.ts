@@ -25,7 +25,7 @@ function findPictureFile(baseName: string, directory: string): string | null {
 }
 
 export async function getMembers(): Promise<Member[]> {
-  const csvPath = path.join(process.cwd(), "content/members/members.csv");
+  const csvPath = path.join(process.cwd(), "content/om-oss/members.csv");
   const picturesDir = path.join(process.cwd(), "public/members");
   
   if (!fs.existsSync(csvPath)) {

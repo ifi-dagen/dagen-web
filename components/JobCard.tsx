@@ -9,8 +9,6 @@ type JobCardProps = {
     logo?: string;
 };
 
-const router = useRouter();
-
 const getCategoryColor = (title: string) => {
     switch (title?.toLowerCase()) {
         case "sommerjobb":
@@ -30,6 +28,8 @@ export default function JobCard({ tittel, firma, frist, url, logo }: JobCardProp
         const [year, month, day] = date.split("-");
         return `${day}.${month}.${year}`;
     };
+
+    const router = useRouter();
 
     return (
         <Link

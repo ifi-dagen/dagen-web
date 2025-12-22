@@ -2,16 +2,16 @@ import { getMarkdownContent } from "../lib/markdown";
 import ReactMarkdown from "react-markdown";
 import { useRouter } from "next/router";
 
-const router = useRouter();
 
 export default function Home({ dagen, ettermiddagen }: { dagen: string, ettermiddagen: string }) {
+  const router = useRouter();
   return (
     <main className="max-w-6xl mx-auto px-4 py-8 space-y-12">
       
       {/* Dagen */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
         <img
-          src={"${router.basePath}/Dagen@ifi_2022-1.webp"}
+          src={`${router.basePath}/Dagen@ifi_2022-1.webp`}
           alt="Dagen bilde"
           className="w-full h-auto rounded-lg"
         />
@@ -26,7 +26,7 @@ export default function Home({ dagen, ettermiddagen }: { dagen: string, ettermid
           <ReactMarkdown>{ettermiddagen}</ReactMarkdown>
         </div>
         <img
-          src={"${router.basePath}/Dagen@ifi_2022.webp"}
+          src={`${router.basePath}/Dagen@ifi_2022.webp`}
           alt="Ettermiddagen bilde"
           className="w-full h-auto rounded-lg md:order-2"
         />

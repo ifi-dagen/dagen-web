@@ -22,8 +22,8 @@ export default function Header() {
 
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 md:mr-16">
-                    <Image src={"${router.basePath}/dagen-logo-black-teal.svg"} alt="dagen@ifi logo" width={132} height={132} className="block dark:hidden" />
-                    <Image src={"${router.basePath}/dagen-logo-white-teal.svg"} alt="dagen@ifi logo" width={132} height={132} className="hidden dark:block" />
+                    <Image src={`${router.basePath}/dagen-logo-black-teal.svg`} alt="dagen@ifi logo" width={132} height={132} className="block dark:hidden" />
+                    <Image src={`${router.basePath}/dagen-logo-white-teal.svg`} alt="dagen@ifi logo" width={132} height={132} className="hidden dark:block" />
                 </Link>
 
                 {/* Desktop Menu */}

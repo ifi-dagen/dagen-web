@@ -7,9 +7,9 @@ type MemberCardProps = {
     titleMail: string;
 }
 
-const router = useRouter();
 
-export default function MemberCard({memberPicture, memberName, memberTitle, titleMail}: MemberCardProps) {
+export default function MemberCard({ memberPicture, memberName, memberTitle, titleMail }: MemberCardProps) {
+    const router = useRouter();
     return (
         <div className="p-6 bg-white dark:bg-gray-800 rounded-lg text-center">
             {/* Bilde, white space lik bildestørrelse hvis ikke bilde */}

@@ -16,10 +16,10 @@ export default function Footer() {
                             <Image src={`${router.basePath}/linkedin.png`} alt="LinkedIn" width={24} height={24} className="dark:invert" />
                         </Link>
                         <Link href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
-                            <Image src={"${router.basePath}/facebook.png"} alt="Facebook" width={24} height={24} className="dark:invert" />
+                            <Image src={`${router.basePath}/facebook.png`} alt="Facebook" width={24} height={24} className="dark:invert" />
                         </Link>
                         <Link href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
-                            <Image src={"${router.basePath}/instagram.png"} alt="Instagram" width={24} height={24} className="dark:invert" />
+                            <Image src={`${router.basePath}/instagram.png`} alt="Instagram" width={24} height={24} className="dark:invert" />
                         </Link>
                     </div>
 

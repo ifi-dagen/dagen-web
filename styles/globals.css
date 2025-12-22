@@ -43,11 +43,19 @@ body {
 
 /* Typography styling for markdown pages */
 /* !important for å overskrive tailwind standard */
+.prose {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
+}
+
 .prose h1 {
   font-size: 2.5rem !important;
   font-weight: 700 !important;
   margin-bottom: 1rem !important;
   color: var(--primary) !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
 }
 
 .prose h2 {
@@ -56,6 +64,8 @@ body {
   margin-top: 2rem !important;
   margin-bottom: 0.75rem !important;
   color: var(--primary) !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
 }
 
 .prose h3 {
@@ -64,6 +74,8 @@ body {
   margin-top: 1.5rem !important;
   margin-bottom: 0.5rem !important;
   color: var(--primary) !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
 }
 
 .prose p {

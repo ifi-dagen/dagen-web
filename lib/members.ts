@@ -14,6 +14,14 @@ export type Member = {
     picturePath: string | null; // Path til bilde av medlem eller null
 };
 
+// Type for å lese rader i CSV-filen etter header
+type MemberCsvRow = {
+    name: string;
+    title: string;
+    email: string;
+    picture?: string;
+};
+
 // Denne funksjonen leser CSV-filen og lager listen av medlemmer
 export function getMembers(): Member[] {
     // Path til CSV-filen fra roten til prosjektet (process.cwd())
@@ -33,38 +41,33 @@ export function getMembers(): Member[] {
     const fileContent = fs.readFileSync(csvPath, "utf8");
 
     // Bruker Papa parse til å lese innholdet
-    // Hver rad er en liste med string (string[])
-    // "navn","rolle","epost","bilde.png" blir til:
-    // ["navn", "rolle", "epost", "bilde.png"]
-    const { data } = Papa.parse<string[]>(fileContent, {
+    // header: true, gjør at første linje brukes som navn på kolonner (Name,Title,Email,Picture)
+    // Gjøres til lower case med transformHeader (name,title,email,picture), så det matcher typen
+    // Hver rad etter header blir et objekt av typen MemberCsvRow
+    const { data } = Papa.parse<MemberCsvRow>(fileContent, {
+        header: true,
+        transformHeader: (header) => header.toLowerCase().trim(),   // trim() = .strip() i Python
         skipEmptyLines: true,
     });
 
     // Tom liste som skal inneholde objekter av typen Member (dataklassen over)
     const members: Member[] = [];
 
-    // Looper alle radene / listene fra CSV-filen
-    for (const row of data as string[][]) {
-        // Sjekker at det er minst fire kolonner / ikke mangler noe
-        if (row.length < 4) {
-            console.warn("Ignoring row with too few columns - members.csv", row);
+    // Looper alle radene / objektene fra CSV-filen
+    for (const row of data) {
+        // Sjekker at raden har navn, tittel og epost
+        if (!row.name || !row.title || !row.email) {
+            console.warn("Ignoring invalid row - members.csv", row);
             continue;
         }
 
-        // Bruker "raw" for å skille mellom variablene vi skal bruke og det som er ubehandlet fra fil
-        const [rawName, rawTitle, rawEmail, rawPictureFileName] = row;
-
         // trim() = .strip() i Python, " Ola " blir: "Ola"
-        // (rawName || "") betyr:
-        //  - hvis rawName har en verdi, bruk den
-        //  - ellers bruk tom string
-        // På den måten unngår vi feil hvis en verdi skulle være undefined, null eller noe annet rart med CSV-filen.
-        const name = (rawName || "").trim();
-        const title = (rawTitle || "").trim();
-        const email = (rawEmail || "").trim();
+        const name = row.name.trim();
+        const title = row.title.trim();
+        const email = row.email.trim();
 
         // Bilde kan være tomt; settes til null hvis det er tomt etter trim()
-        const pictureFileName = (rawPictureFileName || "").trim() || null;
+        const pictureFileName = row.picture?.trim() || null;
 
         // Path til bilde settes først null
         let picturePath: string | null = null;

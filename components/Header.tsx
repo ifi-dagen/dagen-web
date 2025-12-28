@@ -29,7 +29,7 @@ export default function Header() {
                     >
                         {/* Light mode */}
                         <Image
-                            src= {`${router.basePath}/web-desing/dagen-logo/dagen-logo-black-teal.svg`}
+                            src= {`${router.basePath}/web-design/dagen-logo/dagen-logo-black-teal.svg`}
                             alt="dagen@ifi logo"
                             width={132}
                             height={132}
@@ -38,7 +38,7 @@ export default function Header() {
 
                         {/* Dark mode */}
                         <Image
-                            src={`${router.basePath}/web-desing/dagen-logo/dagen-logo-white-teal.svg`}
+                            src={`${router.basePath}/web-design/dagen-logo/dagen-logo-white-teal.svg`}
                             alt="dagen@ifi logo"
                             width={132}
                             height={132}

@@ -51,3 +51,8 @@ export type LayoutCsvRow = {
     index: string;
     file: string;
 };
+
+export type FaqProps = {
+  question: string;
+  answer: string;
+};

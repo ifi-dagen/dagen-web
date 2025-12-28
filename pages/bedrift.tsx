@@ -1,30 +1,34 @@
-import { getFAQs, FAQ } from "../lib/faq";
-import ReactMarkdown from "react-markdown";
-import FAQAccordion from "@/components/FAQAccordion";
-import Papa from "papaparse";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+// Side for bedrift informasjon
+// Bygget opp med info (tekst og bilder) øverst, så FAQ og kontaktinfo til bedrift nederst
+// Egen CSV-fil for info (content)
+// Egen CSV-fil for FAQ
 
-export default function Page({ sections, faqs }: { sections: string[], faqs: FAQ[] }) {
+import { getFAQs } from "../lib/faq";
+import FaqDropdown from "@/components/FaqDropdown";
+import { getContentRowLayout } from "@/lib/contentLayout";
+import { ContentRow, FaqProps } from "@/types";
+import ContentRowBuilder from "@/components/ContentRowBuilder";
+
+// Props for hva siden jobber med
+type BedriftPageProps = {
+  contentRows: ContentRow[];
+  faqs: FaqProps[];
+}
+
+
+export default function Page({ contentRows, faqs }: BedriftPageProps) {
   return (
     <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-12">
       
-      {/* Tekst (content) øverst */}
-      {sections?.map((section, index) => (
-        <div 
-        key={index} 
-        className="prose mx-auto text-center">
-          <ReactMarkdown>{section}</ReactMarkdown>
-        </div>
-      ))}
+      {/* Tekst/bilder (content) øverst */}
+      <ContentRowBuilder rows={contentRows} />
       
       {/* FAQ under content */}
       <div className="my-12">
         <h2 className="text-4xl font-bold text-center mb-8 text-(--primary)">
           FAQs
           </h2>
-        <FAQAccordion 
+        <FaqDropdown 
         faqs={faqs} 
         />
       </div>
@@ -43,26 +47,7 @@ export default function Page({ sections, faqs }: { sections: string[], faqs: FAQ
 }
 
 export async function getStaticProps() {
-  const csvPath = path.join(process.cwd(), "content/bedrift/bedriftside.csv");
-  const fileContent = fs.readFileSync(csvPath, "utf8");
-  const { data } = Papa.parse<string[]>(fileContent, {
-    skipEmptyLines: true,
-  });
-
-  const sections: string[] = [];
-
-  for (const row of data) {
-    const mdPath = row[0];
-    if (mdPath && mdPath.toLowerCase().endsWith('.md')) {
-      const fullPath = path.join(process.cwd(), `content/${mdPath}`);
-      if (fs.existsSync(fullPath)) {
-        const mdContent = fs.readFileSync(fullPath, "utf8");
-        const { content } = matter(mdContent);
-        sections.push(content);
-      }
-    }
-  }
-
-  const faqs = await getFAQs("bedrift/FAQ");
-  return { props: { sections, faqs } };
+  const contentRows = getContentRowLayout("bedrift/bedriftside.csv");
+  const faqs = getFAQs("bedrift/FAQ");
+  return { props: { contentRows, faqs } };
 }

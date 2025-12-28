@@ -18,30 +18,45 @@ export default function ContentRowBuilder({ rows }: ContentRowBuilderProps) {
 
     return (
         <>
-            {rows?.map((row, rowIndex) => (
-                <div
-                    key={rowIndex}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"
-                >
-                    {row.map((item, itemIndex) =>
-                        item.type === "image" ? (
-                            // Hvis filen er et bilde
-                            <Image
-                                src={`${router.basePath}/${item.content}`}
-                                alt={`Bilde ${rowIndex + 1}`}
-                                width={1200}
-                                height={800}
-                                className="w-full h-auto rounded-lg"
-                            />
-                        ) : (
-                            // Hvis ikke bilde, antar vi markdown
-                            <div key={itemIndex} className="prose">
-                                <ReactMarkdown>{item.content}</ReactMarkdown>
-                            </div>
-                        )
-                    )}
-                </div>
-            ))}
+            {rows?.map((row, rowIndex) => {
+                const columnCount = row.length;
+                const isSingle = columnCount === 1;
+
+                return (
+                    <div
+                        key={rowIndex}
+                        className={`
+                        grid gap-6 items-center"
+                        grid-cols-1
+                        md:grid-cols-${columnCount}
+                        `}
+                    >
+                        {row.map((item, itemIndex) =>
+                            item.type === "image" ? (
+                                // Hvis filen er et bilde
+                                <Image
+                                    src={`${router.basePath}/${item.content}`}
+                                    alt={`Bilde ${rowIndex + 1}`}
+                                    width={1200}
+                                    height={800}
+                                    className="w-full h-auto rounded-lg"
+                                />
+                            ) : (
+                                // Hvis ikke bilde, antar vi markdown
+                                <div
+                                    key={itemIndex}
+                                    className={`
+                                    prose
+                                    ${isSingle ? "text-center mx-auto" : ""}
+                                    `}
+                                >
+                                    <ReactMarkdown>{item.content}</ReactMarkdown>
+                                </div>
+                            )
+                        )}
+                    </div>
+                );
+            })}
         </>
     );
 }

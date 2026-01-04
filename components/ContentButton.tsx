@@ -12,6 +12,12 @@ type ContentButtonProps = {
 export default function ContentButton({ href, label }: ContentButtonProps) {
     const isAnchor = href.startsWith("#");
     const isExternal = href.startsWith("http://") || href.startsWith("https://");
+    const hasFragment = href.includes("#"); // Er det sammensatt internlink og anker?
+    const [rawBasePath, hash] = hasFragment ? href.split("#") : [href, null];
+    const basePath = rawBasePath || "/";
+
+    const normalizePath = (p: string) =>
+        p === "/" ? "/" : p.replace(/\/+$/, "");
 
     // Hvis href peker til et anker (#), bruk smooth scroll i stedet for vanlig navigering
     const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -25,8 +31,25 @@ export default function ContentButton({ href, label }: ContentButtonProps) {
             // ?. betyr: hvis elementet finnes, scroll til det
             // Hvis ikke, gjør ingenting (unngår error)
             targetElement?.scrollIntoView({ behavior: "smooth" });
+            return;
+        }
+
+        // Internlink med anker, fjerner hash
+        if (hasFragment && typeof window !== "undefined") {
+            const currentPath = normalizePath(window.location.pathname);
+            const targetPath = normalizePath(basePath);
+
+            if (currentPath === targetPath && hash) {
+                event.preventDefault();
+                const target = document.getElementById(hash);
+                target?.scrollIntoView({ behavior: "smooth" });
+
+                // Oppdaterer URL uten #row-n
+                window.history.replaceState(null, "", targetPath);
+            }
         }
     };
+
 
     // Etern link? Ny fane
     if (isExternal) {
@@ -44,10 +67,10 @@ export default function ContentButton({ href, label }: ContentButtonProps) {
         )
     }
 
-    // Intern lenke, ikke ny fane
+    // Intern lenke uten #, ikke ny fane
     return (
         <Link 
-            href={href} 
+            href={basePath} 
             className="mt-4"
             onClick={handleClick}
         >

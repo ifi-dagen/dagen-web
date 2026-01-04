@@ -42,6 +42,8 @@ export type Member = {
 export type ContentItem = {
   type: "image" | "markdown";
   content: string;
+  buttonHref?: string | null; // Link til sub pages - "/bedrift", "/", "kontakt", osv.
+  buttonLabel?: string | null; // Det som skal stå på knappen
 };
 
 export type ContentRow = ContentItem[];
@@ -50,6 +52,8 @@ export type ContentRow = ContentItem[];
 export type LayoutCsvRow = {
     index: string;
     file: string;
+    buttonhref?: string;
+    buttonlabel?: string;
 };
 
 export type FaqProps = {

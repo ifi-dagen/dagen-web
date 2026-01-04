@@ -5,12 +5,12 @@ import { InternGroup } from "../types";
 
 const contentDir = path.join(process.cwd(), "content");
 
-export async function getMarkdownContent(contentName: string): Promise<string> {
+export function getMarkdownContent(contentName: string): string {
   const filePath = path.join(contentDir, `${contentName}.md`);
 
   if (!fs.existsSync(filePath)) {
     console.error(`Missing markdown file for content: ${contentName}`);
-    return "# 404 - Page not found";
+    return "# 404 - This is just for placement during development! "; // OBS denne byttes til "" når prod!! TODO TODO TODO
   }
 
   const file = fs.readFileSync(filePath, "utf8");
@@ -18,7 +18,7 @@ export async function getMarkdownContent(contentName: string): Promise<string> {
   return content;
 }
 
-export async function getInternGroups(): Promise<InternGroup[]> {
+export function getInternGroups(): InternGroup[] {
   const internDir = path.join(process.cwd(), "content/intern/interngrupper");
   
   if (!fs.existsSync(internDir)) {

@@ -6,11 +6,11 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 const links = [
+    { href: "/", label: "Hjem"},
     { href: "/stillingsannonser", label: "Stillingsannonser" },
-    { href: "/bedrift", label: "Bedrift" },
-    { href: "/intern", label: "Intern" },
-    { href: "/om-oss", label: "Om oss" },
-    { href: "/kontakt", label: "Kontakt" },
+    { href: "/bli-med", label: "Bli med i Dagen!"},
+    { href: "/bedrift", label: "For bedrifter" },
+    { href: "/kontakt", label: "Kontakt oss" },
 ];
 
 export default function Header() {

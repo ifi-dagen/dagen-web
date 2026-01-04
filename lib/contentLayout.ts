@@ -38,10 +38,13 @@ export function getContentRowLayout(csvPath: string): ContentRow[] {
             continue;
         }
 
-        // Lager ny ordbok indeks hvis den ikke finnes
+        // Lager ny ordbokindeks hvis den ikke finnes
         if (!grouped[index]) {
             grouped[index] = [];
         }
+
+        const buttonHref = row.buttonhref && row.buttonhref.length > 0 ? row.buttonhref : null;
+        const buttonLabel = row.buttonlabel && row.buttonlabel.length > 0 ? row.buttonlabel : null;
 
         // Sjekker om filen er markdown (.md), hvis ikke antar vi at det er et bilde
         const isMarkdown = row.file.toLowerCase().endsWith(".md");
@@ -61,6 +64,8 @@ export function getContentRowLayout(csvPath: string): ContentRow[] {
                 grouped[index].push({
                     type: "markdown",
                     content,
+                    buttonHref,
+                    buttonLabel,
                 });
             } else {
                 console.error(`Markdown file not found: ${mdPath}`);
@@ -70,6 +75,8 @@ export function getContentRowLayout(csvPath: string): ContentRow[] {
             grouped[index].push({
                 type: "image",
                 content: row.file,
+                buttonHref,
+                buttonLabel,
             });
         }
 

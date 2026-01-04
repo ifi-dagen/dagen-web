@@ -14,3 +14,11 @@ export const SITE_CONFIG = {
   title: "dagen@ifi",
   description: "Institutt for informatikks karrieredager"
 } as const;
+
+export const LINK_MAP: Record<string, string> = {
+  Hjem: "/",
+  Bedrift: "/bedrift",
+  BliMed: "/bli_med",
+  Stillingsannonser: "/stillingsannonser",
+  Kontakt: "kontakt",
+}

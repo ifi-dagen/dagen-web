@@ -23,30 +23,32 @@ export default function MemberCard({
         <div className="p-6 bg-white dark:bg-gray-800 rounded-lg text-center">
             {/* Bilde, white space lik bildestørrelse hvis ikke bilde */}
             {memberPicture ? (
+                <div className="w-40 h-40 mx-auto mb-4 relative">
                 <Image
                     src={`${router.basePath}/${memberPicture}`}
                     alt={memberName}
-                    width={256}
-                    height={256}
+                    fill
+                    sizes="160px"
                     quality={95}
-                    className="w-40 h-40 mx-auto mb-4 rounded-full object-cover"
+                    className="rounded-full object-cover"
                 />
+                </div>
             ) : (
                 <div className="w-40 h-40 mx-auto mb-4" />
             )}
 
-            {/* Navn høyde satt til h-14 slik at kortet ikke skalerer forskjellig med korte og lange navn */}
-            <h2 className="text-xl font-semibold text-(--primary) h-14 flex items-center justify-center">
+            {/* Navn høyde satt til md:min-h-14 slik at kortet ikke skalerer forskjellig med korte og lange navn. min-h-24 for liten skjerm */}
+            <h2 className="text-xl font-semibold text-(--primary) min-h-24 md:min-h-14 flex items-center justify-center">
                 {memberName}
             </h2>
 
             {/* Rolle / tittel */}
-            <p className="text-gray-700 dark:text-gray-300 font-medium">
+            <p className="text-gray-700 dark:text-gray-300 font-medium wrap-break-word">
                 {memberTitle}
             </p>
 
             {/* Epost, denne kan gjøres klikkbar (mailto), men var ikke det på den gamle siden */}
-            <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
+            <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm wrap-break-word">
                 {titleMail}
             </p>
         </div>

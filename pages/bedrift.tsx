@@ -5,7 +5,7 @@
 
 import { getFAQs } from "../lib/faq";
 import FaqDropdown from "@/components/FaqDropdown";
-import { getContentRowLayout } from "@/lib/contentLayout";
+import { getContentRowLayout } from "@/lib/getContentRowLayout";
 import { ContentRow, FaqProps } from "@/types";
 import ContentRowBuilder from "@/components/ContentRowBuilder";
 

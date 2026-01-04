@@ -44,6 +44,7 @@ export type ContentItem = {
   content: string;
   buttonHref?: string | null; // Link til sub pages - "/bedrift", "/", "kontakt", osv.
   buttonLabel?: string | null; // Det som skal stå på knappen
+  rowId?: string;  // For å mappe knapper til index
 };
 
 export type ContentRow = ContentItem[];

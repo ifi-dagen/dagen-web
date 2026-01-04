@@ -64,7 +64,7 @@ export default function JobCard({ tittel, firma, frist, url, logo }: JobCardProp
                 {tittel}
             </h2>
 
-            {/* Firma navn */}
+            {/* Firmanavn */}
             <p className="text-gray-700 dark:text-gray-300 font-medium">
                 {firma}
             </p>

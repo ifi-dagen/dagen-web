@@ -10,6 +10,19 @@ import matter from "gray-matter";
 import { ContentItem, ContentRow, LayoutCsvRow } from "@/types";
 import { readLayoutCsv } from "./layoutCsvReader";
 
+// Hjelpefunksjon for å sjekke om en href er til en index (int) eller path (side) / #anker
+function checkNumberOrHref(ref?: string | null): string | null {
+    if (!ref) return null;
+
+    // Tall: tolk som referanse til index
+    if (/^\d+$/.test(ref)) {
+        return `#row-${ref}`;
+    }
+
+    // Ikke tall, vanlig href (path eller #anker)
+    return ref;
+}
+
 // Tar inn path til CSV som argument
 // OBS!
 // Markdown-filer forventes å ligge innenfor content-mappe
@@ -43,11 +56,17 @@ export function getContentRowLayout(csvPath: string): ContentRow[] {
             grouped[index] = [];
         }
 
-        const buttonHref = row.buttonhref && row.buttonhref.length > 0 ? row.buttonhref : null;
-        const buttonLabel = row.buttonlabel && row.buttonlabel.length > 0 ? row.buttonlabel : null;
-
+        
         // Sjekker om filen er markdown (.md), hvis ikke antar vi at det er et bilde
         const isMarkdown = row.file.toLowerCase().endsWith(".md");
+
+        // Index til raden
+        const rowId = `row-${index}`;
+
+        // Href for knapp (sjekker tall eller string) og label
+        const buttonHref = checkNumberOrHref(row.buttonhref ?? null);
+        const buttonLabel = row.buttonlabel && row.buttonlabel.length > 0 ? row.buttonlabel : null;
+
 
         if (isMarkdown) {
             // Det er en markdown fil, lager full path
@@ -66,6 +85,7 @@ export function getContentRowLayout(csvPath: string): ContentRow[] {
                     content,
                     buttonHref,
                     buttonLabel,
+                    rowId,
                 });
             } else {
                 console.error(`Markdown file not found: ${mdPath}`);
@@ -77,6 +97,7 @@ export function getContentRowLayout(csvPath: string): ContentRow[] {
                 content: row.file,
                 buttonHref,
                 buttonLabel,
+                rowId,
             });
         }
 

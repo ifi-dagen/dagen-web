@@ -1,29 +1,25 @@
-import { getMarkdownContent, getInternGroups } from "../lib/markdown";
+import { getContentRowLayout } from "@/lib/getContentRowLayout";
+import { getInternGroups } from "../lib/getInternGroups";
 import ReactMarkdown from "react-markdown";
+import { ContentRow } from "@/types";
+import ContentRowBuilder from "@/components/ContentRowBuilder";
 
 type JoinUsProps = {
-  content: string;
-  internInfo: string;
+  contentRows: ContentRow[];
   internGroups: InternGroup[];
-  funkInfo: string;
-  styretInfo: string;
 }
 
 type InternGroup = {
   content: string;
 };
 
-export default function Page({ content, internInfo, internGroups, funkInfo, styretInfo }: JoinUsProps) {
+export default function Page({ contentRows, internGroups }: JoinUsProps) {
   return (
-    <main className="max-w-7xl mx-auto px-4 md:px-6 py-8">
-      <div className="prose max-w-xl mx-auto px-4 py-8">
-        <ReactMarkdown>{content}</ReactMarkdown>
-      </div>
+    <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-12">
+      
 
-      {/* Intern */}
-      <div className="prose max-w-4xl mx-auto px-4 py-8 text-center">
-        <ReactMarkdown>{internInfo}</ReactMarkdown>
-      </div>
+      <ContentRowBuilder rows={contentRows} />
+      
 
       {/* Interngrupper */}
       <div className="space-y-4 text-center">
@@ -36,32 +32,15 @@ export default function Page({ content, internInfo, internGroups, funkInfo, styr
           ))}
         </div>
       </div>
-
-      {/* Funk */}
-      <div className="prose max-w-4xl mx-auto px-4 py-8 text-center">
-        <ReactMarkdown>{funkInfo}</ReactMarkdown>
-      </div>
-
-      {/* Bli med i styret (info om genfors?) */}
-      <div className="prose max-w-4xl mx-auto px-4 py-8 text-center">
-        <ReactMarkdown>{styretInfo}</ReactMarkdown>
-      </div>
-
     </main>
   );
 }
 
 export function getStaticProps() {
-  const content = getMarkdownContent("intern/intern");
-  const internInfo = getMarkdownContent("intern/intern_info");
-  const funkInfo = getMarkdownContent("intern/funk_info");
-  const styretInfo = getMarkdownContent("intern/Bli_med_styret");
+  const contentRows = getContentRowLayout("bli-med/bli_med.csv");
   const internGroups = getInternGroups();
   return { props: { 
-    content,
-    internInfo, 
-    internGroups, 
-    funkInfo,
-    styretInfo
+    contentRows,
+    internGroups,
   } };
 }

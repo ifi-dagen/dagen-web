@@ -20,18 +20,27 @@ export default function ContentRowBuilder({ rows }: ContentRowBuilderProps) {
     return (
         <>
             {rows?.map((row, rowIndex) => {
+                // Radlengde, brukes for å velge antall kolonner
                 const columnCount = row.length;
+
+                // Kun en i raden, brukes for å sentrere tekst
                 const isSingle = columnCount === 1;
+
+                // Setter id på raden for å bruke knapp med index
+                const rowId = row[0]?.rowId;
 
                 return (
                     <div
                         key={rowIndex}
+                        id={rowId}  // Id som knapper kan bruke
                         className={`
+                        scroll-mt-24
                         grid gap-6 items-center
                         grid-cols-1
                         md:grid-cols-${columnCount}
-                        `}
-                    >
+                        `}  // scroll-mt-24 så knappetrykk ikke starter under header
+                            // grid-cols-${columnCount} - setter ant kolonner
+                    >       
                         {row.map((item, itemIndex) => {
                             const content =
                                 item.type === "image" ? (
@@ -48,7 +57,7 @@ export default function ContentRowBuilder({ rows }: ContentRowBuilderProps) {
                                     <div
                                         key={itemIndex}
                                         className={`
-                                    prose
+                                    prose wrap-break-word max-w-full
                                     ${isSingle ? "text-center mx-auto" : ""}
                                     `}
                                     >
@@ -56,15 +65,27 @@ export default function ContentRowBuilder({ rows }: ContentRowBuilderProps) {
                                     </div>
                                 );
 
+                                // Knapp for link, legger seg under teksten eller bildet den hører til
                             return (
                                 <div
                                     key={itemIndex}
-                                    className="flex flex-col items-center text-center"
+                                    className="flex flex-col items-center text-center min-w-0"
                                 >
                                     {content}
 
                                     {item.buttonHref && (
-                                        <Link href={item.buttonHref} className="mt-4">
+                                        <Link 
+                                        href={item.buttonHref} 
+                                        className="mt-4"
+                                        onClick={(event) => {
+                                            // Hvis href er ankerpunkt på samme side fjernes #anker fra url (så det ikke hopper ned ved oppdatering av siden)
+                                            if (item.buttonHref?.startsWith("#")) {
+                                                event.preventDefault();
+                                                const targetElement = document.querySelector(item.buttonHref);
+                                                targetElement?.scrollIntoView({ behavior: "smooth" });
+                                            }
+                                        }}
+                                        >
                                             <button className="px-4 py-2 rounded-lg bg-(--primary) text-white text-sm font-medium hover:opacity-90 transition">
                                                 {item.buttonLabel ?? "Les mer"}
                                             </button>

@@ -1,7 +1,7 @@
 // "Stillingsannonser"-siden, viser alle gyldige stillingsannonser, sortert på frist
 
 import JobCard from "@/components/JobCard";
-import { getJobListings, JobCsvRow } from "@/lib/jobs";
+import { getJobListings, JobCsvRow } from "@/lib/getJobListings";
 
 // Props som definer hva siden skal jobbe med (liste av objekter fra jobs.ts)
 type StillingsannonserProps = {

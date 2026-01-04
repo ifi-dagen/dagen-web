@@ -4,7 +4,7 @@
 import MemberCard from "@/components/MemberCard";
 import GridSection from "@/components/GridSection";
 import ReactMarkdown from "react-markdown";
-import { getMarkdownContent } from "../lib/markdown";
+import { getMarkdownContent } from "../lib/getMarkdownContent";
 import { getMembers, Member } from "../lib/members";
 
 // Props som siden forventer for å bygge:

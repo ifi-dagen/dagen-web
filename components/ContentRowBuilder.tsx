@@ -87,7 +87,7 @@ export default function ContentRowBuilder({ rows }: ContentRowBuilderProps) {
                         id={rowId}
                         className={`
                         scroll-mt-24
-                        max-w-5xl mx-auto
+                        max-w-7xl mx-auto
                         flex flex-col md:flex-row
                         md:justify-center
                         gap-6 

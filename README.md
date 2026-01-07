@@ -1,40 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Dagen Web
 
-## Getting Started
+Next.js-nettside for **Dagen @ IFI**.  
+Bygget med **TypeScript** og **Tailwind CSS**.  
+Prosjektet kjører uten backend, men krever at `content/` og `public/` eksisterer lokalt.
 
-First, run the development server:
+---
 
+## Kom i gang
+
+### 1 Klon prosjektet
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repo-url>
+cd dagen-web
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2 Installer npm
+```bash
+npm install
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### 3 Lag nødvendige mapper
+Disse mappen må eksistere for at siden skal fungere.  
+*Det er lagt opp til at disse vanligvis hentes fra privat content repo*
+```bash
+mkdir -p content/hjem
+mkdir -p content/bedrift/FAQ/answers
+mkdir -p content/bli-med/interngrupper
+mkdir -p public/logos
+mkdir -p public/members
+mkdir -p public/web-design
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### (Optional) Kontaktform
+Opprett `.env.local` hvis Formspree skal brukes
+```bash
+NEXT_PUBLIC_FORMSPREE_ID=...
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### Kjør lokalt
+```bash
+npm run dev
+```
+Åpne:
+[http://localhost:300](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Minimum filstruktur for content
+For at siden skal fungere
+```markdown
+content/
+├── hjem/
+│   ├── hjemside.csv
+│   ├── members.csv
+│   └── *.md
+│
+├── bedrift/
+│   ├── bedriftside.csv
+│   ├── stillingsannonser.csv
+│   └── FAQ/
+│       ├── faq.csv
+│       └── answers/*.md
+│
+└── bli-med/
+    ├── bli_med.csv
+    └── interngrupper/*.md
+```
 
-## Learn More
+### CSV-formater
+CSV-filen brukes til å sette opp sider eller deler av sider.
 
-To learn more about Next.js, take a look at the following resources:
+**Sideoppsett**, hjem, bedrift og bli med:  
+`hjemside.csv`, `bedriftside.csv`,`bli_med.csv`  
+Header | Beskrivelse
+-|-
+Index | Hvilken rad elementet tilhører
+File | Markdown-fil eller bilde
+ButtonHref | (optional) lenke til knapp
+ButtonLabel | (optional) tekst på knapp
+Size | (optional) prosentvis størrelse relativ til andre elementer
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+Oversikt over medlemmer: `members.csv`:  
+```csv
+Name,Title,Email,Picture
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`stillingsannonser.csv`:
+```csv
+Tittel,Firma,Frist,URL,Logo
+```
 
-## Deploy on Vercel
+`faq.csv`:
+```csv
+Question,Answer
+```
+`Answer` referer til en markdown-fil i `FAQ/answers/`.  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+### Minimum filstruktur for public
+```markdown
+public/
+├── logos/
+├── members/
+└── web-design/
+```

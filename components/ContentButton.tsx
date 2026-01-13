@@ -51,7 +51,7 @@ export default function ContentButton({ href, label }: ContentButtonProps) {
     };
 
 
-    // Etern link? Ny fane
+    // Ekstern link? Ny fane
     if (isExternal) {
         return (
             <a
@@ -60,7 +60,8 @@ export default function ContentButton({ href, label }: ContentButtonProps) {
                 rel="noopener noreferrer"
                 className="mt-4"
             >
-                <button className="px-4 py-2 rounded-lg bg-(--primary) text-white text-sm font-medium hover:opacity-90 transition">
+                <button className="px-6 py-4 rounded-4xl bg-(--primary) text-white text-sm font-medium hover:opacity-90 transition">
+                    {/* Hvis ikke labeltekst vises: Les mer */}
                     {label ?? "Les mer"}
                 </button>
             </a>
@@ -74,7 +75,7 @@ export default function ContentButton({ href, label }: ContentButtonProps) {
             className="mt-4"
             onClick={handleClick}
         >
-            <button className="px-4 py-2 rounded-lg bg-(--primary) text-white text-sm font-medium hover:opacity-90 transition">
+            <button className="px-6 py-4 rounded-4xl bg-(--primary) text-white text-sm font-medium hover:opacity-90 transition">
                 {/* Hvis ikke labeltekst vises: Les mer */}
                 {label ?? "Les mer"}
             </button>

@@ -52,8 +52,8 @@ export default function Header() {
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className={`transition-colors whitespace-nowrap ${router.pathname === link.href
-                                        ? "text-(--primary) border-b-2 border-(--primary) pb-1"
+                                className={`transition-colors whitespace-nowrap border rounded-4xl px-6 py-4 border-(--primary) ${router.pathname === link.href
+                                        ? "bg-(--primary) text-white"
                                         : "hover:text-(--primary)"
                                     }`}
                             >

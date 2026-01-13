@@ -13,12 +13,8 @@ export default function ContentMarkdown({ markdownText, isCentered }: ContentMar
         <div
             className={`
                 prose wrap-break-word max-w-full
-                ${isCentered ? "text-center mx-auto" : ""}
+                ${isCentered ? "mx-auto" : ""}
             `}
-            // prose: gir fin styling til markdown
-            // wrap-break-word: bryt lange ord hvis de ikke får plass på linjen
-            // max-w-full: maks bredde 100% (ikke gå utenfor)
-            // text-center mx-auto: hvis isCentered er true, sentrer teksten
         >
             <ReactMarkdown>{markdownText}</ReactMarkdown>
         </div>

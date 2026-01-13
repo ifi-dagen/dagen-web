@@ -20,7 +20,7 @@ export default function MemberCard({
     const router = useRouter();
 
     return (
-        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg text-center">
+        <div className="p-6 text-center">
             {/* Bilde, white space lik bildestørrelse hvis ikke bilde */}
             {memberPicture ? (
                 <div className="w-40 h-40 mx-auto mb-4 relative">

@@ -12,11 +12,11 @@ export default function Page({ contentRows, internGroups }: JoinUsProps) {
       <ContentRowBuilder rows={contentRows} />
       
       {/* Interngrupper */}
-      <div className="space-y-4 text-center">
-        <h2 className="text-4xl font-bold text-(--primary)">Intergruppene</h2>
+      <div className="space-y-4">
+        <h2 className="text-4xl font-bold text-(--primary) text-center">Intergruppene</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {internGroups.map((group, index) => (
-            <div key={index} className="prose p-6 bg-white dark:bg-gray-800">
+            <div key={index} className="prose p-6">
               <ReactMarkdown>{group.content}</ReactMarkdown>
             </div>
           ))}

@@ -16,7 +16,7 @@ export default function Footer() {
 
                     {/* SOME-linker */}
                     <div className="flex gap-4 justify-center md:justify-start">
-                        
+
                         {/* LinkedIn */}
                         <Link
                             href={SOCIAL_LINKS.linkedin}
@@ -51,17 +51,25 @@ export default function Footer() {
                         </Link>
                     </div>
 
-                    {/* Foreningsnavnet */}
+                    {/* Foreningsnavnet og adresse */}
                     <div className="text-center">
                         <p className="font-semibold text-lg text-(--primary)">
                             {CONTACT_INFO.organizationName}
                         </p>
+                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                            <p>{CONTACT_INFO.address}</p>
+                            <p>{CONTACT_INFO.postalCode}</p>
+                        </div>
+
                     </div>
 
-                    {/* Adresse */}
-                    <div className="text-sm text-gray-600 dark:text-gray-400 md:text-right">
-                        <p>{CONTACT_INFO.address}</p>
-                        <p>{CONTACT_INFO.postalCode}</p>
+                    {/* Kontakt oss knapp */}
+                    <div className="flex gap-4 justify-center md:justify-end">
+                        <Link
+                            href="/kontakt"
+                            className="bg-(--primary) rounded-4xl px-8 py-4 inline-block text-white">
+                            Kontakt oss
+                        </Link>
                     </div>
 
                 </div>

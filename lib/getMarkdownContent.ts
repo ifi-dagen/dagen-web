@@ -9,7 +9,7 @@ export function getMarkdownContent(contentName: string): string {
 
   if (!fs.existsSync(filePath)) {
     console.error(`Missing markdown file for content: ${contentName}`);
-    return "";
+    return "404";
   }
 
   const file = fs.readFileSync(filePath, "utf8");

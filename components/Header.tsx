@@ -6,10 +6,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 const links = [
-    { href: "/", label: "Hjem"},
     { href: "/stillingsannonser", label: "Stillingsannonser" },
     { href: "/bli-med", label: "Bli med i Dagen!"},
     { href: "/bedrift", label: "For bedrifter" },
+    { href: "/om-oss", label: "Om oss"},
     { href: "/kontakt", label: "Kontakt oss" },
 ];
 
@@ -27,22 +27,11 @@ export default function Header() {
                         href="/"
                         className="flex items-center gap-2 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 md:mr-16"
                     >
-                        {/* Light mode */}
                         <Image
-                            src= {`${router.basePath}/web-design/dagen-logo/dagen-logo-black-teal.svg`}
+                            src= {`${router.basePath}/web-design/dagen-logo/at-black.svg`}
                             alt="dagen@ifi logo"
                             width={132}
                             height={132}
-                            className="block dark:hidden"
-                        />
-
-                        {/* Dark mode */}
-                        <Image
-                            src={`${router.basePath}/web-design/dagen-logo/dagen-logo-white-teal.svg`}
-                            alt="dagen@ifi logo"
-                            width={132}
-                            height={132}
-                            className="hidden dark:block"
                         />
                     </Link>
 

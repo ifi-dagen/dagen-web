@@ -10,4 +10,5 @@ module.exports = {
     extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

@@ -7,10 +7,12 @@ import Papa from "papaparse";
 // Header i CSV-filen må matche (Tittel,Firma,Frist,URL,Logo)
 export type JobCsvRow = {
     tittel: string;
+    stillingstype: string;
     firma: string;
     frist: string; // YYYY-MM-DD format
     url: string;
     logo?: string; // Navn på fil
+    beskrivelse: string;
 }
 
 // Funksjonen leser fra CSV-filen og returnerer en liste objekter av JobCsvRow
@@ -39,6 +41,6 @@ export function getJobListings(): JobCsvRow[] {
 
     // Filtrer bort rader som mangler tittel,firmanavn,frist eller URL
     return (data as JobCsvRow[]).filter((job) => 
-        job.tittel && job.firma && job.frist && job.url
+        job.tittel && job.stillingstype && job.firma && job.frist && job.url && job.beskrivelse
     );
 }

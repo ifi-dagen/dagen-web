@@ -19,7 +19,7 @@ type MemberCsvRow = {
 // Denne funksjonen leser CSV-filen og lager listen av medlemmer
 export function getMembers(): Member[] {
     // Path til CSV-filen fra roten til prosjektet (process.cwd())
-    const csvPath = path.join(process.cwd(), "content/hjem/members.csv");
+    const csvPath = path.join(process.cwd(), "content/om-oss/members.csv");
 
     // Path til bildemappen fra root
     const memberPictureDir = path.join(process.cwd(), "public/members");

@@ -18,7 +18,7 @@ export type JobCsvRow = {
 // Funksjonen leser fra CSV-filen og returnerer en liste objekter av JobCsvRow
 export function getJobListings(): JobCsvRow[] {
     // Path til CSV-filen
-    const filePath = path.join(process.cwd(), "content/bedrift/stillingsannonser.csv");
+    const filePath = path.join(process.cwd(), "content/stillingsannonser/stillingsannonser.csv");
 
     // Hvis ikke filen eksisterer 
     if (!fs.existsSync(filePath)) {

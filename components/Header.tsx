@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import HeaderButton from "./HeaderButton";
 
+// Knappene som vises i header og hvor de linker hen
 const links = [
     { href: "/program", label: "Program" },
     { href: "/bli-med", label: "Bli med i Dagen!" },
@@ -30,21 +30,28 @@ export default function Header() {
                         className="absolute inset-y-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 flex items-center"
                     >
                         <Image
-                            src={`${router.basePath}/web-design/dagen-logo/at-black.svg`}
+                            src={`${router.basePath}/web-design/dagen-logo/dagen_at.svg`} // <-------- PATH - logo i header
                             alt="dagen@ifi logo"
                             width={64.27}
                             height={58.93}
                         />
                     </Link>
 
-                    {/* Desktop Menu */}
+                    {/* Desktop Menu med "knapper" (Linker med design som knapper) */}
                     <nav className="hidden md:flex gap-4 absolute right-0 inset-y-0 items-center">
                         {links.map((link) => (
-                            <HeaderButton
-                                key={link.href}
+                            <Link
                                 href={link.href}
-                                label={link.label}
-                            />
+                                className={
+                                    "inline-flex items-center justify-center " +
+                                    "h-[59px] px-[16px] py-[8px] " +
+                                    "rounded-[53.4px] border-[0.53px] border-black " +
+                                    "bg-(--primary) " +
+                                    "font-mono font-normal text-[18px] leading-[34px] " +
+                                    "hover:opacity-90 transition"
+                                }>
+                                {link.label}
+                            </Link>
                         ))}
                     </nav>
 

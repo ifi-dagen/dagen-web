@@ -114,6 +114,7 @@ body {
   margin-bottom: 1rem !important;
   line-height: 2.125 !important;
   font-size: 1.125rem !important;
+  text-align: justify;
   color: var(--foreground) !important;
   font-family: var(--font-mono);
 }

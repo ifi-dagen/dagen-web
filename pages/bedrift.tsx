@@ -9,7 +9,6 @@ import { getContentRowLayout } from "@/lib/getContentRowLayout";
 import { ContentRow, FaqItem } from "@/types";
 import ContentRowBuilder from "@/components/ContentRowBuilder";
 
-// Props for hva siden jobber med
 type BedriftPageProps = {
   contentRows: ContentRow[];
   faqs: FaqItem[];

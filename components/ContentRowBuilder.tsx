@@ -113,7 +113,7 @@ export default function ContentRowBuilder({ rows }: ContentRowBuilderProps) {
                         key={rowIndex}
                         id={rowId}
                         className={`
-                        scroll-mt-24
+                        scroll-mt-48
                         max-w-full mx-auto
                         `}
                     >

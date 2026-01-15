@@ -27,6 +27,10 @@ export default function Kontakt() {
     const data = new FormData(form);
 
     try {
+      console.log("contactType:", contactType);
+      console.log("formId:", formId);
+      console.log("formAction:", formAction);
+
       const res = await fetch(formAction, {
         method: "POST",
         headers: { Accept: "application/json" },
@@ -104,9 +108,8 @@ export default function Kontakt() {
               placeholder={isAnonymous ? "Anonym" : "Ola Nordmann"}
               disabled={isAnonymous}
               required={!isAnonymous}
-              className={`w-full rounded-lg border border-gray-300 dark:border-gray-700 p-3 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-(--primary) ${
-                isAnonymous ? "opacity-60 cursor-not-allowed" : ""
-              }`}
+              className={`w-full rounded-lg border border-gray-300 dark:border-gray-700 p-3 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-(--primary) ${isAnonymous ? "opacity-60 cursor-not-allowed" : ""
+                }`}
             />
           </div>
 
@@ -122,9 +125,8 @@ export default function Kontakt() {
               placeholder={isAnonymous ? "Anonym" : "ola@epost.no"}
               disabled={isAnonymous}
               required={!isAnonymous}
-              className={`w-full rounded-lg border border-gray-300 dark:border-gray-700 p-3 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-(--primary) ${
-                isAnonymous ? "opacity-60 cursor-not-allowed" : ""
-              }`}
+              className={`w-full rounded-lg border border-gray-300 dark:border-gray-700 p-3 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-(--primary) ${isAnonymous ? "opacity-60 cursor-not-allowed" : ""
+                }`}
             />
           </div>
 

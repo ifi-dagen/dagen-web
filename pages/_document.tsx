@@ -10,7 +10,7 @@ export default function Document() {
       <Head>
         <link rel="icon" href={`${basePath}/web-design/dagen-logo/dagen_at.svg`} />
       </Head>
-      <body className="antialiased">
+      <body style={{ ["--base-path" as any]: basePath }} className="antialiased">
         <Main />
         <NextScript />
       </body>

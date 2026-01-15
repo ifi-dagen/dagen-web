@@ -40,6 +40,7 @@ jobs:
 
       - name: Build (Next export)
         env:
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           # github-actions[bot] FORMSPREE_STUDENT_ID is configured in repository secrets
           NEXT_PUBLIC_FORMSPREE_STUDENT_ID: ${{ secrets.FORMSPREE_STUDENT_ID }}
           # github-actions[bot] FORMSPREE_BEDRIFT_ID is configured in repository secrets

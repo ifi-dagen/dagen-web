@@ -7,9 +7,14 @@ import Footer from "@/components/Footer";
 import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="page-background" />
+      <div
+        className="page-background"
+        style={{ backgroundImage: `url('${base}/web-design/at_background.png')` }}
+      />
       <Header />
       <div className="grow">
         <Component {...pageProps} />

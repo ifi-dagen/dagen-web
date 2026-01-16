@@ -15,7 +15,7 @@ type HomePageProps = {
 export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInfo }: HomePageProps) {
   const router = useRouter();
   return (
-    <main className="max-w-[1253px] mx-auto px-4 md:px-6 pt-[300px] pb-[160px]">
+    <main className="max-w-[1253px] mx-auto px-4 md:px-6 pt-[300px] pb-40">
 
       {/* Hva er Dagen - infotekst - PATH til tekst nederst i koden */}
       <section className="mb-[270px]">
@@ -28,9 +28,9 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
       {hspInfo &&
         <section className="mb-[170px]">
           <div className="max-w-[1106px] min-h-[557px] mx-auto border-[0.93px] border-black rounded-[4.66px] px-8 py-8 flex flex-col">
-            <div className="flex flex-col items-center text-center md:flex-row md:justify-center md:gap-[64px] mb-[48px]">
+            <div className="flex flex-col items-center text-center md:flex-row md:justify-center md:gap-16 mb-12">
               {/* Logo: under på mobil, venstre på desktop */}
-              <div className="order-2 md:order-1 relative w-[128px] h-[128px] shrink-0 mt-[24px] md:mt-0">
+              <div className="order-2 md:order-1 relative w-32 h-32 shrink-0 mt-6 md:mt-0">
                 <Image
                   src={`${router.basePath}/homepage/hsp_logo.png`} // <------------- BILDE LINK / PATH FOR HPS-LOGO
                   alt=""
@@ -54,11 +54,11 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
               <ReactMarkdown>{hspInfo}</ReactMarkdown>
             </div>
 
-            <div className="mt-auto flex flex-col gap-4 md:flex-row md:gap-6 md:justify-end pt-[24px]">
-              <button className="h-[59px] px-[16px] py-[8px] rounded-[53.4px] border-[0.93px] border-black bg-[var(--primary)] font-mono font-normal text-[11px] leading-[15px] tracking-[0.05em] hover:opacity-70 transition whitespace-nowrap">
+            <div className="mt-auto flex flex-col gap-4 md:flex-row md:gap-6 md:justify-end pt-6">
+              <button className="h-[59px] px-4 py-2 rounded-[53.4px] border-[0.93px] border-black bg-(--primary) font-mono font-normal text-[11px] leading-[15px] tracking-[0.05em] hover:opacity-70 transition whitespace-nowrap">
                 Bli hovedsamarbeidspartner
               </button>
-              <button className="h-[59px] px-[16px] py-[8px] rounded-[53.4px] border-[0.93px] border-black bg-[var(--primary)] font-mono font-normal text-[11px] leading-[15px] tracking-[0.05em] hover:opacity-70 transition whitespace-nowrap">
+              <button className="h-[59px] px-4 py-2 rounded-[53.4px] border-[0.93px] border-black bg-(--primary) font-mono font-normal text-[11px] leading-[15px] tracking-[0.05em] hover:opacity-70 transition whitespace-nowrap">
                 Bli samarbeidspartner
               </button>
             </div>
@@ -69,14 +69,14 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
       {/* Dagen */}
       <section className="mb-[170px] px-4 md:px-0 -mx-4 md:-mx-16">
         <div className="max-w-[1129px] mr-auto">
-          <div className="flex flex-col md:flex-row gap-[32px] md:gap-[81px]">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-[81px]">
 
             {/* Dagen - Overskrift og tekst - PATH til tekst nederst i koden */}
             <div className="max-w-[490px] flex flex-col">
               <h2 className="font-heading font-bold text-black m-0 text-center md:text-center text-[32px] sm:text-[40px] md:text-[48px] leading-[1.05]">
                 DAGEN@IFI
               </h2>
-              <div className="mt-[64px] prose max-w-none font-mono">
+              <div className="mt-16 prose max-w-none font-mono">
                 <ReactMarkdown>{dagenInfo}</ReactMarkdown>
               </div>
             </div>
@@ -98,7 +98,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
       {/* Ettermiddagen */}
       <section className="px-4 md:px-0 -mx-4 md:-mx-16">
         <div className="max-w-[1129px] ml-auto">
-          <div className="flex flex-col md:flex-row gap-[32px] md:gap-[81px]">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-[81px]">
             
             {/* Ettermiddagen - bilde */}
             <div className="order-3 md:order-1 relative w-full md:w-[558px] aspect-square md:h-[558px] shrink-0 border-[0.93px] border-black rounded-[4.66px] overflow-hidden">
@@ -116,7 +116,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
               <h2 className="font-heading font-bold text-black m-0 text-center md:text-center text-[32px] sm:text-[40px] md:text-[48px] leading-[1.05]">
                 ETTERMIDDAGEN@IFI
               </h2>
-              <div className="mt-[64px] prose max-w-none font-mono">
+              <div className="mt-16 prose max-w-none font-mono">
                 <ReactMarkdown>{ettermiddagenInfo}</ReactMarkdown>
               </div>
             </div>

@@ -23,7 +23,7 @@ cp -R "$TMP_DIR"/bedrift content/bedrift || true
 cp -R "$TMP_DIR"/bli-med content/bli-med || true
 cp -R "$TMP_DIR"/om-oss content/om-oss || true
 cp -R "$TMP_DIR"/program content/program || true
-cå -R "$TMP_DIR"/stillingsannonser content/stillingsannonser || true
+cp -R "$TMP_DIR"/stillingsannonser content/stillingsannonser || true
 
 # Kopier public assets
 mkdir -p public

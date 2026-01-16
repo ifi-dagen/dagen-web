@@ -44,7 +44,7 @@ export default function Header() {
                                 href={link.href}
                                 className={
                                     "inline-flex items-center justify-center " +
-                                    "h-[59px] px-[16px] py-[8px] " +
+                                    "h-[59px] px-4 py-2 " +
                                     "rounded-[53.4px] border-[0.53px] border-black " +
                                     "bg-(--primary) " +
                                     "font-mono font-normal text-[18px] leading-[34px] " +

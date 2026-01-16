@@ -3,7 +3,7 @@ import ContentRowBuilder from "@/components/ContentRowBuilder";
 import { getContentRowLayout } from "@/lib/getContentRowLayout";
 import { getInternGroups } from "../lib/getInternGroups";
 import { InternGroup, JoinUsProps } from "@/types";
-import JoinUsCard from "@/components/JoinUsCard";
+import JoinUsCard from "../components/JoinUsCard";
 import { getMarkdownContent } from "@/lib/getMarkdownContent";
 
 type JoinProps = {

@@ -133,3 +133,21 @@ body {
   opacity: 0.2;
   pointer-events: none;
 }
+
+@keyframes overlaySlideIn {
+  from { transform: translate3d(0, 100%, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes overlaySlideOut {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, 100%, 0); }
+}
+
+.slide-in {
+  animation: overlaySlideIn 500ms ease-out forwards;
+}
+
+.slide-out {
+  animation: overlaySlideOut 500ms ease-in forwards;
+}

@@ -1,6 +1,6 @@
 import GridSection from "@/components/GridSection";
 import MemberCard from "@/components/MemberCard";
-import { getMarkdownContent } from "@/lib/getMarkdownContent"
+import { getMarkdownContent } from "@/lib/getFileContent"
 import { getMembers } from "@/lib/members";
 import { Member } from "@/types";
 import Link from "next/link";

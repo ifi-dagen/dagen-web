@@ -6,7 +6,7 @@ import JoinUsOverlay from "@/components/bli-med/JoinUsOverlay";
 import JoinReadMoreCard from "@/components/bli-med/JoinReadMoreCard";
 import ApplyButton from "@/components/buttons/ApplyButton";
 
-import { getMarkdownContent } from "@/lib/getMarkdownContent";
+import { getMarkdownContent } from "@/lib/getFileContent";
 import { getApplyLinks } from "@/lib/bli-med/getApplyLinks";
 import {
   INTERN_TITLES,
@@ -127,7 +127,7 @@ export default function JoinUs({
       <JoinUsOverlay open={overlay !== null} onClose={closeOverlay}>
         <div className="max-w-[1107px] mx-auto">
           {/* Title */}
-          <div className="text-black text-4xl font-bold font-['Roboto_Mono'] uppercase leading-8 tracking-widest text-center mb-16">
+          <div className="text-black text-4xl font-bold font-mono uppercase leading-8 tracking-widest text-center mb-16">
             {overlayData?.title}
           </div>
 

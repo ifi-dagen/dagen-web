@@ -1,4 +1,4 @@
-import { getMarkdownContent } from "@/lib/getMarkdownContent";
+import { getMarkdownContent } from "@/lib/getFileContent";
 import type { ApplyLinks } from "@/types/domain";
 
 const toLinkOrNull = (s: string) => {

@@ -1,7 +1,7 @@
 // Forsiden (hjem)
 
 import ReactMarkdown from "react-markdown";
-import { getMarkdownContent } from "@/lib/getMarkdownContent";
+import { getMarkdownContent } from "@/lib/getFileContent";
 import Image from "next/image";
 import { useRouter } from "next/router";
 

@@ -4,3 +4,5 @@ export type ApplyLinks = {
   funk: string | null;
   intern: string | null;
 };
+
+export type PriceRow = { label: string; price: string };

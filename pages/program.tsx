@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import fs from "fs";
 import path from "path";
 
-import { getMarkdownContent } from "@/lib/getMarkdownContent";
+import { getMarkdownContent } from "@/lib/getFileContent";
 import { getProgramText } from "@/lib/program/getProgramText";
 import { BedriftItem, ProgramItem } from "@/types";
 import { getBedrifter } from "@/lib/program/getBedrifter";

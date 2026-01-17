@@ -59,14 +59,25 @@ export default function JoinUsOverlay({ open, onClose, children }: OverlayProps)
         };
         document.addEventListener("keydown", onKeyDown);
 
-        const prevOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
+        const html = document.documentElement;
+        const prevHtmlOverflow = html.style.overflow;
+        const prevBodyPaddingRight = document.body.style.paddingRight;
+
+        // Kompenser for scrollbar som forsvinner (hindrer “hopp”)
+        const scrollbarWidth = window.innerWidth - html.clientWidth;
+        if (scrollbarWidth > 0) {
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
+        }
+
+        html.style.overflow = "hidden";
 
         return () => {
             document.removeEventListener("keydown", onKeyDown);
-            document.body.style.overflow = prevOverflow;
+            html.style.overflow = prevHtmlOverflow;
+            document.body.style.paddingRight = prevBodyPaddingRight;
         };
     }, [mounted]);
+
 
     const handleClose = () => {
         if (pushedRef.current && !closingViaHistory.current) {

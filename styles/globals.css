@@ -47,6 +47,20 @@ body {
   font-family: var(--font-mono);
 }
 
+.page-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: repeat-y;
+  z-index: -1;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
 .prose {
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;

@@ -66,7 +66,7 @@ export default function BedriftOverlayCard({
                             <li key={`${idx}-${text}`} className="flex items-start gap-6">
                                 <Image
                                     src={checked ? checkedIcon : uncheckedIcon}
-                                    alt={checked ? "Valgt" : "Ikke valgt"}
+                                    alt={checked ? "Ja" : "Nei"}
                                     width={14}
                                     height={14}
                                     className="mt-1 shrink-0"

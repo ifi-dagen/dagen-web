@@ -154,6 +154,7 @@ export default function Bedrift({
                                 <div className="flex flex-col items-start">
                                     <BedriftOverlayCard
                                         title="Standard"
+                                        isStandard={true}
                                         bodyList={standardStand}
                                         layout="fixed"
                                     />

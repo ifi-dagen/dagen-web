@@ -145,14 +145,33 @@ export default function ProgramPage({
                     {/* Grid av logoer */}
                     {bedrifterItems.length > 0 ? (
                         <div className="relative">
+
+
+
+                            <p className="font-mono text-xs font-extralight text-center">
+                                OBS! KUN FOR DEMO! - bedrifter til ettermiddagen er ikke bekreftet enda
+                            </p>
+                            {/* TODO ^ FJERNE DEMO DISCLAIMER ^ !!!! ----- !!! */}
+
+
+
+
                             <h2 className="font-mono text-4xl font-bold text-center my-16">
-                                Disse kommer til {nextEventUp}@ifi!
+                                Disse kommer til {nextEventUp}@ifi!<br />
                             </h2>
+
+
+                            {/* LAGE SPONSOR max-w-[320px] isj OG HS CENTER w-2X isj */}
+                            {/* Spons cols-4 (kanskje 3) */}
+                            {/* Oppdatere for csv med "spons?" kolonne finne logisk verdier */}
+                            {/* Null = vanlig - 1 = spons - 2 = hs - ? - ev. string??  */}
+
+
                             <div
                                 className={[
                                     "w-full",
-                                    "grid gap-6",
-                                    "grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7",
+                                    "grid gap-2 md:gap-6 px-2 md:px-0",
+                                    "grid-cols-3 md:grid-cols-5",
                                     "items-center justify-items-center",
                                 ].join(" ")}
                             >
@@ -164,9 +183,9 @@ export default function ProgramPage({
                                         <Image
                                             src={`${router.basePath}/logos/${b.logo}`}
                                             alt={b.name}
-                                            width={240}
-                                            height={140}
-                                            className="h-auto w-full max-w-[120px] object-contain"
+                                            width={340}
+                                            height={340}
+                                            className="h-auto w-full max-w-[220px] object-contain"
                                         />
                                     </div>
                                 ))}

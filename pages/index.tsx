@@ -4,6 +4,8 @@ import ReactMarkdown from "react-markdown";
 import { getMarkdownContent } from "@/lib/getFileContent";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { buttonClasses } from "@/components/buttons/buttonStyles";
+import rightArrow from "@/components/icons/rightArrow.svg";
 
 type HomePageProps = {
   whatIsDagen: string;
@@ -55,11 +57,14 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
             </div>
 
             <div className="mt-auto flex flex-col gap-4 md:flex-row md:gap-6 md:justify-end pt-6">
-              <button className="h-[59px] px-4 py-2 rounded-[53.4px] border-[0.93px] border-black bg-(--primary) font-mono font-normal text-[11px] leading-[15px] tracking-[0.05em] hover:opacity-70 transition whitespace-nowrap">
-                Bli hovedsamarbeidspartner
-              </button>
-              <button className="h-[59px] px-4 py-2 rounded-[53.4px] border-[0.93px] border-black bg-(--primary) font-mono font-normal text-[11px] leading-[15px] tracking-[0.05em] hover:opacity-70 transition whitespace-nowrap">
-                Bli samarbeidspartner
+              <button className={buttonClasses([
+                "md:min-w-80 h-16 px-5 py-3 gap-10",
+                "font-normal text-sm md:text-lg rounded-[100px]",
+                "leading-8 transition",
+              ].join(" "))}
+              >
+                Bli hovedsponsor 2027
+                <Image src={rightArrow} alt="" width={12} height={12} />
               </button>
             </div>
           </div>
@@ -78,6 +83,20 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
               </h2>
               <div className="mt-16 prose max-w-none font-mono">
                 <ReactMarkdown>{dagenInfo}</ReactMarkdown>
+              </div>
+              <div className="max-w-[490px] flex flex-col gap-2 md:gap-3.5 md:flex-row justify-center">
+                <button className={buttonClasses(([
+                  "w-full"
+                ].join(" ")))}>
+                  Bli funk!
+                  <Image src={rightArrow} alt="" width={12} height={12} />
+                </button>
+                <button className={buttonClasses(([
+                  "w-full"
+                ].join(" ")))}>
+                  Stå på stand
+                  <Image src={rightArrow} alt="" width={12} height={12} />
+                </button>
               </div>
             </div>
 
@@ -99,7 +118,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
       <section className="px-4 md:px-0 -mx-4 md:-mx-16">
         <div className="max-w-[1129px] ml-auto">
           <div className="flex flex-col md:flex-row gap-8 md:gap-[81px]">
-            
+
             {/* Ettermiddagen - bilde */}
             <div className="order-3 md:order-1 relative w-full md:w-[558px] aspect-square md:h-[558px] shrink-0 border-[0.93px] border-black rounded-[4.66px] overflow-hidden">
               <Image
@@ -119,6 +138,12 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
               <div className="mt-16 prose max-w-none font-mono">
                 <ReactMarkdown>{ettermiddagenInfo}</ReactMarkdown>
               </div>
+              <button className={buttonClasses(([
+                  "w-full"
+                ].join(" ")))}>
+                  Stå på stand
+                  <Image src={rightArrow} alt="" width={12} height={12} />
+                </button>
             </div>
           </div>
         </div>

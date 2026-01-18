@@ -17,7 +17,7 @@ const links = [
 
 export default function Header() {
     const [isMobilMenuOpen, setMobileMenuOpen] = useState(false);
-    const router = useRouter();
+    const { pathname, basePath } = useRouter();
 
     return (
         <header className="sticky top-0 z-50 pt-[35px]">
@@ -30,7 +30,7 @@ export default function Header() {
                         className="absolute inset-y-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 flex items-center"
                     >
                         <Image
-                            src={`${router.basePath}/web-design/dagen-logo/dagen_at.svg`} // <-------- PATH - logo i header
+                            src={`${basePath}/web-design/dagen-logo/dagen_at.svg`} // <-------- PATH - logo i header
                             alt="dagen@ifi logo"
                             width={64.27}
                             height={58.93}
@@ -39,34 +39,40 @@ export default function Header() {
 
                     {/* Desktop Menu med "knapper" (Linker med design som knapper) */}
                     <nav className="hidden md:flex gap-4 absolute right-0 inset-y-0 items-center">
-                        {links.map((link) => (
-                            <Link
-                                href={link.href}
-                                className={
-                                    "inline-flex items-center justify-center " +
-                                    "h-[59px] px-4 py-2 " +
-                                    "rounded-[53.4px] border-[0.53px] border-black " +
-                                    "bg-(--primary) " +
-                                    "font-mono font-normal text-[18px] leading-[34px] " +
-                                    "hover:opacity-90 transition"
-                                }>
-                                {link.label}
-                            </Link>
-                        ))}
+                        {links.map((link) => {
+                            const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={[
+                                        "inline-flex items-center justify-center ",
+                                        "h-[59px] px-4 py-2 ",
+                                        "rounded-[53.4px] border-[0.53px] border-button-outline ",
+                                        "hover:bg-background active:bg-background ",
+                                        "font-mono font-normal text-[18px] leading-[34px] ",
+                                        "transition text-button-text",
+                                        isActive ? "bg-background" : "bg-button-bg",
+                                    ].join(" ")}
+                                >
+                                    {link.label}
+                                </Link>
+                            );
+                        })}
                     </nav>
 
                     {/* Mobil Hamburger-menyknapp */}
                     <button
                         type="button"
-                        className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 flex flex-col gap-1 z-10"
+                        className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 flex flex-col gap-[5px] z-10"
                         onClick={() => setMobileMenuOpen(!isMobilMenuOpen)}
                         aria-label={isMobilMenuOpen ? "Lukk meny" : "Åpne meny"}
                         aria-expanded={isMobilMenuOpen}
                         aria-controls="mobile-menu"
                     >
-                        <span className="block w-6 h-0.5 bg-current"></span>
-                        <span className="block w-6 h-0.5 bg-current"></span>
-                        <span className="block w-6 h-0.5 bg-current"></span>
+                        <span className="block w-8 h-1 bg-current"></span>
+                        <span className="block w-8 h-1 bg-current"></span>
+                        <span className="block w-8 h-1 bg-current"></span>
                     </button>
 
                 </div>
@@ -74,25 +80,46 @@ export default function Header() {
 
             {/* Mobil Meny */}
             {isMobilMenuOpen && (
-                <nav
-                    id="mobile-menu"
-                    className="md:hidden flex flex-col gap-3 p-4 border-t border-gray-200 font-mono bg-white"
-                >
-                    {links.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className={`transition-colors ${router.pathname === link.href
-                                ? "underline font-semibold"
-                                : "hover:text-(--primary)"
-                                }`}
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            {link.label}
-                        </Link>
+                <>
+                    {/* Klikk utenfor for å lukke */}
+                    <button
+                        type="button"
+                        aria-label="Lukk meny"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="fixed inset-0 z-40 cursor-default"
+                    />
 
-                    ))}
-                </nav>
+                    {/* Selve menyen */}
+                    <nav 
+                    id="mobile-menu"
+                    className={[
+                            "absolute right-0 top-full z-50",
+                            "md:hidden",
+                            "flex flex-col gap-1 p-1 font-mono",
+                        ].join(" ")}
+                        >
+                    {links.map((link) => {
+                            const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={[
+                                        "inline-flex items-center justify-center ",
+                                        "px-2 py-1 ",
+                                        "rounded-full border border-button-outline ",
+                                        "hover:bg-background active:bg-background ",
+                                        "font-mono font-normal text-[18px] leading-[34px] ",
+                                        "transition text-button-text",
+                                        isActive ? "bg-background" : "bg-button-bg",
+                                    ].join(" ")}
+                                >
+                                    {link.label}
+                                </Link>
+                            );
+                        })}
+                    </nav>
+                </>
             )}
         </header>
     );

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { buttonClasses } from "./buttons/buttonStyles";
 
 type OverlayShellProps = {
   open: boolean;
@@ -115,7 +116,7 @@ export default function OverlayShell({
       <div
         onAnimationEnd={onPanelAnimationEnd}
         className={[
-          "absolute inset-0 bg-(--card-bg) flex flex-col",
+          "absolute inset-0 bg-card-bg flex flex-col",
           "transform-gpu will-change-transform",
           anim === "in" ? "slide-in" : "slide-out",
         ].join(" ")}
@@ -128,13 +129,10 @@ export default function OverlayShell({
                 onClick={handleClose}
                 type="button"
                 aria-label="Lukk"
-                className={[
+                className={buttonClasses([
                   "pointer-events-auto",
-                  "w-20 h-14 rounded-[53.41px] bg-(--primary)",
-                  "border border-black",
-                  "flex items-center justify-center",
-                  "text-black text-lg font-normal font-mono tracking-wide",
-                ].join(" ")}
+                  "w-20",
+                ].join(" "))}
               >
                 X
               </button>

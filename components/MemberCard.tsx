@@ -20,7 +20,7 @@ export default function MemberCard({
     const router = useRouter();
 
     return (
-        <div className="p-6 text-center">
+        <div className=" w-[200px] h-[305px] text-center">
             {/* Bilde, white space lik bildestørrelse hvis ikke bilde */}
             {memberPicture ? (
                 <div className="w-40 h-40 mx-auto mb-4 relative">
@@ -38,7 +38,7 @@ export default function MemberCard({
             )}
 
             {/* Navn høyde satt til md:min-h-14 slik at kortet ikke skalerer forskjellig med korte og lange navn. min-h-24 for liten skjerm */}
-            <h2 className="text-xl font-semibold text-(--primary) min-h-24 md:min-h-14 flex items-center justify-center">
+            <h2 className="text-[24px] font-normal font-heading leading-7 text-text-heading min-h-24 md:min-h-14 flex items-center justify-center">
                 {memberName}
             </h2>
 

@@ -22,7 +22,7 @@ export default function StandkartOverlay({
       maxWidthClass="max-w-[1440px]"
       historyKey="__standkartOverlay"
     >
-      <div className="border border-black bg-white">
+      <div className="bg-background">
         <Image
           src={imageSrc}
           alt={alt}

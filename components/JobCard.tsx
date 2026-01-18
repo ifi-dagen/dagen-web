@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import ArrowDownIcon from "./icons/ArrowDownIcon";
+import { buttonClasses } from "./buttons/buttonStyles";
 
 type JobCardProps = {
     tittel: string;
@@ -90,8 +91,8 @@ export default function JobCard({
             >
                 <article
                     className={[
-                        "bg-(--card-bg)",
-                        "border border-black",
+                        "bg-card-bg",
+                        "border border-card-outline",
                         "overflow-hidden",
                         "w-[994.91px]",
                     ].join(" ")}
@@ -108,25 +109,23 @@ export default function JobCard({
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label={aria}
-                                    className={[
-                                        "inline-flex items-center gap-3.5",
+                                    className={buttonClasses([
+                                        "gap-3.5",
                                         "h-[77px] px-7",
                                         "rounded-[90.19px]",
-                                        "border border-black bg-(--primary)",
-                                        "font-mono font-normal",
+                                        "font-normal text-text-color",
                                         "text-[44.6px] leading-[1.2]",
                                         "tracking-[0]",
-                                        "whitespace-nowrap",
-                                        "hover:opacity-90 transition",
-                                    ].join(" ")}
+                                        "transition",
+                                    ].join(" "))}
                                 >
                                     <span>{stillingstype}</span>
 
-                                    <ArrowDownIcon className="w-12 h-12 -rotate-90 text-black" />
+                                    <ArrowDownIcon className="w-12 h-12 -rotate-90 text-text-color" />
                                 </Link>
 
                                 {/* Info */}
-                                <div className="mt-[18px] space-y-2.5 font-mono text-black">
+                                <div className="mt-[18px] space-y-2.5 font-mono text-text-color">
                                     <p className="text-[23.14px] leading-[43.7px] m-0">
                                         {"Stilling: " + tittel}
                                     </p>
@@ -156,17 +155,14 @@ export default function JobCard({
                         </div>
                     </div>
 
-                    {/* DELELINJE */}
-                    <div className="border-t border-black" />
-
                     {/* BUNNDEL */}
-                    <div className="px-6 pt-6 pb-[22px]">
+                    <div className="px-6 pt-6 pb-[22px] border-t border-card-outline">
                         <div className="flex flex-col items-end">
                             <div className="relative w-full">
                                 <p
                                     ref={textRef}
                                     className={[
-                                        "font-mono text-black",
+                                        "font-mono text-text-color",
                                         "text-[23.14px] leading-[43.7px]",
                                         "m-0",
                                         "text-justify",
@@ -181,12 +177,12 @@ export default function JobCard({
                                 {inline && (
                                     <>
                                         {/* Dekker hele nederste linje */}
-                                        <div className="absolute left-0 right-0 bottom-0 h-[52px] bg-(--card-bg) pointer-events-none z-0" />
+                                        <div className="absolute left-0 right-0 bottom-0 h-[52px] bg-card-bg pointer-events-none z-0" />
                                         {/* Dekker over / bak knappen - solid */}
                                         <div className="absolute right-0 bottom-0 h-20 w-[230px] pointer-events-none z-0">
-                                            <div className="absolute inset-0 bg-(--card-bg)" />
+                                            <div className="absolute inset-0 bg-card-bg" />
                                             {/* Gradient fra bak knappen mot venstre */}
-                                            <div className="absolute right-[220px] top-0 h-full w-[500px] bg-linear-to-l from-(--card-bg) to-transparent" />
+                                            <div className="absolute right-[220px] top-0 h-full w-[500px] bg-linear-to-l from-card-bg to-transparent" />
                                         </div>
 
                                     </>
@@ -202,23 +198,20 @@ export default function JobCard({
                                                 e.stopPropagation();
                                                 setIsOpen((v) => !v);
                                             }}
-                                            className={[
+                                            className={buttonClasses([
                                                 "h-[63.99px] px-[26px] w-[220px]",
                                                 "rounded-[57.93px]",
-                                                "border border-black bg-(--primary)",
-                                                "font-mono font-normal text-[23.14px] leading-[43.7px]",
-                                                "inline-flex items-center gap-3",
-                                                "hover:opacity-90 transition",
-                                                "whitespace-nowrap",
+                                                "font-normal text-[23.14px] leading-[43.7px]",
+                                                "transition",
 
                                                 inline ? "absolute right-0 bottom-0 z-20" : "",
-                                            ].join(" ")}
+                                            ].join(" "))}
                                             aria-label={isOpen ? "Vis mindre" : "Vis mer"}
                                         >
                                             <span>{isOpen ? "Vis mindre" : "Vis mer"}</span>
                                             <ArrowDownIcon
                                                 className={[
-                                                    "w-[22px] h-[22px] text-black transition-transform",
+                                                    "w-[22px] h-[22px] text-button-text transition-transform",
                                                     isOpen ? "rotate-180" : "",
                                                 ].join(" ")}
                                             />
@@ -228,7 +221,6 @@ export default function JobCard({
                             </div>
                         </div>
                     </div>
-
                 </article>
             </div>
         </div>

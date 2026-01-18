@@ -65,7 +65,7 @@ export default function Stillingsannonser({ jobListings: jobListings }: Stilling
             <span
               className={[
                 "absolute left-0 top-0 h-full w-1/2",
-                "rounded-full bg-(--primary)",
+                "rounded-full bg-primary",
                 "transition-transform duration-300 ease-out",
                 isGalleryView ? "translate-x-full" : "translate-x-0",
               ].join(" ")}

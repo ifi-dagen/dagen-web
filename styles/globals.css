@@ -2,28 +2,44 @@
 
 :root {
   --primary: #D0EEF3;
-  --background: #fffefc;
+  --background: #FFFEFC;
   --foreground: #171717;
-  --card-bg: #f7feff;
-  --card-border: #e5e7eb;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-200: #e5e7eb;
-}
 
+  --accent: #F7FEFF;
+  --card-bg: #F7FEFF;
+  --card-outline: #000;
+
+  --button-bg: #D0EEF3;
+  --button-hover: #F7FEFF;
+  --button-text: #000;
+  --button-outline: #000;
+
+  --text-heading: #000;
+  --text-color: #000;
+}
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-card-bg: var(--card-bg);
+  --color-card-outline: var(--card-outline);
+
+  --color-button-bg: var(--button-bg);
+  --color-button-hover: var(--button-hover);
+  --color-button-text: var(--button-text);
+  --color-button-outline: var(--button-outline);
+
+  --color-text-heading: var(--text-heading);
+  --color-text-color: var(--text-color);
+
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: var(--font-roboto-mono);
   --font-heading: var(--font-ibm-plex-mono);
 }
 
-html {
-  overflow-y: scroll;
-}
+html { overflow-y: scroll; }
 
 body {
   background: var(--background);
@@ -31,18 +47,13 @@ body {
   font-family: var(--font-mono);
 }
 
-/* Typography styling for markdown pages */
-/* !important for å overskrive tailwind standard */
 .prose {
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
   hyphens: auto !important;
 }
 
-.prose h1 {
-  font-size: 2.5rem !important;
-  font-weight: 700 !important;
-  margin-bottom: 1rem !important;
+.prose :is(h1,h2,h3,h4,h5) {
   color: var(--foreground) !important;
   font-family: var(--font-heading);
   text-align: center;
@@ -50,53 +61,11 @@ body {
   overflow-wrap: break-word !important;
 }
 
-.prose h2 {
-  font-size: 2rem !important;
-  font-weight: 600 !important;
-  margin-top: 2rem !important;
-  margin-bottom: 0.75rem !important;
-  color: var(--foreground) !important;
-  font-family: var(--font-heading);
-  text-align: center;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-}
-
-.prose h3 {
-  font-size: 1.5rem !important;
-  font-weight: 600 !important;
-  margin-top: 1.5rem !important;
-  margin-bottom: 0.5rem !important;
-  color: var(--foreground) !important;
-  font-family: var(--font-heading);
-  text-align: center;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-}
-
-.prose h4 {
-  font-size: 1.25rem !important;
-  font-weight: 600 !important;
-  margin-top: 1.25rem !important;
-  margin-bottom: 0.5rem !important;
-  color: var(--foreground) !important;
-  font-family: var(--font-heading);
-  text-align: center;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-}
-
-.prose h5 {
-  font-size: 1rem !important;
-  font-weight: 600 !important;
-  margin-top: 1.25rem !important;
-  margin-bottom: 0.5rem !important;
-  color: var(--foreground) !important;
-  font-family: var(--font-heading);
-  text-align: center;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-}
+.prose h1 { font-size: 2.5rem !important; font-weight: 700 !important; margin-bottom: 1rem !important; }
+.prose h2 { font-size: 2rem !important; font-weight: 600 !important; margin: 2rem 0 0.75rem !important; }
+.prose h3 { font-size: 1.5rem !important; font-weight: 600 !important; margin: 1.5rem 0 0.5rem !important; }
+.prose h4 { font-size: 1.25rem !important; font-weight: 600 !important; margin: 1.25rem 0 0.5rem !important; }
+.prose h5 { font-size: 1rem !important; font-weight: 600 !important; margin: 1.25rem 0 0.5rem !important; }
 
 .prose p {
   margin-bottom: 1rem !important;
@@ -115,39 +84,10 @@ body {
   font-family: var(--font-mono);
 }
 
-.prose li {
-  margin-bottom: 0.25rem !important;
-}
+.prose li { margin-bottom: 0.25rem !important; }
 
-.page-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center top;
-  background-repeat: repeat-y;
-  z-index: -1;
-  opacity: 0.2;
-  pointer-events: none;
-}
-
-/* Animasjoner for overlays o.l. */
-@keyframes overlaySlideIn {
-  from { transform: translate3d(0, 100%, 0); }
-  to   { transform: translate3d(0, 0, 0); }
-}
-
-@keyframes overlaySlideOut {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(0, 100%, 0); }
-}
-
-.slide-in {
-  animation: overlaySlideIn 500ms ease-out forwards;
-}
-
-.slide-out {
-  animation: overlaySlideOut 500ms ease-in forwards;
-}
+/* overlays */
+@keyframes overlaySlideIn { from { transform: translate3d(0, 100%, 0); } to { transform: translate3d(0, 0, 0); } }
+@keyframes overlaySlideOut { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, 100%, 0); } }
+.slide-in { animation: overlaySlideIn 500ms ease-out forwards; }
+.slide-out { animation: overlaySlideOut 500ms ease-in forwards; }

@@ -33,6 +33,7 @@ export default function BedriftOverlayCard({
             className={[
                 "w-full md:w-[360px] relative bg-background",
                 "outline-1 -outline-offset-1 outline-black",
+                "font-mono font-normal text-text-color",
                 isFixed ? "md:h-[474px]" : "md:h-auto",
             ].join(" ")}
         >
@@ -40,8 +41,7 @@ export default function BedriftOverlayCard({
             <div
                 className={[
                     isFixed ? "md:w-[322px] md:left-[18.75px] md:top-[16.5px] md:absolute" : "md:pt-[16.5px]",
-                    "text-center text-3xl font-normal font-mono",
-                    "leading-6 tracking-wider",
+                    "text-center text-3xl tracking-wider leading-6",
                     "pt-6 md:pt-0",
                 ].join(" ")}
             >
@@ -54,9 +54,8 @@ export default function BedriftOverlayCard({
                     isFixed
                         ? "md:w-[325.75px] md:h-[388.25px] md:top-[69.5px] md:absolute"
                         : "md:w-[325.75px] md:mt-8",
-                    "text-black text-sm font-normal font-mono",
-                    "leading-6 tracking-wide px-4 pb-4",
-                    "mt-6 md:mt-0",
+                    "text-sm tracking-wide leading-6",
+                    "px-4 pb-4 mt-6 md:mt-0",
                 ].join(" ")}
             >
                 <ul className="m-0 list-none p-0 space-y-2">

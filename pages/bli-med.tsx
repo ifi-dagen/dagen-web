@@ -127,13 +127,15 @@ export default function JoinUs({
       <JoinUsOverlay open={overlay !== null} onClose={closeOverlay}>
         <div className="max-w-[1107px] mx-auto">
           {/* Title */}
-          <div className="text-black text-4xl font-bold font-mono uppercase leading-8 tracking-widest text-center mb-16">
+          <div className="text-black text-4xl font-bold font-mono uppercase 
+                            leading-8 tracking-widest text-center mb-16">
             {overlayData?.title}
           </div>
 
           {/* Infotekst */}
           <div className="pb-20">
-            <div className="text-justify text-black text-lg font-normal font-mono leading-8 tracking-wide whitespace-pre-line">
+            <div className="text-justify text-black text-lg font-normal font-mono 
+                            leading-8 tracking-wide whitespace-pre-line">
               <ReactMarkdown>{overlayData?.body ?? ""}</ReactMarkdown>
             </div>
 

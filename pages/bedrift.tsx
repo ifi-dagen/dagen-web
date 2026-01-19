@@ -220,7 +220,7 @@ export default function Bedrift({
                                         ),
                                         a: ({ node, ...props }) => (
                                             <a
-                                                className="underline text-[#007C91] hover:opacity-80"
+                                                className="underline text-text-link hover:opacity-80"
                                                 {...props}
                                             />
                                         ),

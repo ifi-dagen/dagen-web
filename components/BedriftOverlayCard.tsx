@@ -31,7 +31,7 @@ export default function BedriftOverlayCard({
     return (
         <div
             className={[
-                "w-full md:w-[360px] relative bg-background",
+                "w-full md:w-[360px] relative bg-overlay-card",
                 "outline-1 -outline-offset-1 outline-black",
                 "font-mono font-normal text-text-color",
                 isFixed ? "md:h-[474px]" : "md:h-auto",

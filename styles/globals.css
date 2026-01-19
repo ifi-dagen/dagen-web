@@ -3,7 +3,10 @@
 :root {
   --primary: #D0EEF3;
   --background: #FFFEFC;
-  --foreground: #171717;
+  --foreground: #000;
+
+  --overlay-bg: #F7FEFF;
+  --overlay-card: #FFFEFC;
 
   --accent: #F7FEFF;
   --card-bg: #F7FEFF;
@@ -16,6 +19,7 @@
 
   --text-heading: #000;
   --text-color: #000;
+  --text-link: #007c91;
 }
 
 @theme inline {
@@ -26,6 +30,9 @@
   --color-card-bg: var(--card-bg);
   --color-card-outline: var(--card-outline);
 
+  --color-overlay-bg: var(--overlay-bg);
+  --color-overlay-card: var(--overlay-card);
+
   --color-button-bg: var(--button-bg);
   --color-button-hover: var(--button-hover);
   --color-button-text: var(--button-text);
@@ -33,6 +40,7 @@
 
   --color-text-heading: var(--text-heading);
   --color-text-color: var(--text-color);
+  --color-text-link: var(--text-link);
 
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: var(--font-roboto-mono);

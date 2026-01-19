@@ -38,7 +38,7 @@ export default function MemberCard({
             )}
 
             {/* Navn */}
-            <h2 className="text-xl md:text-2xl font-normal 
+            <h2 className="text-xl md:text-xl font-normal font-mono
                             leading-7 text-text-color min-h-16 md:min-h-14 
                             flex items-center justify-center md:mb-[13px]">
                 {memberName}

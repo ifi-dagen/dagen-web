@@ -1,16 +1,61 @@
+import AboutUsOverlay from "@/components/AboutUsOverlay";
+import { buttonClasses } from "@/components/buttons/buttonStyles";
 import MemberCard from "@/components/MemberCard";
+import { getMarkdownContent } from "@/lib/getFileContent";
 import { getMembers } from "@/lib/members";
 import { Member } from "@/types";
 import Link from "next/link";
+import { useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+
 
 type AboutUsProps = {
     members: Member[];
+    vedtekter: string;
+    varsling: string;
 }
 
-export default function AboutUs({ members }: AboutUsProps) {
+type OverlayType = "vedtekter" | "varsling" | null;
+
+export default function AboutUs({ members, vedtekter, varsling }: AboutUsProps) {
+    const [overlay, setOverlay] = useState<OverlayType>(null);
+    const scrollYRef = useRef(0);
+
+    const openOverlay = (type: Exclude<OverlayType, null>) => {
+        scrollYRef.current = window.screenY || 0;
+        setOverlay(type);
+    };
+
+    const closeOverlay = () => {
+        setOverlay(null);
+
+        requestAnimationFrame(() => {
+            window.scrollTo(0, scrollYRef.current);
+        });
+
+        if (typeof window !== "undefined" && window.history.state?.aboutUsOverlay) {
+            window.history.back();
+        }
+    };
+
     return (
         <main className="max-w-[1440px] mx-auto px-4 md:px-6 py-8 space-y-20 
-                        mt-24 md:mt-36 md:mb-[187px]">
+                        mt-24 md:mt-36 md:mb-[187px] justify-items-center">
+            <div className="flex flex-row gap-2">
+                <button
+                    onClick={() => openOverlay("vedtekter")}
+                    className={buttonClasses()}
+                >
+                    Vedtekter
+                </button>
+                <button
+                    onClick={() => openOverlay("varsling")}
+                    className={buttonClasses()}
+                >
+                    Varsling
+                </button>
+            </div>
+
             <div className="max-w-[1116.41px] min-h-[1180px] mx-auto">
                 <h1 className="text-center justify-center text-text-heading 
                                 text-5xl font-bold leading-[57.60px]">
@@ -58,6 +103,29 @@ export default function AboutUs({ members }: AboutUsProps) {
                     </div>
                 </div>
             </div>
+
+            {/* Overlay */}
+            <AboutUsOverlay open={overlay !== null} onClose={closeOverlay}>
+                <div className="max-w-4xl mx-auto">
+                    <div className="text-text-color font-mono text-justify whitespace-pre-line">
+                        
+                        {/* Vedtekter */}
+                        {overlay === "vedtekter" && (
+                            <div className="leading-8 tracking-wide">
+                                <ReactMarkdown>{vedtekter}</ReactMarkdown>
+                            </div>
+                        )}
+
+                        {/* Varsling */}
+                        {overlay === "varsling" && (
+                            <div className="leading-8 tracking-wide">
+                                <ReactMarkdown>{varsling}</ReactMarkdown>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </AboutUsOverlay>
+
         </main>
     )
 }
@@ -65,9 +133,13 @@ export default function AboutUs({ members }: AboutUsProps) {
 
 export function getStaticProps() {
     const members = getMembers();
+    const vedtekter = getMarkdownContent("om-oss/vedtekter");
+    const varsling = getMarkdownContent("bli-med/styret_extended");
     return {
         props: {
             members,
+            vedtekter,
+            varsling,
         },
     };
 }

@@ -29,7 +29,7 @@ export default function JoinReadMoreCard({ variant, title, cardText }: InternCar
         <div
             className={[
                 container,
-                "relative bg-(--primary) outline-1 -outline-offset-1 outline-black overflow-hidden",
+                "relative bg-overlay-card outline-1 -outline-offset-1 outline-black overflow-hidden",
             ].join(" ")}
         >
             <div

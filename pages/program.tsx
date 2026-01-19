@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { getProgramText } from "@/lib/program/getProgramText";
 import { BedriftItem, ProgramItem } from "@/types";
 import { getBedrifter } from "@/lib/program/getBedrifter";
-import StandkartOverlay from "@/components/StandkartOverlay";
 
 function getEventNameOnDate(date = new Date()): string {
     const year = date.getFullYear();
@@ -21,7 +20,7 @@ function getEventNameOnDate(date = new Date()): string {
 const nextEventUp = getEventNameOnDate();
 
 
-type Tab = "program" | "bedrifter";
+type Tab = "program" | "bedrifter" | "standkart";
 
 type ProgramPageProps = {
     programItems: ProgramItem[];
@@ -38,27 +37,28 @@ export default function ProgramPage({
 
     const isProgram = tab === "program";
     const isBedrifter = tab === "bedrifter";
+    const isStandkart = tab === "standkart";
 
     const hsp = bedrifterItems.find((b) => b.spons === "hsp") ?? null;
     const spons = bedrifterItems.filter((b) => b.spons === "sponsor") ?? null;
     const restBedrifer = bedrifterItems.filter((b) => b.spons !== "hsp" && b.spons !== "sponsor");
 
     return (
-        <main className="max-w-[1304px] mx-auto px-6">
+        <main className="max-w-[1304px] mx-auto px-6 justify-items-center">
             {/* Toggle */}
-            <div className="flex justify-center mt-16">
-                <div className="w-64 h-12 inline-flex">
+            <div className="sticky top-40">
+                <div className="w-64 h-12 relative inline-flex">
                     <button
                         type="button"
                         onClick={() => setTab("program")}
                         aria-pressed={isProgram}
                         className={[
                             "flex-1 h-12 -mr-px",
-                            "outline-1 -outline-offset-1 outline-black",
-                            "rounded-l-[100px]",
+                            "outline-1 -outline-offset-1 outline-button-outline",
+                            "rounded-l-full",
                             "inline-flex items-center justify-center",
                             "font-mono text-sm tracking-tight",
-                            isProgram ? "bg-primary" : "bg-background",
+                            isProgram ? "bg-button-bg" : "bg-button-hover",
                         ].join(" ")}
                     >
                         Program
@@ -70,14 +70,29 @@ export default function ProgramPage({
                         aria-pressed={isBedrifter}
                         className={[
                             "flex-1 h-12",
-                            "outline-1 -outline-offset-1 outline-black",
-                            "rounded-r-[100px]",
+                            "outline-1 -outline-offset-1 outline-button-outline",
                             "inline-flex items-center justify-center",
                             "font-mono text-sm tracking-tight",
-                            isBedrifter ? "bg-primary" : "bg-background",
+                            isBedrifter ? "bg-button-bg" : "bg-button-hover",
                         ].join(" ")}
                     >
                         Bedrifter
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={() => setTab("standkart")}
+                        aria-pressed={isStandkart}
+                        className={[
+                            "flex-1 h-12 -ml-px",
+                            "outline-1 -outline-offset-1 outline-button-outline",
+                            "rounded-r-full",
+                            "inline-flex items-center justify-center",
+                            "font-mono text-sm tracking-tight",
+                            isStandkart ? "bg-button-bg" : "bg-button-hover",
+                        ].join(" ")}
+                    >
+                        Standkart
                     </button>
                 </div>
             </div>
@@ -90,6 +105,7 @@ export default function ProgramPage({
                         alt="Dagen at ifi logo"
                         width={500}
                         height={300}
+                        
                     />
                     <h2 className="text-3xl py-12 px-12 font-heading">
                         Årets program
@@ -118,30 +134,8 @@ export default function ProgramPage({
 
             {/* Bedrifter */}
             {isBedrifter && (
-                <div className="flex flex-col items-center mb-24 mt-11">
-                    {/* Knapp øverst */}
-                    <button
-                        type="button"
-                        onClick={() => setStandkartOpen(true)}
-                        className={[
-                            "mb-10",
-                            "px-6 py-3",
-                            "border border-black",
-                            "rounded-full",
-                            "font-mono text-sm tracking-tight",
-                            "hover:bg-primary",
-                        ].join(" ")}
-                    >
-                        Standkart
-                    </button>
-
-                    <StandkartOverlay
-                        open={standkartOpen}
-                        onClose={() => setStandkartOpen(false)}
-                        imageSrc={`${router.basePath}/program/standkart.png`}
-                        alt="Standkart"
-                    />
-
+                <div className="flex flex-col items-center mb-24 mt-24">
+                    
                     {/* Grid av logoer */}
                     {bedrifterItems.length > 0 ? (
                         <div className="relative">
@@ -178,19 +172,18 @@ export default function ProgramPage({
                             {/* Sponsorer */}
                             {spons.length > 0 && (
                                 <div className={[
-                                    // "w-full mt-24 md:mt-48",
-                                    // "grid gap-2 md:gap-6 px-2 md:px-0",
-                                    // "grid-cols-2 md:grid-cols-3",
-                                    // "items-center justify-items-center",
-                                    // "flex flex-wrap",
-                                    "mt-24 md:mt-48 flex flex-wrap justify-center gap-0 md:gap-6 px-2 md:px-0",
+                                    "w-full mt-24 md:mt-48",
+                                    "grid gap-2 md:gap-6 px-2 md:px-0",
+                                    "grid-cols-2 md:grid-cols-3",
+                                    "items-center justify-items-center",
+                                    "flex flex-wrap",
                                 ].join(" ")}
                                 >
                                     {spons
                                         .map((b) => (
                                             <div
                                                 key={b.name}
-                                                className=/*"w-full flex items-center justify-center p-3"*/"flex items-center justify-center p-3 w-1/3 md:w-1/4"
+                                                className="w-full flex items-center justify-center p-3"
                                             >
                                                 <Image
                                                     src={`${router.basePath}/logos/${b.logo}`}
@@ -208,18 +201,17 @@ export default function ProgramPage({
                             {restBedrifer.length > 0 && (
                                 <div
                                     className={[
-                                        // "w-full mt-24 md:mt-48",
-                                        // "grid gap-2 md:gap-6 px-2 md:px-0",
-                                        // "grid-cols-3 md:grid-cols-5",
-                                        // "items-center justify-items-center",
-                                        "mt-24 md:mt-48 flex flex-wrap justify-center gap-0 md:gap-0 px-2 md:px-0",
+                                        "w-full mt-24 md:mt-48",
+                                        "grid gap-2 md:gap-6 px-2 md:px-0",
+                                        "grid-cols-3 md:grid-cols-5",
+                                        "items-center justify-items-center",
                                     ].join(" ")}
                                 >
                                     {restBedrifer
                                         .map((b) => (
                                             <div
                                                 key={b.name}
-                                                className=/*"w-full flex items-center justify-center p-3"*/"flex items-center justify-center p-3 w-1/4 md:w-1/6"
+                                                className="w-full flex items-center justify-center p-3"
                                             >
                                                 <Image
                                                     src={`${router.basePath}/logos/${b.logo}`}
@@ -238,6 +230,25 @@ export default function ProgramPage({
                             Bedrifter kommer snart
                         </div>
                     )}
+                </div>
+            )}
+
+            {/* Standkart */}
+            {isStandkart && (
+                <div className="flex flex-col items-center mb-24 mt-24">
+                    <p className="font-mono text-sm">
+                        OBS! Standkartet under er for Dagen 2024, og er kun ment for demonstrasjon. Oppdatert standkart kommer snart.
+                    </p>
+                    <h2 className="text-text-heading text-5xl font-bold font-mono uppercase leading-8 tracking-widest pt-40">
+                        STANDKART
+                    </h2>
+                    <Image
+                        src={`${router.basePath}/program/standkart.png`}
+                        alt="standkart"
+                        width={1000}
+                        height={4000}
+                        className="h-auto w-full object-contain pt-16" 
+                        />
                 </div>
             )}
 

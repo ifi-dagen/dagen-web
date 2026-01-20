@@ -111,14 +111,14 @@ export default function AboutUs({ members, vedtekter, varsling }: AboutUsProps) 
                         
                         {/* Vedtekter */}
                         {overlay === "vedtekter" && (
-                            <div className="leading-8 tracking-wide">
+                            <div className="leading-8 tracking-wide prose">
                                 <ReactMarkdown>{vedtekter}</ReactMarkdown>
                             </div>
                         )}
 
                         {/* Varsling */}
                         {overlay === "varsling" && (
-                            <div className="leading-8 tracking-wide">
+                            <div className="leading-8 tracking-wide prose">
                                 <ReactMarkdown>{varsling}</ReactMarkdown>
                             </div>
                         )}

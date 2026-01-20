@@ -134,7 +134,7 @@ export default function AboutUs({ members, vedtekter, varsling }: AboutUsProps) 
 export function getStaticProps() {
     const members = getMembers();
     const vedtekter = getMarkdownContent("om-oss/vedtekter");
-    const varsling = getMarkdownContent("bli-med/styret_extended");
+    const varsling = getMarkdownContent("om-oss/varslingsplakat");
     return {
         props: {
             members,

@@ -36,8 +36,8 @@ function formatKr(value: string) {
 function PriceRow({ label, price }: { label: string; price: string }) {
     return (
         <>
-            <div className="h-[62px] md:min-h-[84px] px-4 md:px-[25px] bg-background outline-1 outline-black flex items-center">
-                <div className="text-sm md:text-lg font-bold font-mono wrap-break-word text-left">
+            <div className="min-h-[62px] md:min-h-[84px] px-4 md:px-[25px] bg-background outline-1 outline-black flex items-center">
+                <div className="text-sm md:text-lg font-bold font-mono wrap-break-word text-left hyphens-auto">
                     {label}
                 </div>
             </div>
@@ -170,29 +170,34 @@ export default function Bedrift({
                                 />
                             </div>
 
-                            {/* Priser */}
+                            {/* Priser - liste */}
                             <div className="mt-16 w-full">
 
                                 {/* Tittel */}
-                                <div className="w-full max-w-[400px] mx-auto px-4 md:max-w-none md:w-[979px] md:mx-0 md:px-0 md:ml-[11px] text-black text-lg font-bold font-mono md:py-[7px]">
+                                <div className={[
+                                    "w-full md:max-w-none",
+                                    "mx-auto md:mx-0 px-4 md:px-0 md:py-[7px] md:ml-[11px]",
+                                    "text-text-color text-lg font-bold font-mono",
+                                ].join(" ")}
+                                    >
                                     PRISER*
                                 </div>
 
                                 {/* Ettermiddagen */}
                                 {first && (
-                                    <div className="mb-[31px] w-full max-w-[400px] mx-auto px-4 md:max-w-none md:w-[1002px] md:mx-0 md:px-0">
-                                        <div className="grid grid-cols-2 md:grid-cols-[660px_342px]">
+                                    <div className="mb-[31px] w-full mx-auto md:mx-0 px-4 md:px-0">
+                                        <div className="grid grid-cols-[2fr_1fr]">
                                             <PriceRow label={first.label} price={first.price} />
                                         </div>
                                     </div>
                                 )}
 
                                 {/* Dagen */}
-                                <div className="w-full max-w-[400px] mx-auto px-4 md:max-w-none md:w-[1002px] md:mx-0 md:px-0">
+                                <div className="w-full mx-auto px-4 md:mx-0 md:px-0">
                                     {rest.map((row) => (
                                         <div
                                             key={row.label}
-                                            className="grid grid-cols-2 md:grid-cols-[660px_342px]"
+                                            className="grid grid-cols-[2fr_1fr]"
                                         >
                                             <PriceRow label={row.label} price={row.price} />
                                         </div>

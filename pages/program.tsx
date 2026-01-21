@@ -44,7 +44,7 @@ export default function ProgramPage({
     return (
         <main className="max-w-[1304px] mx-auto px-6 justify-items-center">
             {/* Toggle */}
-            <div className="sticky top-40 z-50">
+            <div className="sticky top-40 z-50 flex justify-center">
                 <div className="w-64 h-12 relative inline-flex font-mono text-sm tracking-tight">
                     
                     {/* Programknapp */}
@@ -57,7 +57,7 @@ export default function ProgramPage({
                             "inline-flex items-center justify-center",
                             "rounded-l-full",
                             "outline-1 -outline-offset-1 outline-button-outline",
-                            isProgram ? "bg-button-bg" : "bg-button-hover",
+                            isProgram ? "bg-button-bg" : "bg-background",
                         ].join(" ")}
                     >
                         Program
@@ -72,7 +72,7 @@ export default function ProgramPage({
                             "flex-1 h-12",
                             "inline-flex items-center justify-center",
                             "outline-1 -outline-offset-1 outline-button-outline",
-                            isBedrifter ? "bg-button-bg" : "bg-button-hover",
+                            isBedrifter ? "bg-button-bg" : "bg-background",
                         ].join(" ")}
                     >
                         Bedrifter
@@ -88,7 +88,7 @@ export default function ProgramPage({
                             "inline-flex items-center justify-center",
                             "rounded-r-full",
                             "outline-1 -outline-offset-1 outline-button-outline",
-                            isStandkart ? "bg-button-bg" : "bg-button-hover",
+                            isStandkart ? "bg-button-bg" : "bg-background",
                         ].join(" ")}
                     >
                         Standkart
@@ -236,9 +236,6 @@ export default function ProgramPage({
             {/* Standkart */}
             {isStandkart && (
                 <div className="flex flex-col items-center mt-24 mb-24 font-mono">
-                    <p className="text-sm">
-                        OBS! Standkartet under er for Dagen 2024, og er kun ment for demonstrasjon. Oppdatert standkart kommer snart.
-                    </p>
                     <h2 className="text-text-heading text-5xl font-bold uppercase leading-8 tracking-widest pt-40">
                         STANDKART
                     </h2>

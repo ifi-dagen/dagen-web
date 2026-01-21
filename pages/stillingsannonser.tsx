@@ -46,50 +46,61 @@ export default function Stillingsannonser({ jobListings: jobListings }: Stilling
   const scale = useContainerScale(contentRef, 994.91, 1);
 
   return (
-    <div className="max-w-[1047px] mx-auto px-4 md:px-6 py-8 mt-12 md:mt-48">
-      <div ref={contentRef} className="max-w-96 md:max-w-[832px] mx-auto">
-        <div className="hidden md:flex absolute right-[150px] top-44">
-          <button
-            type="button"
-            role="switch"
-            aria-checked={isGalleryView}
-            onClick={() => setIsGalleryView((v) => !v)}
-            className={[
-              "relative inline-flex h-12 w-48 items-center",
-              "rounded-full border-2 border-black",
-              "bg-background",
-              "transition focus:outline-none",
-            ].join(" ")}
-          >
-            {/* Slider */}
-            <span
-              className={[
-                "absolute left-0 top-0 h-full w-1/2",
-                "rounded-full bg-primary",
-                "transition-transform duration-300 ease-out",
-                isGalleryView ? "translate-x-full" : "translate-x-0",
-              ].join(" ")}
-            />
-            {/* List view */}
-            <span className="relative z-10 flex w-1/2 items-center justify-center">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-                <line x1="4" y1="6" x2="20" y2="6" stroke="black" strokeWidth="1" />
-                <line x1="4" y1="12" x2="20" y2="12" stroke="black" strokeWidth="1" />
-                <line x1="4" y1="18" x2="20" y2="18" stroke="black" strokeWidth="1" />
-              </svg>
-            </span>
+    <div className="max-w-[1047px] mx-auto px-4 md:px-6 py-8 mt-12">
 
-            {/* Gallery view */}
-            <span className="relative z-10 flex w-1/2 items-center justify-center">
-              <svg width="36" height="32" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="4" width="8" height="7" stroke="black" strokeWidth="1" />
-                <rect x="14" y="4" width="8" height="7" stroke="black" strokeWidth="1" />
-                <rect x="3" y="14" width="8" height="7" stroke="black" strokeWidth="1" />
-                <rect x="14" y="14" width="8" height="7" stroke="black" strokeWidth="1" />
-              </svg>
-            </span>
-          </button>
-        </div>
+      {/* Overskrift */}
+      <h2 className="font-mono text-3xl font-bold text-text-color hyphens-auto text-center mb-8">
+        STILLINGSANNONSER
+      </h2>
+
+      {/* View-knapp */}
+      <div className="hidden md:flex justify-end max-w-[1047px] mx-auto mb-10">
+        <button
+          type="button"
+          role="switch"
+          aria-checked={isGalleryView}
+          onClick={() => setIsGalleryView((v) => !v)}
+          className={[
+            "relative inline-flex h-12 w-48 items-center",
+            "rounded-full border border-black",
+            "bg-background overflow-auto",
+            "transition focus:outline-none",
+          ].join(" ")}
+        >
+          {/* Slider */}
+          <span
+            className={[
+              "absolute left-0 top-0 h-full w-1/2",
+              "bg-primary",
+              "transition-transform duration-300 ease-out",
+              isGalleryView ? "translate-x-full" : "translate-x-0",
+            ].join(" ")}
+          />
+
+          {/* Bilder i slider */}
+          {/* List view */}
+          <span className="relative z-10 flex w-1/2 items-center justify-center">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+              <line x1="4" y1="6" x2="20" y2="6" stroke="black" strokeWidth="1" />
+              <line x1="4" y1="12" x2="20" y2="12" stroke="black" strokeWidth="1" />
+              <line x1="4" y1="18" x2="20" y2="18" stroke="black" strokeWidth="1" />
+            </svg>
+          </span>
+
+          {/* Gallery view */}
+          <span className="relative z-10 flex w-1/2 items-center justify-center">
+            <svg width="36" height="32" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="4" width="8" height="7" stroke="black" strokeWidth="1" />
+              <rect x="14" y="4" width="8" height="7" stroke="black" strokeWidth="1" />
+              <rect x="3" y="14" width="8" height="7" stroke="black" strokeWidth="1" />
+              <rect x="14" y="14" width="8" height="7" stroke="black" strokeWidth="1" />
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      {/* Kort */}
+      <div ref={contentRef} className="mx-auto">
 
         {/* Mobil: 1 kolonne */}
         <div className="flex flex-col items-center gap-6 md:hidden">
@@ -108,10 +119,11 @@ export default function Stillingsannonser({ jobListings: jobListings }: Stilling
           ))}
         </div>
 
+        {/* Venstre rad først */}
         {isGalleryView && (
           <div className="hidden md:flex justify-center">
-            <div className="flex items-start gap-[69px]">
-              <div className="flex flex-col items-start gap-[66px]">
+            <div className="flex items-start gap-8">
+              <div className="flex flex-col items-start gap-8">
                 {left.map((job) => (
                   <JobCard
                     key={`${job.firma}-${job.url}`}
@@ -122,14 +134,14 @@ export default function Stillingsannonser({ jobListings: jobListings }: Stilling
                     url={job.url}
                     logo={job.logo}
                     beskrivelse={job.beskrivelse}
-                    scale={.5}
+                    scale={scale / 2.1}
                     minCardHeightPx={620}
                   />
                 ))}
               </div>
 
-
-              <div className="flex flex-col items-start gap-[66px]">
+              {/* Høre rad */}
+              <div className="flex flex-col items-start gap-8">
                 {right.map((job) => (
                   <JobCard
                     key={`${job.firma}-${job.url}`}
@@ -140,7 +152,7 @@ export default function Stillingsannonser({ jobListings: jobListings }: Stilling
                     url={job.url}
                     logo={job.logo}
                     beskrivelse={job.beskrivelse}
-                    scale={.5}
+                    scale={scale / 2.1}
                     minCardHeightPx={620}
                   />
                 ))}
@@ -162,13 +174,12 @@ export default function Stillingsannonser({ jobListings: jobListings }: Stilling
                   url={job.url}
                   logo={job.logo}
                   beskrivelse={job.beskrivelse}
-                  scale={1}
+                  scale={scale}
                 />
               ))}
             </div>
           </div>
         )}
-
       </div>
     </div>
   );

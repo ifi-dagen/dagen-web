@@ -13,11 +13,12 @@ type AboutUsProps = {
     members: Member[];
     vedtekter: string;
     varsling: string;
+    thisYear: string;
 }
 
 type OverlayType = "vedtekter" | "varsling" | null;
 
-export default function AboutUs({ members, vedtekter, varsling }: AboutUsProps) {
+export default function AboutUs({ members, vedtekter, varsling, thisYear }: AboutUsProps) {
     const [overlay, setOverlay] = useState<OverlayType>(null);
     const scrollYRef = useRef(0);
 
@@ -41,7 +42,9 @@ export default function AboutUs({ members, vedtekter, varsling }: AboutUsProps) 
     return (
         <main className="max-w-[1440px] mx-auto px-4 md:px-6 py-8 space-y-20 
                         mt-24 md:mt-36 md:mb-[187px] justify-items-center">
-            <div className="flex flex-row gap-2">
+            
+            {/* Knapper for vedtekter og varlsing */}
+            <div className="flex flex-row gap-2 justify-center">
                 <button
                     onClick={() => openOverlay("vedtekter")}
                     className={buttonClasses()}
@@ -58,8 +61,8 @@ export default function AboutUs({ members, vedtekter, varsling }: AboutUsProps) 
 
             <div className="max-w-[1116.41px] min-h-[1180px] mx-auto">
                 <h1 className="text-center justify-center text-text-heading 
-                                text-5xl font-bold leading-[57.60px]">
-                    Hils på styret 2026!
+                                text-5xl font-bold font-mono leading-[57.60px]">
+                    Hils på styret {thisYear}!
                 </h1>
 
                 <div className="max-w-[1107px] min-h-[1041px relative pt-[85px]">
@@ -82,7 +85,7 @@ export default function AboutUs({ members, vedtekter, varsling }: AboutUsProps) 
                             <div className={[
                                 "w-48 h-48 mx-auto mb-4 rounded-full",
                                 "border border-current flex items-center",
-                                "justify-center text-text-color text-2xl"
+                                "justify-center text-text-color text-2xl font-mono"
                             ].join(" ")}
                             >
                                 deg?
@@ -93,7 +96,7 @@ export default function AboutUs({ members, vedtekter, varsling }: AboutUsProps) 
                                 className={[
                                     "bg-button-bg rounded-4xl px-6 py-4",
                                     "text-button-text outline outline-button-outline",
-                                    "hover:bg-button-hover",
+                                    "hover:bg-button-hover font-mono",
                                     "inline-block mt-12 md:mt-14 mx-auto"
                                 ].join(" ")}
                             >
@@ -135,11 +138,15 @@ export function getStaticProps() {
     const members = getMembers();
     const vedtekter = getMarkdownContent("om-oss/vedtekter");
     const varsling = getMarkdownContent("om-oss/varslingsplakat");
+
+    const thisYear = new Date().getFullYear();
+
     return {
         props: {
             members,
             vedtekter,
             varsling,
+            thisYear,
         },
     };
 }

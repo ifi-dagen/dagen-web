@@ -34,7 +34,7 @@ export default function MemberCard({
                     />
                 </div>
             ) : (
-                <div className="w-36 h-36 mx-auto mb-2.5 relative" />
+                <div className="w-48 h-48 mx-auto mb-2.5 relative" />
             )}
 
             {/* Navn */}

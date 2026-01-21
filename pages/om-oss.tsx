@@ -114,7 +114,7 @@ export default function AboutUs({ members, vedtekter, varsling, thisYear }: Abou
                         
                         {/* Vedtekter */}
                         {overlay === "vedtekter" && (
-                            <div className="leading-8 tracking-wide prose">
+                            <div className="leading-8 tracking-wide prose vedtekter-prose">
                                 <ReactMarkdown>{vedtekter}</ReactMarkdown>
                             </div>
                         )}

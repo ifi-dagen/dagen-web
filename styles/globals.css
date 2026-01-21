@@ -108,6 +108,10 @@ body {
 
 .prose li { margin-bottom: 0.25rem !important; }
 
+.vedtekter-prose :is(h2,h3,h4,h5) {
+  text-align: left !important;
+}
+
 /* overlays */
 @keyframes overlaySlideIn { from { transform: translate3d(0, 100%, 0); } to { transform: translate3d(0, 0, 0); } }
 @keyframes overlaySlideOut { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, 100%, 0); } }

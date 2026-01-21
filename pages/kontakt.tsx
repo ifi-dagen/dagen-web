@@ -158,7 +158,7 @@ export default function Kontakt() {
                 id="name"
                 name="name"
                 type="text"
-                placeholder={isAnonymous ? "Anonym" : "Ola Nordmann"}
+                placeholder={isAnonymous ? "Anonym" : "Navn Etternavn"}
                 disabled={isAnonymous}
                 required={!isAnonymous}
                 className={fieldClasses}
@@ -199,7 +199,7 @@ export default function Kontakt() {
                 ].join(" ")}
                 htmlFor="contact_type"
               >
-                Jeg tar kontakt som...
+                Jeg tar kontakt som...*
               </label>
 
               <InlineDropdown
@@ -213,7 +213,7 @@ export default function Kontakt() {
                   { value: "bedrift", label: "Bedriftsrepresentant" },
                   { value: "si_fra", label: "Si fra!" },
                 ]}
-                placeholder="Velg …"
+                placeholder="Velg..."
                 fieldClasses={fieldClasses}
               />
 
@@ -231,7 +231,7 @@ export default function Kontakt() {
                 ].join(" ")}
                 htmlFor="message"
               >
-                Melding
+                Melding*
               </label>
 
               <textarea
@@ -246,13 +246,18 @@ export default function Kontakt() {
 
             <input type="hidden" name="form_name" value="kontakt_skjema" />
 
+            {/* Footer */}
+            <span className="mr-auto mb-10 font-extralight">
+              *Obligatoriske felt
+            </span>
+
             {/* Submit */}
             <button
               type="submit"
               disabled={submitDisabled}
               className={buttonClasses(
                 [
-                  "px-6 py-5 transition",
+                  "px-6 py-5 transition mr-auto",
                   submitDisabled ? "bg-button-hover cursor-not-allowed" : "",
                 ].join(" ")
               )}

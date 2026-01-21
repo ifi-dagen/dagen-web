@@ -25,6 +25,8 @@ export default function JoinReadMoreCard({ variant, title, cardText }: InternCar
             ? "w-full px-6 py-6 md:px-0 md:py-0 md:left-[29px] md:top-[96px] md:right-[29px] md:w-auto md:h-[386px] relative md:absolute"
             : "w-full px-6 py-6 md:px-0 md:py-0 md:left-[31px] md:top-[98px] md:w-[537px] md:h-[267px] relative md:absolute";
 
+    if (!cardText) return;
+
     return (
         <div
             className={[

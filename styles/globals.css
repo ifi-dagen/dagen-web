@@ -47,7 +47,9 @@
   --font-heading: var(--font-ibm-plex-mono);
 }
 
-html { overflow-y: scroll; }
+html {
+  overflow-y: scroll;
+}
 
 body {
   background: var(--background);
@@ -56,17 +58,20 @@ body {
 }
 
 .page-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  min-height: 100vh;
-  background-size: cover;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 1;
+
   background-position: center top;
   background-repeat: repeat-y;
-  z-index: -1;
-  opacity: 0.2;
-  pointer-events: none;
+  background-size: 100% auto;
+
+  background-image:
+    linear-gradient(var(--background), var(--background)),
+    var(--bg-url);
+  background-blend-mode: multiply;
 }
 
 .prose {
@@ -75,7 +80,7 @@ body {
   hyphens: auto !important;
 }
 
-.prose :is(h1,h2,h3,h4,h5) {
+.prose :is(h1, h2, h3, h4, h5) {
   color: var(--foreground) !important;
   font-family: var(--font-heading);
   text-align: center;
@@ -83,11 +88,35 @@ body {
   overflow-wrap: break-word !important;
 }
 
-.prose h1 { font-size: 2.5rem !important; font-weight: 700 !important; margin-bottom: 1rem !important; }
-.prose h2 { font-size: 2rem !important; font-weight: 600 !important; margin: 2rem 0 0.75rem !important; }
-.prose h3 { font-size: 1.5rem !important; font-weight: 600 !important; margin: 1.5rem 0 0.5rem !important; }
-.prose h4 { font-size: 1.25rem !important; font-weight: 600 !important; margin: 1.25rem 0 0.5rem !important; }
-.prose h5 { font-size: 1rem !important; font-weight: 600 !important; margin: 1.25rem 0 0.5rem !important; }
+.prose h1 {
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+}
+
+.prose h2 {
+  font-size: 2rem !important;
+  font-weight: 600 !important;
+  margin: 2rem 0 0.75rem !important;
+}
+
+.prose h3 {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin: 1.5rem 0 0.5rem !important;
+}
+
+.prose h4 {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin: 1.25rem 0 0.5rem !important;
+}
+
+.prose h5 {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin: 1.25rem 0 0.5rem !important;
+}
 
 .prose p {
   margin-bottom: 1rem !important;
@@ -106,14 +135,39 @@ body {
   font-family: var(--font-mono);
 }
 
-.prose li { margin-bottom: 0.25rem !important; }
+.prose li {
+  margin-bottom: 0.25rem !important;
+}
 
-.vedtekter-prose :is(h2,h3,h4,h5) {
+.vedtekter-prose :is(h2, h3, h4, h5) {
   text-align: left !important;
 }
 
 /* overlays */
-@keyframes overlaySlideIn { from { transform: translate3d(0, 100%, 0); } to { transform: translate3d(0, 0, 0); } }
-@keyframes overlaySlideOut { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, 100%, 0); } }
-.slide-in { animation: overlaySlideIn 500ms ease-out forwards; }
-.slide-out { animation: overlaySlideOut 500ms ease-in forwards; }
+@keyframes overlaySlideIn {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes overlaySlideOut {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+.slide-in {
+  animation: overlaySlideIn 500ms ease-out forwards;
+}
+
+.slide-out {
+  animation: overlaySlideOut 500ms ease-in forwards;
+}

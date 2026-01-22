@@ -1,11 +1,9 @@
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
+import { Roboto_Mono, IBM_Plex_Mono } from "next/font/google";
 import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "@/styles/globals.css";
-import { Roboto_Mono, IBM_Plex_Mono } from "next/font/google";
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
@@ -20,21 +18,25 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const { basePath } = useRouter();
 
   return (
-    <div 
-    className={`${robotoMono.variable} ${ibmPlexMono.variable} flex flex-col min-h-screen`}
->
+    <div className={`${robotoMono.variable} ${ibmPlexMono.variable} min-h-screen relative`}>
       <div
         className="page-background"
-        style={{ backgroundImage: `url('${base}/web-design/at_background.png')` }}
+        style={
+          {
+            ["--bg-url" as any]: `url('${basePath}/web-design/background.png')`,
+          } as React.CSSProperties
+        }
       />
-      <Header />
-      <div className="grow">
-        <Component {...pageProps} />
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Header />
+        <div className="grow">
+          <Component {...pageProps} />
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }

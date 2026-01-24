@@ -14,6 +14,8 @@ export default function OverlayCard({
     frameClass,
     bodyClass,
 }: OverlayCardProps) {
+    if (!children) return;
+
     return (
         <div
             className={[

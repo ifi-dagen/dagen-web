@@ -183,7 +183,7 @@ export default function ProgramPage({
                                 <div className="w-full p-3 flex items-center justify-center">
                                     <Image
                                         src={`${router.basePath}/logos/${hsp.logo}`}
-                                        alt={`Hovedsponsor for dagen - ${hsp.name}`}
+                                        alt={`Hovedsamarbeidspartner for dagen - ${hsp.name}`}
                                         width={340}
                                         height={340}
                                         className="h-auto w-full max-w-[360px] object-contain"

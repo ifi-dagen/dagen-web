@@ -129,8 +129,8 @@ export default function Bedrift({
             <div
                 className={[
                     "w-full md:max-w-[1107px]",
-                    "text-justify text-lg font-normal font-mono leading-8 tracking-wide",
-                    "justify-center",
+                    "text-justify text-lg font-normal font-mono leading-8",
+                    "tracking-wide prose justify-center",
                 ].join(" ")}
             >
                 <ReactMarkdown>{bedriftPageInfo}</ReactMarkdown>
@@ -252,7 +252,7 @@ export default function Bedrift({
                             </div>
 
                             {/* FAQ */}
-                            <div className="mt-16 max-w-[979px] mr-auto text-left md:text-justify text-sm md:text-lg font-mono leading-6 md:leading-8 tracking-wide">
+                            <div className="mt-16 max-w-[979px] mr-auto text-left md:text-justify text-sm md:text-lg font-mono leading-6 md:leading-8 tracking-wide prose">
                                 <ReactMarkdown
                                     components={{
                                         h3: ({ node, ...props }) => (
@@ -274,7 +274,7 @@ export default function Bedrift({
                     {overlay === "hsp" && (
                         <div className="max-w-[1002px] mx-auto justify-items-center">
                             {/* hsp_extended */}
-                            <div className="mr-auto text-left md:text-justify text-sm md:text-lg font-mono leading-6 md:leading-8 tracking-wide word-break">
+                            <div className="mr-auto text-left md:text-justify text-sm md:text-lg font-mono leading-6 md:leading-8 tracking-wide word-break prose">
                                 <ReactMarkdown components={mdComponents}>{hspExtended}</ReactMarkdown>
                             </div>
 
@@ -296,7 +296,7 @@ export default function Bedrift({
                             </div>
 
                             {/* info-tekst */}
-                            <div className="mt-16 mr-auto text-left md:text-justify text-sm md:text-lg font-mono leading-6 md:leading-8 tracking-wide">
+                            <div className="mt-16 mr-auto text-left md:text-justify text-sm md:text-lg font-mono leading-6 md:leading-8 tracking-wide prose">
                                 <ReactMarkdown components={mdComponents}>{hspInfoText}</ReactMarkdown>
                             </div>
                         </div>

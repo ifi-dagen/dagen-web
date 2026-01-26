@@ -138,7 +138,7 @@ export default function JoinUsPage({
           {/* Infotekst */}
           <div className="pb-20">
             <div className="text-justify text-black text-lg font-normal font-mono 
-                            leading-8 tracking-wide whitespace-pre-line prose">
+                            leading-8 tracking-wide prose">
               <ReactMarkdown>{overlayData?.body ?? ""}</ReactMarkdown>
             </div>
 

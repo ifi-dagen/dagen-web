@@ -23,7 +23,7 @@ export default function Header() {
         <header
             className={[
                 "sticky top-0 z-50",
-                "pt-[35px]",
+                "pt-[35px] pb-4 bg-[linear-gradient(to_bottom,white,transparent)]",
             ].join(" ")}
         >
             <div

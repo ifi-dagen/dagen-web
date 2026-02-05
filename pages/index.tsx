@@ -22,14 +22,14 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
     <main
       className={[
         "w-full max-w-[1253px] mx-auto",
-        "px-[clamp(1rem,2vw,1.5rem)] pt-[clamp(5rem,12vw,300px)] pb-[clamp(4rem,10vw,300px)]",
+        "px-[clamp(1rem,2vw,1.5rem)] pt-32 pb-[clamp(4rem,10vw,300px)]",
         "text-text-color",
       ].join(" ")}
     >
 
       {/* Hva er Dagen - infotekst - PATH til tekst nederst i koden */}
       <section
-        className="mb-[clamp(4.5rem,14vw,324px)]">
+        className="mb-32">
         <div
           className="w-fit max-w-[1107px] mx-auto prose font-mono">
           <ReactMarkdown>{whatIsDagen}</ReactMarkdown>

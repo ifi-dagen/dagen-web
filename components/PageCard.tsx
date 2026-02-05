@@ -43,7 +43,7 @@ export default function PageCard({ title, infoText, onOpen, applyLink, widthClas
                     "md:min-h-96 md:mt-[86px] px-4",
                 ].join(" ")}
             >
-                <div className="whitespace-pre-wrap leading-loose">
+                <div className="leading-loose prose">
                     <ReactMarkdown>{infoText}</ReactMarkdown>
                 </div>
             </div>

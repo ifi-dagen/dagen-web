@@ -129,7 +129,7 @@ export default function AboutUsPage({ members, vedtekter, varsling, thisYear }: 
             {/* Overlay */}
             <PageOverlay open={overlay !== null} onClose={closeOverlay} maxWidthClass="max-w-7xl">
                 <div className="max-w-4xl mx-auto">
-                    <div className="text-text-color font-mono text-justify whitespace-pre-line">
+                    <div className="text-text-color font-mono text-justify">
 
                         {/* Vedtekter */}
                         {overlay === "vedtekter" && (

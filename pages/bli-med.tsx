@@ -105,7 +105,7 @@ export default function JoinUsPage({
         <p
           className={[
             "px-6 md:px-4",
-            "text-text-color text-lg font-normal font-mono leading-8",
+            "text-text-color text-lg font-normal leading-8",
             "tracking-wide text-justify",
           ].join(" ")}
         >
@@ -155,7 +155,7 @@ export default function JoinUsPage({
 
           {/* Infotekst */}
           <div className="pb-20">
-            <div className="text-justify text-black text-lg font-normal font-mono 
+            <div className="text-justify text-black text-lg font-normal 
                             leading-8 tracking-wide prose">
               <ReactMarkdown>{overlayData?.body ?? ""}</ReactMarkdown>
             </div>

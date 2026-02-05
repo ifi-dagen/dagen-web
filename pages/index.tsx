@@ -31,7 +31,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
       <section
         className="mb-32">
         <div
-          className="w-fit max-w-[1107px] mx-auto prose font-mono">
+          className="w-fit max-w-[1107px] mx-auto prose">
           <ReactMarkdown>{whatIsDagen}</ReactMarkdown>
         </div>
       </section>
@@ -44,7 +44,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
             className={[
               "w-full mx-auto md:max-3xl lg:max-w-6xl min-h-[clamp(22rem,50vw,557px)]",
               "px-8 py-8",
-              "border border-black rounded-sm",
+              "border border-card-outline rounded-sm",
               "flex flex-col",
             ].join(" ")}
           >
@@ -88,7 +88,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
 
             {/* HSP - infotekst --- PATH nederst i koden */}
             <div
-              className="max-w-none flex-1 prose font-mono">
+              className="max-w-none flex-1 prose">
               <ReactMarkdown>{hspInfo}</ReactMarkdown>
             </div>
 
@@ -148,7 +148,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
                 className={[
                   "w-full lg:max-w-[433px]",
                   "mt-[clamp(2.5rem,6vw,4rem)]",
-                  "prose font-mono",
+                  "prose",
                 ].join(" ")}
               >
                 <ReactMarkdown>{dagenInfo}</ReactMarkdown>
@@ -231,7 +231,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
                   "m-0 text-center",
                   "w-full wrap-break-word",
                   "text-[clamp(32px,5vw,42px)] leading-[1.05]",
-                  "font-heading font-bold uppercase",
+                  "prose font-bold uppercase",
                 ].join(" ")}
               >
                 ETTERMIDDAGEN@IFI
@@ -241,7 +241,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
                 className={[
                   "w-full min-w-0 lg:max-w-[433px]",
                   "mt-[clamp(2.5rem,6vw,4rem)]",
-                  "prose font-mono text-left",
+                  "prose text-left",
                   "wrap-break-word",
                 ].join(" ")}
               >

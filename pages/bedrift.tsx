@@ -43,7 +43,7 @@ function PriceRow({ label, price }: { label: string; price: string }) {
                 className={[
                     "min-h-[62px] md:min-h-[84px]",
                     "px-4 md:px-[25px]",
-                    "text-left text-sm md:text-lg font-bold font-mono hyphens-auto wrap-break-word",
+                    "text-left text-sm md:text-lg font-bold hyphens-auto wrap-break-word",
                     "bg-background outline-1 outline-black",
                     "flex items-center",
                 ].join(" ")}
@@ -54,7 +54,7 @@ function PriceRow({ label, price }: { label: string; price: string }) {
             <div
                 className={[
                     "h-auto md:min-h-[84px]",
-                    "text-sm md:text-lg font-bold font-mono",
+                    "text-sm md:text-lg font-bold",
                     "bg-background outline-1 outline-black",
                     "flex items-center justify-center",
                 ].join(" ")}
@@ -141,7 +141,7 @@ export default function Bedrift({
                 "md:max-w-[1360px]",
                 "mt-[205px] md:mb-[116px]",
                 "px-4 md:px-2",
-                "text-justify text-lg font-normal font-mono leading-8 tracking-wide",
+                "text-justify text-lg font-normal leading-8 tracking-wide",
                 "text-text-color",
                 "mx-auto pb-64 md:pb-0 justify-items-center",
             ].join(" ")}
@@ -150,7 +150,7 @@ export default function Bedrift({
             <div
                 className={[
                     "w-full md:max-w-[1107px]",
-                    "text-justify text-lg font-normal font-mono leading-8",
+                    "text-justify text-lg font-normal leading-8",
                     "tracking-wide prose justify-center",
                 ].join(" ")}
             >
@@ -186,7 +186,7 @@ export default function Bedrift({
             {/* Overlay */}
             <PageOverlay open={overlay !== null} onClose={closeOverlay} maxWidthClass="max-w-[1107px]">
                 <div className="max-w-[1107px] mx-auto px-4 md:px-0">
-                    <div className="text-center text-4xl font-bold font-mono uppercase leading-10 tracking-widest mb-16 wrap-break-word">
+                    <div className="text-center text-4xl font-bold uppercase leading-10 tracking-widest mb-16 wrap-break-word">
                         {overlayTitle}
                     </div>
 
@@ -196,11 +196,11 @@ export default function Bedrift({
                             {/* Infotekst */}
                             <div className="text-left md:text-justify mr-auto">
                                 <div className="md:min-h-[156px]">
-                                    <span className="text-lg font-bold font-mono leading-8 tracking-wide">
+                                    <span className="text-lg font-bold leading-8 tracking-wide">
                                         STANDPLASSTYPER
                                         <br />
                                     </span>
-                                    <span className="text-lg font-normal font-mono leading-8 tracking-wide">
+                                    <span className="text-lg font-normal leading-8 tracking-wide">
                                         På Ettermiddagen@ifi har vi kun standard plasser.
                                         <br />
                                         På Dagen@ifi tilbyr vi standard standplasser og sponsorplasser.
@@ -219,7 +219,7 @@ export default function Bedrift({
                                         bodyClass="px-4 pb-5 text-sm tracking-wide leading-7 justify-start"
                                         children={<Checklist items={standardStand} />}
                                     />
-                                    <div className="px-1 text-[10px] font-mono leading-5 tracking-wide">
+                                    <div className="px-1 text-[10px] leading-5 tracking-wide">
                                         *Rom for speedintervju kan legges til mot et tillegg
                                     </div>
                                 </div>
@@ -242,7 +242,7 @@ export default function Bedrift({
                                     className={[
                                         "mx-auto",
                                         "px-4 md:px-0 md:py-[7px]",
-                                        "text-left text-lg font-bold font-mono",
+                                        "text-left text-lg font-bold",
                                     ].join(" ")}
                                 >
                                     PRISER*
@@ -267,17 +267,17 @@ export default function Bedrift({
                                 </div>
 
                                 {/* Fotnote */}
-                                <div className="mt-[31px] w-full max-w-[400px] mx-auto px-4 md:max-w-none md:w-auto md:px-0 text-left text-xs md:text-lg font-mono">
+                                <div className="mt-[31px] w-full max-w-[400px] mx-auto px-4 md:max-w-none md:w-auto md:px-0 text-left text-xs md:text-lg">
                                     *Priser kan variere fra år til år, eller etter avtale.
                                 </div>
                             </div>
 
                             {/* FAQ */}
-                            <div className="mt-16 max-w-[979px] mr-auto text-left md:text-justify text-sm md:text-lg font-mono leading-6 md:leading-8 tracking-wide prose">
+                            <div className="mt-16 max-w-[979px] mr-auto md:text-justify text-sm md:text-lg leading-6 md:leading-8 tracking-wide prose">
                                 <ReactMarkdown
                                     components={{
                                         h3: ({ node, ...props }) => (
-                                            <h3 className="m-0 font-bold tracking-widest uppercase" {...props} />
+                                            <h3 className="m-0 font-bold tracking-widest text-left! uppercase" {...props} />
                                         ),
                                         p: ({ node, ...props }) => <p className="m-0 mb-10" {...props} />,
                                         a: ({ node, ...props }) => (
@@ -295,7 +295,7 @@ export default function Bedrift({
                     {overlay === "samarbeidspartner" && (
                         <div className="max-w-[1002px] mx-auto justify-items-center">
                             {/* hsp_extended */}
-                            <div className="mr-auto text-left md:text-justify text-sm md:text-lg font-mono leading-6 md:leading-8 tracking-wide word-break prose">
+                            <div className="mr-auto text-left md:text-justify text-sm md:text-lg leading-6 md:leading-8 tracking-wide word-break prose">
                                 <ReactMarkdown components={mdComponents}>{hspExtended}</ReactMarkdown>
                             </div>
 
@@ -317,7 +317,7 @@ export default function Bedrift({
                             </div>
 
                             {/* info-tekst */}
-                            <div className="mt-16 mr-auto text-left md:text-justify text-sm md:text-lg font-mono leading-6 md:leading-8 tracking-wide prose">
+                            <div className="mt-16 mr-auto text-left md:text-justify text-sm md:text-lg leading-6 md:leading-8 tracking-wide prose">
                                 <ReactMarkdown components={mdComponents}>{hspInfoText}</ReactMarkdown>
                             </div>
                         </div>

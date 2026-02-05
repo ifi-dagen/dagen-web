@@ -65,7 +65,7 @@ export default function PageOverlay({
   return (
     // Backdrop
     <div
-      className="fixed inset-0 z-50"
+      className="fixed inset-0 z-50 backdrop-blur-[2px] bg-slate-800/30"
       onMouseDown={handleClose}
     >
       {/* Panel */}
@@ -74,7 +74,7 @@ export default function PageOverlay({
         onAnimationEnd={onPanelAnimationEnd}
         className={[
           "absolute inset-0 max-w-5xl mx-auto mt-36",
-          "bg-card-bg flex flex-col border",
+          "bg-card-bg flex flex-col",
           "transform-gpu will-change-transform",
           anim === "in" ? "slide-in" : "slide-out",
         ].join(" ")}

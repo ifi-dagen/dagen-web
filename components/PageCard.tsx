@@ -38,7 +38,7 @@ export default function PageCard({ title, infoText, onOpen, applyLink, widthClas
             <div
                 className={[
                     "flex justify-center flex-1",
-                    "mt-8 text-lg font-normal font-mono leading-8 tracking-wide",
+                    "mt-8 text-lg font-normal leading-8",
                     "[&>p]:m-0 hyphens-auto",
                     "md:min-h-96 md:mt-[86px] px-4",
                 ].join(" ")}

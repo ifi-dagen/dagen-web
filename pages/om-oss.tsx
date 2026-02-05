@@ -82,7 +82,7 @@ export default function AboutUsPage({ members, vedtekter, varsling, thisYear }: 
 
             <div className="max-w-[1116.41px] min-h-[1180px] mx-auto">
                 <h1 className="text-center justify-center text-text-heading 
-                                text-5xl font-bold font-mono leading-[57.60px]">
+                                text-5xl font-bold  leading-[57.60px]">
                     Hils på styret {thisYear}!
                 </h1>
 
@@ -106,7 +106,7 @@ export default function AboutUsPage({ members, vedtekter, varsling, thisYear }: 
                             <div className={[
                                 "w-48 h-48 mx-auto mb-4 rounded-full",
                                 "border border-current flex items-center",
-                                "justify-center text-text-color text-2xl font-mono"
+                                "justify-center text-text-color text-2xl "
                             ].join(" ")}
                             >
                                 deg?
@@ -129,11 +129,11 @@ export default function AboutUsPage({ members, vedtekter, varsling, thisYear }: 
             {/* Overlay */}
             <PageOverlay open={overlay !== null} onClose={closeOverlay} maxWidthClass="max-w-7xl">
                 <div className="max-w-4xl mx-auto">
-                    <div className="text-text-color font-mono text-justify">
+                    <div className="text-text-color  text-justify">
 
                         {/* Vedtekter */}
                         {overlay === "vedtekter" && (
-                            <div className="leading-8 tracking-wide prose vedtekter-prose">
+                            <div className="leading-8 tracking-wide prose">
                                 <ReactMarkdown>{vedtekter}</ReactMarkdown>
                             </div>
                         )}

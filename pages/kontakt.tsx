@@ -23,7 +23,7 @@ export default function ContactUsPage() {
     "w-full",
     "h-20",
     "px-[22px] pr-12",
-    "text-lg font-normal font-mono leading-6",
+    "text-lg font-normal leading-6",
     "text-text-color",
     "bg-background border border-black",
     "appearance-none",
@@ -87,7 +87,6 @@ export default function ContactUsPage() {
         "max-w-[1000px]",
         "mt-8 md:mt-[150px]",
         "px-4 md:px-6 py-8",
-        "font-mono",
         "text-text-color",
         "mx-auto",
       ].join(" ")}
@@ -96,7 +95,7 @@ export default function ContactUsPage() {
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="flex flex-col items-center">
             {/* Anonym */}
-            <div className="flex items-center gap-4">
+            <div className="flex font-mono items-center gap-4">
               <label htmlFor="anonymous" className="text-sm">
                 Anonym tilbakemelding?
               </label>
@@ -327,7 +326,7 @@ function InlineDropdown({
               "w-full",
               "mt-2",
               "p-2",
-              "text-lg font-normal font-mono leading-6",
+              "text-lg font-normal leading-6",
               "bg-background border border-black",
               "absolute z-10",
             ].join(" ")}

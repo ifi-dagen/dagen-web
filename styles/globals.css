@@ -54,7 +54,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 .page-background {
@@ -83,7 +83,6 @@ body {
 .prose :is(h1, h2, h3, h4, h5) {
   color: var(--foreground) !important;
   font-family: var(--font-heading);
-  text-align: center;
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
 }
@@ -122,9 +121,8 @@ body {
   margin-bottom: 1rem !important;
   line-height: 2.125 !important;
   font-size: 1.125rem !important;
-  text-align: justify;
   color: var(--foreground) !important;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 .prose ul {
@@ -132,15 +130,11 @@ body {
   margin-bottom: 1rem !important;
   list-style-type: disc !important;
   color: var(--foreground) !important;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 .prose li {
   margin-bottom: 0.25rem !important;
-}
-
-.vedtekter-prose :is(h2, h3, h4, h5) {
-  text-align: left !important;
 }
 
 /* overlays */

@@ -159,7 +159,7 @@ export default function JobCard({
                                 <p
                                     ref={textRef}
                                     className={[
-                                        "font-mono text-text-color",
+                                        "text-text-color",
                                         "text-[23.14px] leading-[43.7px]",
                                         "m-0",
                                         "text-justify",

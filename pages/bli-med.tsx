@@ -106,7 +106,7 @@ export default function JoinUsPage({
           className={[
             "px-6 md:px-4",
             "text-text-color text-lg font-normal leading-8",
-            "tracking-wide text-justify",
+            "tracking-wide",
           ].join(" ")}
         >
           {joinUsInfo}
@@ -148,14 +148,14 @@ export default function JoinUsPage({
       <PageOverlay open={overlay !== null} onClose={closeOverlay} maxWidthClass="max-w-[1304px]">
         <div className="max-w-[1107px] mx-auto">
           {/* Title */}
-          <div className="text-black text-4xl font-bold font-mono uppercase 
+          <div className="text-4xl font-bold font-mono uppercase 
                             leading-8 tracking-widest text-center mb-16">
             {overlayData?.title}
           </div>
 
           {/* Infotekst */}
           <div className="pb-20">
-            <div className="text-justify text-black text-lg font-normal 
+            <div className="text-lg font-normal 
                             leading-8 tracking-wide prose">
               <ReactMarkdown>{overlayData?.body ?? ""}</ReactMarkdown>
             </div>

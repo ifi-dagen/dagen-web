@@ -141,7 +141,7 @@ export default function Bedrift({
                 "md:max-w-[1360px]",
                 "mt-[205px] md:mb-[116px]",
                 "px-4 md:px-2",
-                "text-justify text-lg font-normal leading-8 tracking-wide",
+                "text-lg font-normal leading-8 tracking-wide",
                 "text-text-color",
                 "mx-auto pb-64 md:pb-0 justify-items-center",
             ].join(" ")}
@@ -150,7 +150,7 @@ export default function Bedrift({
             <div
                 className={[
                     "w-full md:max-w-[1107px]",
-                    "text-justify text-lg font-normal leading-8",
+                    "text-lg font-normal leading-8",
                     "tracking-wide prose justify-center",
                 ].join(" ")}
             >
@@ -194,7 +194,7 @@ export default function Bedrift({
                     {overlay === "stand" && (
                         <div className="md:max-w-[1002px] mx-auto justify-items-center">
                             {/* Infotekst */}
-                            <div className="text-left md:text-justify mr-auto">
+                            <div className="text-left mr-auto">
                                 <div className="md:min-h-[156px]">
                                     <span className="text-lg font-bold leading-8 tracking-wide">
                                         STANDPLASSTYPER
@@ -273,7 +273,7 @@ export default function Bedrift({
                             </div>
 
                             {/* FAQ */}
-                            <div className="mt-16 max-w-[979px] mr-auto md:text-justify text-sm md:text-lg leading-6 md:leading-8 tracking-wide prose">
+                            <div className="mt-16 max-w-[979px] mr-auto text-sm md:text-lg leading-6 md:leading-8 tracking-wide prose">
                                 <ReactMarkdown
                                     components={{
                                         h3: ({ node, ...props }) => (
@@ -295,7 +295,7 @@ export default function Bedrift({
                     {overlay === "samarbeidspartner" && (
                         <div className="max-w-[1002px] mx-auto justify-items-center">
                             {/* hsp_extended */}
-                            <div className="mr-auto text-left md:text-justify text-sm md:text-lg leading-6 md:leading-8 tracking-wide word-break prose">
+                            <div className="mr-auto text-left text-sm md:text-lg leading-6 md:leading-8 tracking-wide word-break prose">
                                 <ReactMarkdown components={mdComponents}>{hspExtended}</ReactMarkdown>
                             </div>
 
@@ -317,7 +317,7 @@ export default function Bedrift({
                             </div>
 
                             {/* info-tekst */}
-                            <div className="mt-16 mr-auto text-left md:text-justify text-sm md:text-lg leading-6 md:leading-8 tracking-wide prose">
+                            <div className="mt-16 mr-auto text-left text-sm md:text-lg leading-6 md:leading-8 tracking-wide prose">
                                 <ReactMarkdown components={mdComponents}>{hspInfoText}</ReactMarkdown>
                             </div>
                         </div>

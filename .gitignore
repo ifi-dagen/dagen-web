@@ -42,7 +42,7 @@ next-env.d.ts
 
 # ide-generated workspace configs
 .idea/
-.vscode
+.vscode/
 
 # Files not used in build
 content/

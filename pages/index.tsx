@@ -234,7 +234,7 @@ export default function Home({ whatIsDagen, hspInfo, dagenInfo, ettermiddagenInf
                   "prose font-bold uppercase",
                 ].join(" ")}
               >
-                ETTERMIDDAGEN@IFI
+              {"ETTER\u00ADMIDDAGEN\u200B@IFI"}
               </h2>
 
               <div

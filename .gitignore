@@ -40,6 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# ide-generated workspace configs
+.idea/
+.vscode
+
 # Files not used in build
 content/
 public/

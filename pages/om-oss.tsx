@@ -94,10 +94,10 @@ export default function AboutUsPage({ members, vedtekter, varsling, thisYear }: 
                         {members.map((member) => (
                             <MemberCard
                                 key={`${member.name}-${member.title}`} // Sammensatt, tilfelle like navn
-                                memberName={member.name}
-                                memberTitle={member.title}
-                                roleEmail={member.email}
-                                memberPicture={member.picturePath}
+                                name={member.name}
+                                title={member.title}
+                                email={member.email}
+                                picturePath={member.picturePath}
                             />
                         ))}
 

@@ -101,6 +101,8 @@ export default function ContactUsPage() {
 
                             <Link
                                 href={"https://nettskjema.no/a/ifi-dagen-si-ifra"}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className={buttonClasses([].join(" "))}
                             >
                                 Si fra!

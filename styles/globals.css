@@ -125,16 +125,24 @@ body {
   font-family: var(--font-sans);
 }
 
-.prose ul {
+.prose li {
+  margin-bottom: 0.25rem !important;
+}
+
+/* HTML lists */
+ul, ol {
   margin-left: 1.5rem !important;
   margin-bottom: 1rem !important;
-  list-style-type: disc !important;
   color: var(--foreground) !important;
   font-family: var(--font-sans);
 }
 
-.prose li {
-  margin-bottom: 0.25rem !important;
+ol {
+  list-style-type: decimal !important;
+}
+
+ul {
+  list-style-type: disc !important;
 }
 
 /* overlays */

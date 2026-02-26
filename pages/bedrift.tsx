@@ -154,7 +154,9 @@ export default function Bedrift({
                     "tracking-wide prose justify-center",
                 ].join(" ")}
             >
-                <ReactMarkdown>{bedriftPageInfo}</ReactMarkdown>
+                <p>
+                    Vil din bedrift være med på laget? Velkommen til en av Oslos største karrieredag innen IT - den beste mulighetene for å rekruttere informatikere fra UiO!
+                </p>
             </div>
 
             {/* Infokort */}
@@ -168,19 +170,38 @@ export default function Bedrift({
             >
                 <PageCard
                     title="Stå på stand"
-                    infoText={standInfo}
                     onOpen={() => openOverlay("stand")}
                     applyLink={null}
                     widthClass="w-full md:w-[659px]"
-                />
+                >
+                    <div>
+                        <p>Besøk oss på Ole-Johan Dahls hus, og hils på studentene! </p>
+                        <p>Bedriften din vil få en standplass med bord og plass til deres egen roll-up mm.
+                            Utover det er det opp til dere hva dere gjør med standen - slipp kreativiten
+                            løs! Tidligere har vi hatt soft-is, mini kafé med espressomaskin og donuts,
+                            lykkehjul med premier, et program der studentene kunne tegne et bilde som ble
+                            til en figur i et dataspill, og mer!</p>
+                        <p>Velkommen til stand på Ettermiddagen@ifi, Dagen@ifi eller begge!</p>
+                    </div>
+                </PageCard>
 
                 <PageCard
                     title={"Hoved\u00ADsamarbeids\u00ADpartner"}
-                    infoText={hspInfo}
                     onOpen={() => openOverlay("hovedsamarbeidspartner")}
                     applyLink={null}
                     widthClass="w-full md:w-[659px]"
-                />
+                >
+                    <div>
+                        <p>AKA “HSP”</p>
+                        <p>Som hovedsamarbeidspartner vil dere få en unik mulighet til å komme tett på
+                            engasjerte informatikkstudenter gjennom hele året, både under karrieredagene og
+                            gjennom andre arrangementer på Institutt for Informatikk.
+                        </p>
+                        <p>Bli studentenes snakkis, for vi vet at samarbeidspartneren blir den bedriften
+                            som får mest synlighet for våre studenter.</p>
+                        <p>Søknaden for HSP 2027 åpner i høst.</p>
+                    </div>
+                </PageCard>
             </div>
 
             {/* Overlay */}

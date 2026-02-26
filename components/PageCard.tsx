@@ -1,16 +1,17 @@
 import ReactMarkdown from "react-markdown";
 import ApplyButton from "./buttons/ApplyButton";
 import ReadMoreButton from "./buttons/ReadMoreButton";
+import {ReactNode} from "react";
 
 type JoinUsCardProps = {
     title: string;
-    infoText: string;
     onOpen: () => void;
     applyLink: string | null;
     widthClass: string;
+    children: ReactNode;
 };
 
-export default function PageCard({ title, infoText, onOpen, applyLink, widthClass }: JoinUsCardProps) {
+export default function PageCard({ title, onOpen, applyLink, widthClass, children }: JoinUsCardProps) {
     return (
         <div
             className={[
@@ -43,7 +44,7 @@ export default function PageCard({ title, infoText, onOpen, applyLink, widthClas
                 ].join(" ")}
             >
                 <div className="leading-loose prose">
-                    <ReactMarkdown>{infoText}</ReactMarkdown>
+                    {children}
                 </div>
             </div>
 

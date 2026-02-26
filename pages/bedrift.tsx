@@ -170,25 +170,27 @@ export default function Bedrift({
             >
                 <PageCard
                     title="Stå på stand"
-                    infoText={
-                        <div>
-                            <p>Besøk oss på Ole-Johan Dahls hus, og hils på studentene! </p>
-                            <p>Bedriften din vil få en standplass med bord og plass til deres egen roll-up mm.
-                                Utover det er det opp til dere hva dere gjør med standen - slipp kreativiten
-                                løs! Tidligere har vi hatt soft-is, mini kafé med espressomaskin og donuts,
-                                lykkehjul med premier, et program der studentene kunne tegne et bilde som ble
-                                til en figur i et dataspill, og mer!</p>
-                            <p>Velkommen til stand på Ettermiddagen@ifi, Dagen@ifi eller begge!</p>
-                        </div>
-                    }
                     onOpen={() => openOverlay("stand")}
                     applyLink={null}
                     widthClass="w-full md:w-[659px]"
-                />
+                >
+                    <div>
+                        <p>Besøk oss på Ole-Johan Dahls hus, og hils på studentene! </p>
+                        <p>Bedriften din vil få en standplass med bord og plass til deres egen roll-up mm.
+                            Utover det er det opp til dere hva dere gjør med standen - slipp kreativiten
+                            løs! Tidligere har vi hatt soft-is, mini kafé med espressomaskin og donuts,
+                            lykkehjul med premier, et program der studentene kunne tegne et bilde som ble
+                            til en figur i et dataspill, og mer!</p>
+                        <p>Velkommen til stand på Ettermiddagen@ifi, Dagen@ifi eller begge!</p>
+                    </div>
+                </PageCard>
 
                 <PageCard
                     title={"Hoved\u00ADsamarbeids\u00ADpartner"}
-                    infoText={
+                    onOpen={() => openOverlay("hovedsamarbeidspartner")}
+                    applyLink={null}
+                    widthClass="w-full md:w-[659px]"
+                >
                     <div>
                         <p>AKA “HSP”</p>
                         <p>Som hovedsamarbeidspartner vil dere få en unik mulighet til å komme tett på
@@ -199,11 +201,7 @@ export default function Bedrift({
                             som får mest synlighet for våre studenter.</p>
                         <p>Søknaden for HSP 2027 åpner i høst.</p>
                     </div>
-                    }
-                    onOpen={() => openOverlay("hovedsamarbeidspartner")}
-                    applyLink={null}
-                    widthClass="w-full md:w-[659px]"
-                />
+                </PageCard>
             </div>
 
             {/* Overlay */}

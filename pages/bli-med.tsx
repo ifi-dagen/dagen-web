@@ -120,58 +120,57 @@ export default function JoinUsPage({
         {/* Funk */}
         <PageCard
           title="Funksjonær;"
-          infoText={
-            <div>
-              <p>AKA “funk”</p>
-              <ol>
-                <li>en som jobber frivillig før/under/etter dagen@ifi</li>
-                <li>får  en feeet funkpakke og invitasjon til funkfest som takk for innsatsen!</li>
-                <li>velges i aug/sep</li>
-              </ol>
-            </div>
-          }
           onOpen={() => openOverlay("funk")}
           applyLink={applyLinks.funk}
           widthClass="w-[360px] md:w-96"
-        />
+        >
+          <div>
+            <p>AKA “funk”</p>
+            <ol>
+              <li>en som jobber frivillig før/under/etter dagen@ifi</li>
+              <li>får  en feeet funkpakke og invitasjon til funkfest som takk for innsatsen!</li>
+              <li>velges i aug/sep</li>
+            </ol>
+          </div>
+        </PageCard>
 
         {/* Intern */}
         <PageCard
           title="Intern;"
-          infoText={
-            <div>
-              <ol>
-                <li> jobber tett med styret hele året, og er med på sosiale aktiviteter</li>
-                <li>bidrar til både dagen@ifi og ettermiddagen@ifi</li>
-                <li>velges jan/feb hvert år</li>
-              </ol>
-              <div>
-                <b><i>SØKNADSFRIST: </i></b>
-                <b>01.02.26 </b>
-                <i>kl.</i>
-              </div>
-              <p>23:59</p>
-            </div>
-          }
           onOpen={() => openOverlay("intern")}
           applyLink={applyLinks.intern}
           widthClass="w-[360px] md:w-96"
-        />
+        >
+          <div>
+            <ol>
+              <li> jobber tett med styret hele året, og er med på sosiale aktiviteter</li>
+              <li>bidrar til både dagen@ifi og ettermiddagen@ifi</li>
+              <li>velges jan/feb hvert år</li>
+            </ol>
+            <div>
+              <b><i>SØKNADSFRIST: </i></b>
+              <b>01.02.26 </b>
+              <i>kl.</i>
+            </div>
+            <p>23:59</p>
+          </div>
+        </PageCard>
 
         {/* Styret */}
         <PageCard
           title="Styremedlem;"
-          infoText={<div>
+          onOpen={() => openOverlay("styret")}
+          applyLink={null}
+          widthClass="w-[360px] md:w-96"
+        >
+          <div>
             <ol>
               <li>jobber “bak kulissene” med å arrangere dagen@ifi og ettermiddagen@ifi</li>
               <li>velges hver generalforsamling (okt/nov)</li>
               <li>alle ifi-studenter kan stille til styret</li>
             </ol>
-          </div>}
-          onOpen={() => openOverlay("styret")}
-          applyLink={null}
-          widthClass="w-[360px] md:w-96"
-        />
+          </div>
+        </PageCard>
       </div>
 
       <PageOverlay open={overlay !== null} onClose={closeOverlay} maxWidthClass="max-w-[1304px]">

@@ -5,13 +5,13 @@ import {ReactNode} from "react";
 
 type JoinUsCardProps = {
     title: string;
-    infoText: ReactNode;
     onOpen: () => void;
     applyLink: string | null;
     widthClass: string;
+    children: ReactNode;
 };
 
-export default function PageCard({ title, infoText, onOpen, applyLink, widthClass }: JoinUsCardProps) {
+export default function PageCard({ title, onOpen, applyLink, widthClass, children }: JoinUsCardProps) {
     return (
         <div
             className={[
@@ -44,7 +44,7 @@ export default function PageCard({ title, infoText, onOpen, applyLink, widthClas
                 ].join(" ")}
             >
                 <div className="leading-loose prose">
-                    {infoText}
+                    {children}
                 </div>
             </div>
 

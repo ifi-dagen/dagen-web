@@ -147,12 +147,6 @@ export default function JoinUsPage({
               <li>bidrar til både dagen@ifi og ettermiddagen@ifi</li>
               <li>velges jan/feb hvert år</li>
             </ol>
-            <div>
-              <b><i>SØKNADSFRIST: </i></b>
-              <b>01.02.26 </b>
-              <i>kl.</i>
-            </div>
-            <p>23:59</p>
           </div>
         </PageCard>
 

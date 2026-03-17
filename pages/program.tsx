@@ -57,6 +57,8 @@ export default function ProgramPage({
     const isBedrifter = tab === "bedrifter";
     const isStandkart = tab === "standkart";
 
+    const date = new Date();
+
     const hsp = bedrifterItems.find((b) => b.spons === "hsp") ?? null;
     const spons = bedrifterItems.filter((b) => b.spons === "sponsor") ?? null;
     const restBedrifer = bedrifterItems.filter((b) => b.spons !== "hsp" && b.spons !== "sponsor");
@@ -120,7 +122,9 @@ export default function ProgramPage({
             {isProgram && (
                 <div className="w-full flex flex-col items-center mt-22 mb-24 md:mt-[88px]">
                     <div className="w-full max-w-[1041px]">
-
+                        <div className="mt-12 text-center font-mono text-lg">
+                            Program for {nextEventUp}@ifi {date.getFullYear()}
+                        </div>
                         {/* Logo */}
                         <div
                             className={[
@@ -195,6 +199,16 @@ export default function ProgramPage({
                                 Program for {nextEventUp}@ifi kommer
                             </div>
                         )}
+                        <div>
+                            {programItems.map((item) => (
+                                item.asterisk ? (
+                                    <div key={item.asterisk}
+                                         className="font-mono text-shadow-background">
+                                        *{item.asterisk}
+                                    </div>
+                                ) : null
+                            ))}
+                        </div>
                     </div>
                 </div>
             )}

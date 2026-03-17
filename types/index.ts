@@ -9,6 +9,7 @@ export type ProgramItem = {
     time?: string;
     what: string;
     where: string;
+    asterisk: string;
 };
 
 export type BedriftItem = {

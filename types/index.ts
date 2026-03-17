@@ -7,7 +7,8 @@ export type Member = {
 
 export type ProgramItem = {
     time?: string;
-    text: string;
+    what: string;
+    where: string;
 };
 
 export type BedriftItem = {

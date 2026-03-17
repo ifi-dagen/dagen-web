@@ -144,8 +144,8 @@ export default function ProgramPage({
                             <div className="w-full">
                                 {programItems.map((item) => (
                                     <div
-                                        key={`${item.time}-${item.text}`}
-                                        className="grid grid-cols-[126px_1fr] md:grid-cols-[224px_1fr]"
+                                        key={`${item.time}-${item.what}-${item.where}`}
+                                        className="grid grid-cols-[126px_1fr_1fr] md:grid-cols-[224px_1fr_1fr]"
                                     >
                                         {/* Tid */}
                                         <div
@@ -161,7 +161,20 @@ export default function ProgramPage({
                                             </div>
                                         </div>
 
-                                        {/* Tekst */}
+                                        {/* What */}
+                                        <div
+                                            className={[
+                                                "w-full px-2 md:px-6 py-2 md:py-4",
+                                                "flex items-center",
+                                                "bg-background",
+                                                "border-l border-b border-black",
+                                            ].join(" ")}
+                                        >
+                                            <div className="font-mono text-xs md:text-base font-normal leading-8 tracking-wide">
+                                                {item.what}
+                                            </div>
+                                        </div>
+                                        {/* Where */}
                                         <div
                                             className={[
                                                 "w-full px-2 md:px-6 py-2 md:py-4",
@@ -171,7 +184,7 @@ export default function ProgramPage({
                                             ].join(" ")}
                                         >
                                             <div className="font-mono text-xs md:text-base font-normal leading-8 tracking-wide">
-                                                {item.text}
+                                                {item.where}
                                             </div>
                                         </div>
                                     </div>

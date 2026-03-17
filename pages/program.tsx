@@ -58,8 +58,11 @@ export default function ProgramPage({
     const isStandkart = tab === "standkart";
 
     const hsp = bedrifterItems.find((b) => b.spons === "hsp") ?? null;
-    const spons = bedrifterItems.filter((b) => b.spons === "sponsor") ?? null;
-    const restBedrifer = bedrifterItems.filter((b) => b.spons !== "hsp" && b.spons !== "sponsor");
+    const spons = bedrifterItems
+        .filter((b) => b.spons === "sponsor")
+        .sort((a, b) => a.name.localeCompare(b.name))?? null;
+    const restBedrifer = bedrifterItems.filter((b) => b.spons !== "hsp" && b.spons !== "sponsor")
+        .sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <main className="max-w-[1304px] mx-auto px-6 justify-items-center">

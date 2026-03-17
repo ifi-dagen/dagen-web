@@ -57,6 +57,8 @@ export default function ProgramPage({
     const isBedrifter = tab === "bedrifter";
     const isStandkart = tab === "standkart";
 
+    const date = new Date();
+
     const hsp = bedrifterItems.find((b) => b.spons === "hsp") ?? null;
     const spons = bedrifterItems.filter((b) => b.spons === "sponsor") ?? null;
     const restBedrifer = bedrifterItems.filter((b) => b.spons !== "hsp" && b.spons !== "sponsor");
@@ -120,7 +122,9 @@ export default function ProgramPage({
             {isProgram && (
                 <div className="w-full flex flex-col items-center mt-22 mb-24 md:mt-[88px]">
                     <div className="w-full max-w-[1041px]">
-
+                        <div className="mt-12 text-center font-mono text-lg">
+                            Program for {nextEventUp}@ifi {date.getFullYear()}
+                        </div>
                         {/* Logo */}
                         <div
                             className={[
@@ -144,8 +148,8 @@ export default function ProgramPage({
                             <div className="w-full">
                                 {programItems.map((item) => (
                                     <div
-                                        key={`${item.time}-${item.text}`}
-                                        className="grid grid-cols-[126px_1fr] md:grid-cols-[224px_1fr]"
+                                        key={`${item.time}-${item.what}-${item.where}`}
+                                        className="grid grid-cols-[126px_1fr_1fr] md:grid-cols-[224px_1fr_1fr]"
                                     >
                                         {/* Tid */}
                                         <div
@@ -161,7 +165,20 @@ export default function ProgramPage({
                                             </div>
                                         </div>
 
-                                        {/* Tekst */}
+                                        {/* What */}
+                                        <div
+                                            className={[
+                                                "w-full px-2 md:px-6 py-2 md:py-4",
+                                                "flex items-center",
+                                                "bg-background",
+                                                "border-l border-b border-black",
+                                            ].join(" ")}
+                                        >
+                                            <div className="font-mono text-xs md:text-base font-normal leading-8 tracking-wide">
+                                                {item.what}
+                                            </div>
+                                        </div>
+                                        {/* Where */}
                                         <div
                                             className={[
                                                 "w-full px-2 md:px-6 py-2 md:py-4",
@@ -171,7 +188,7 @@ export default function ProgramPage({
                                             ].join(" ")}
                                         >
                                             <div className="font-mono text-xs md:text-base font-normal leading-8 tracking-wide">
-                                                {item.text}
+                                                {item.where}
                                             </div>
                                         </div>
                                     </div>
@@ -182,6 +199,16 @@ export default function ProgramPage({
                                 Program for {nextEventUp}@ifi kommer
                             </div>
                         )}
+                        <div>
+                            {programItems.map((item) => (
+                                item.asterisk ? (
+                                    <div key={item.asterisk}
+                                         className="font-mono text-shadow-background">
+                                        *{item.asterisk}
+                                    </div>
+                                ) : null
+                            ))}
+                        </div>
                     </div>
                 </div>
             )}

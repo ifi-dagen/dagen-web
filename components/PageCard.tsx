@@ -1,4 +1,3 @@
-import ReactMarkdown from "react-markdown";
 import ApplyButton from "./buttons/ApplyButton";
 import ReadMoreButton from "./buttons/ReadMoreButton";
 import {ReactNode} from "react";

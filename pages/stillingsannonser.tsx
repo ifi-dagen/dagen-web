@@ -193,24 +193,32 @@ export default function JobListingsPage({ jobListings: jobListings }: Stillingsa
 
 // Henter, filtrerer og sorterer annonser fra jobs.ts
 export async function getStaticProps() {
-  const jobs = getJobListings();
+    const jobs = getJobListings();
 
-  // Definerer "i dag" som dagens dato kl 00:00
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+    // Definerer "i dag" som dagens dato kl 00:00
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-  // Filtrer bort utgåtte frister
-  const validJobs = jobs.filter((job) => {
-    const deadlineDate = new Date(job.frist);
-    return deadlineDate >= today;
-  });
+    // Filtrer bort utgåtte frister og evt tidlige sommerjobber
+    const validJobs = jobs.filter((job) => {
+        // Handle summer jobs before September 1st
+        const sep1 = new Date()
+        sep1.setMonth(8, 0) // 0-indexed, 8=september, 0=1st
+        if (job.stillingstype === "Sommerjobb" && new Date() < sep1) {
+            return false
+        }
 
-  // Sorter etter frister, FEFO (First Expired First Out)
-  validJobs.sort((a: JobCsvRow, b: JobCsvRow) => {
-    return new Date(a.frist).getTime() - new Date(b.frist).getTime();
-  });
+        // Handle expired jobs
+        const deadlineDate = new Date(job.frist);
+        return deadlineDate >= today;
+    });
 
-  return {
-    props: { jobListings: validJobs },
-  };
+    // Sorter etter frister, FEFO (First Expired First Out)
+    validJobs.sort((a: JobCsvRow, b: JobCsvRow) => {
+        return new Date(a.frist).getTime() - new Date(b.frist).getTime();
+    });
+
+    return {
+        props: { jobListings: validJobs },
+    };
 }

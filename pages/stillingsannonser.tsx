@@ -215,7 +215,7 @@ export async function getStaticProps() {
   const validJobs = jobs.filter((job) => {
     // Handle expired jobs
     const deadlineDate = new Date(job.frist);
-    if (deadlineDate >= today) {
+    if (deadlineDate < today) {
         return false
     }
     

@@ -221,7 +221,7 @@ export async function getStaticProps() {
     
     // We now know that the job isn't expired, and can check if it's an
     // early summer job
-    if (job.stillingstype === "Sommerjobb" && deadlineDate > jun1 && new Date() < sep1) {
+    if (job.stillingstype === "Sommerjobb" && deadlineDate > jun1 && today < sep1) {
         return false
     }
     

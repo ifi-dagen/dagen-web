@@ -181,6 +181,8 @@ export default function Bedrift({
                             løs! Tidligere har vi hatt soft-is, mini kafé med espressomaskin og donuts,
                             lykkehjul med premier, et program der studentene kunne tegne et bilde som ble
                             til en figur i et dataspill, og mer!</p>
+                        <p>Vil din bedrift delta på Dagen@ifi 2026? Les mer og meld dere på
+                            <a href="https://forms.gle/uA7JSyYm7vcwpSTRA">her</a>!</p>
                         <p>Velkommen til stand på Ettermiddagen@ifi, Dagen@ifi eller begge!</p>
                     </div>
                 </PageCard>

@@ -11,20 +11,22 @@ type JobFilterProps = {
     onSelectJobType: (jobType: string) => void;
 };
 
+type DismissReason = "pointer" | "escape";
+
 function useDismissOnOutsideInteraction(
     containerRef: React.RefObject<HTMLElement | null>,
     isActive: boolean,
-    onDismiss: () => void
+    onDismiss: (reason: DismissReason) => void
 ) {
     useEffect(() => {
         if (!isActive) return;
 
         const onMouseDown = (event: MouseEvent) => {
-            if (!containerRef.current?.contains(event.target as Node)) onDismiss();
+            if (!containerRef.current?.contains(event.target as Node)) onDismiss("pointer");
         };
 
         const onKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") onDismiss();
+            if (event.key === "Escape") onDismiss("escape");
         };
 
         document.addEventListener("mousedown", onMouseDown);
@@ -44,24 +46,37 @@ export default function JobFilter({
 }: JobFilterProps) {
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
 
     const radioGroupName = useId();
     const panelId = `${radioGroupName}-panel`;
 
-    const close = useCallback(() => setIsOpen(false), []);
-    useDismissOnOutsideInteraction(containerRef, isOpen, close);
+    const closeAndRefocus = useCallback(() => {
+        setIsOpen(false);
+        triggerRef.current?.focus();
+    }, []);
 
-    const options = [ALL_JOB_TYPES, ...jobTypes];
+    const dismiss = useCallback(
+        (reason: DismissReason) => {
+            if (reason === "escape") closeAndRefocus();
+            else setIsOpen(false);
+        },
+        [closeAndRefocus]
+    );
+
+    useDismissOnOutsideInteraction(containerRef, isOpen, dismiss);
+
+    const options = [ALL_JOB_TYPES, ...jobTypes.filter((type) => type !== ALL_JOB_TYPES)];
     const isFiltered = selectedJobType !== ALL_JOB_TYPES;
 
     return (
         <div ref={containerRef} className="relative">
             <button
+                ref={triggerRef}
                 type="button"
                 onClick={() => setIsOpen((v) => !v)}
                 aria-expanded={isOpen}
-                aria-haspopup="true"
-                aria-controls={panelId}
+                aria-controls={isOpen ? panelId : undefined}
                 className={buttonClasses("max-w-full")}
             >
                 <span className="truncate">
@@ -109,7 +124,7 @@ export default function JobFilter({
                                     checked={isSelected}
                                     onChange={() => {
                                         onSelectJobType(option);
-                                        setIsOpen(false);
+                                        closeAndRefocus();
                                     }}
                                     className="sr-only peer"
                                 />

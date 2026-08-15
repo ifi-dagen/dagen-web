@@ -88,6 +88,7 @@ export default function JobFilter({
                     alt=""
                     width={20}
                     height={20}
+                    style={{ height: "auto" }}
                     className={[
                         "shrink-0 transition-transform",
                         isOpen ? "rotate-180" : "",

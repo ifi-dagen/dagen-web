@@ -1,62 +1,61 @@
-// Nedtrekksmeny for å filtrere stillingsannonser på stillingstype
-
 import Image from "next/image";
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { buttonClasses } from "./buttons/buttonStyles";
 import downArrow from "./icons/downArrow.svg";
 
-// Verdien som betyr "ikke filtrer" - er valgt som standard
 export const ALL_JOB_TYPES = "Alle";
 
 type JobFilterProps = {
-    stillingstyper: string[];
-    valgtStillingstype: string;
-    onVelgStillingstype: (stillingstype: string) => void;
+    jobTypes: string[];
+    selectedJobType: string;
+    onSelectJobType: (jobType: string) => void;
 };
 
+function useDismissOnOutsideInteraction(
+    containerRef: React.RefObject<HTMLElement | null>,
+    isActive: boolean,
+    onDismiss: () => void
+) {
+    useEffect(() => {
+        if (!isActive) return;
+
+        const onMouseDown = (event: MouseEvent) => {
+            if (!containerRef.current?.contains(event.target as Node)) onDismiss();
+        };
+
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") onDismiss();
+        };
+
+        document.addEventListener("mousedown", onMouseDown);
+        document.addEventListener("keydown", onKeyDown);
+
+        return () => {
+            document.removeEventListener("mousedown", onMouseDown);
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, [containerRef, isActive, onDismiss]);
+}
+
 export default function JobFilter({
-    stillingstyper,
-    valgtStillingstype,
-    onVelgStillingstype,
+    jobTypes,
+    selectedJobType,
+    onSelectJobType,
 }: JobFilterProps) {
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // useId gir unikt navn på radiogruppen, slik at flere filtre ikke kolliderer
     const radioGroupName = useId();
     const panelId = `${radioGroupName}-panel`;
 
-    // Lukk menyen ved klikk utenfor eller Escape
-    useEffect(() => {
-        if (!isOpen) return;
+    const close = useCallback(() => setIsOpen(false), []);
+    useDismissOnOutsideInteraction(containerRef, isOpen, close);
 
-        const closeOnOutsideClick = (event: MouseEvent) => {
-            if (!containerRef.current?.contains(event.target as Node)) {
-                setIsOpen(false);
-            }
-        };
-
-        const closeOnEscape = (event: KeyboardEvent) => {
-            if (event.key === "Escape") setIsOpen(false);
-        };
-
-        document.addEventListener("mousedown", closeOnOutsideClick);
-        document.addEventListener("keydown", closeOnEscape);
-
-        return () => {
-            document.removeEventListener("mousedown", closeOnOutsideClick);
-            document.removeEventListener("keydown", closeOnEscape);
-        };
-    }, [isOpen]);
-
-    // "Alle" ligger alltid øverst, deretter stillingstypene fra annonsene
-    const alternativer = [ALL_JOB_TYPES, ...stillingstyper];
-    const erFiltrert = valgtStillingstype !== ALL_JOB_TYPES;
+    const options = [ALL_JOB_TYPES, ...jobTypes];
+    const isFiltered = selectedJobType !== ALL_JOB_TYPES;
 
     return (
         <div ref={containerRef} className="relative">
-
-            {/* Knappen som åpner og lukker menyen */}
             <button
                 type="button"
                 onClick={() => setIsOpen((v) => !v)}
@@ -66,7 +65,7 @@ export default function JobFilter({
                 className={buttonClasses("max-w-full")}
             >
                 <span className="truncate">
-                    {erFiltrert ? `Filter: ${valgtStillingstype}` : "Filter"}
+                    {isFiltered ? `Filter: ${selectedJobType}` : "Filter"}
                 </span>
 
                 <Image
@@ -81,7 +80,6 @@ export default function JobFilter({
                 />
             </button>
 
-            {/* Selve menyen */}
             {isOpen && (
                 <div
                     id={panelId}
@@ -96,28 +94,26 @@ export default function JobFilter({
                         "font-mono text-lg tracking-wide text-text-color",
                     ].join(" ")}
                 >
-                    {alternativer.map((alternativ) => {
-                        const isSelected = alternativ === valgtStillingstype;
+                    {options.map((option) => {
+                        const isSelected = option === selectedJobType;
 
                         return (
                             <label
-                                key={alternativ}
+                                key={option}
                                 className="flex cursor-pointer items-center gap-3 py-2"
                             >
-                                {/* Skjult native radio - beholder tastatur og skjermleser */}
                                 <input
                                     type="radio"
                                     name={radioGroupName}
-                                    value={alternativ}
+                                    value={option}
                                     checked={isSelected}
                                     onChange={() => {
-                                        onVelgStillingstype(alternativ);
+                                        onSelectJobType(option);
                                         setIsOpen(false);
                                     }}
                                     className="sr-only peer"
                                 />
 
-                                {/* Radioknappen slik den vises */}
                                 <span
                                     aria-hidden
                                     className={[
@@ -132,7 +128,7 @@ export default function JobFilter({
                                     )}
                                 </span>
 
-                                <span className="truncate">{alternativ}</span>
+                                <span className="truncate">{option}</span>
                             </label>
                         );
                     })}

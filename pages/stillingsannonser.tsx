@@ -42,29 +42,27 @@ function useContainerScale(
 
 export default function JobListingsPage({ jobListings: jobListings }: StillingsannonserProps) {
   const [isGalleryView, setIsGalleryView] = useState(false);
-  const [valgtStillingstype, setValgtStillingstype] = useState<string>(ALL_JOB_TYPES);
+  const [selectedJobType, setSelectedJobType] = useState<string>(ALL_JOB_TYPES);
   const contentRef = useRef<HTMLDivElement>(null);
   const scale = useContainerScale(contentRef, 994.91, 1);
 
-  // Stillingstypene som faktisk finnes i annonsene, uten duplikater
-  const stillingstyper = useMemo(
+  const jobTypes = useMemo(
     () =>
       Array.from(new Set(jobListings.map((job) => job.stillingstype)))
         .sort((a, b) => a.localeCompare(b, "nb")),
     [jobListings]
   );
 
-  // Annonsene som vises etter at filteret er brukt
-  const synligeAnnonser = useMemo(
+  const visibleJobListings = useMemo(
     () =>
-      valgtStillingstype === ALL_JOB_TYPES
+      selectedJobType === ALL_JOB_TYPES
         ? jobListings
-        : jobListings.filter((job) => job.stillingstype === valgtStillingstype),
-    [jobListings, valgtStillingstype]
+        : jobListings.filter((job) => job.stillingstype === selectedJobType),
+    [jobListings, selectedJobType]
   );
 
-  const left = synligeAnnonser.filter((_, i) => i % 2 === 0);
-  const right = synligeAnnonser.filter((_, i) => i % 2 === 1);
+  const left = visibleJobListings.filter((_, i) => i % 2 === 0);
+  const right = visibleJobListings.filter((_, i) => i % 2 === 1);
 
   return (
     <main className="max-w-[1047px] mx-auto px-4 md:px-6 py-8 mt-12">
@@ -74,16 +72,14 @@ export default function JobListingsPage({ jobListings: jobListings }: Stillingsa
         STILLINGSANNONSER
       </h2>
 
-      {/* Filter- og view-knapp */}
       {jobListings.length > 0 && (
         <div className="flex items-start justify-between gap-4 max-w-[1047px] mx-auto mb-10">
 
-          {/* Filter-knapp - kun nyttig med flere stillingstyper å velge mellom */}
-          {stillingstyper.length > 1 ? (
+          {jobTypes.length > 1 ? (
             <JobFilter
-              stillingstyper={stillingstyper}
-              valgtStillingstype={valgtStillingstype}
-              onVelgStillingstype={setValgtStillingstype}
+              jobTypes={jobTypes}
+              selectedJobType={selectedJobType}
+              onSelectJobType={setSelectedJobType}
             />
           ) : (
             <span />
@@ -137,7 +133,7 @@ export default function JobListingsPage({ jobListings: jobListings }: Stillingsa
 
             {/* Mobil - Liste */}
             <div className="flex flex-col items-center gap-6 md:hidden">
-              {synligeAnnonser.map((job) => (
+              {visibleJobListings.map((job) => (
                 <JobCard
                   key={`${job.firma}-${job.url}`}
                   tittel={job.tittel}
@@ -200,7 +196,7 @@ export default function JobListingsPage({ jobListings: jobListings }: Stillingsa
               {/* Listevisning */}
               {!isGalleryView && (
                 <div className="flex flex-col items-start gap-[66px]">
-                  {synligeAnnonser.map((job) => (
+                  {visibleJobListings.map((job) => (
                     <JobCard
                       key={`${job.firma}-${job.url}`}
                       tittel={job.tittel}

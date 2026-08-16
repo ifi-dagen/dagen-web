@@ -44,3 +44,28 @@ export function getJobListings(): JobCsvRow[] {
         job.tittel && job.stillingstype && job.firma && job.frist && job.url && job.beskrivelse
     );
 }
+
+export function getVisibleJobListings(now = new Date()): JobCsvRow[] {
+    const today = new Date(now);
+    today.setHours(0, 0, 0, 0);
+
+    const septemberFirst = new Date(today.getFullYear(), 8, 1);
+    const juneFirst = new Date(today.getFullYear(), 5, 1);
+
+    return getJobListings()
+        .filter((job) => {
+            const deadline = new Date(job.frist);
+
+            if (deadline < today) return false;
+
+            return !(
+                job.stillingstype === "Sommerjobb" &&
+                deadline > juneFirst &&
+                today < septemberFirst
+            );
+        })
+        .sort(
+            (a, b) =>
+                new Date(a.frist).getTime() - new Date(b.frist).getTime()
+        );
+}

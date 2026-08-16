@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { BedriftItem, ProgramItem } from "@/types";
 import { getBedrifter } from "@/lib/getBedrifter";
 import { getCsvContent } from "@/lib/getFileContent";
+import { getVisibleJobListings, JobCsvRow } from "@/lib/getJobListings";
+import InteractiveStandMap from "@/components/stand-map/InteractiveStandMap";
 
 function getEventNameOnDate(date = new Date()): string {
     const year = date.getFullYear();
@@ -27,11 +29,13 @@ const isTab = (x: unknown): x is Tab =>
 type ProgramPageProps = {
     programItems: ProgramItem[];
     bedrifterItems: BedriftItem[];
+    jobListings: JobCsvRow[];
 };
 
 export default function ProgramPage({
     programItems,
     bedrifterItems,
+    jobListings,
 }: ProgramPageProps) {
     const router = useRouter();
     const [tab, setTab] = useState<Tab>("program");
@@ -285,16 +289,13 @@ export default function ProgramPage({
 
             {/* Standkart */}
             {isStandkart && (
-                <div className="flex flex-col items-center mt-24 mb-24 font-mono">
-                    <h2 className="text-text-heading text-5xl font-bold uppercase leading-8 tracking-widest pt-40">
+                <div className="flex w-full flex-col items-center mt-6 mb-14 font-mono">
+                    <h2 className="mb-12 pt-24 text-3xl font-bold uppercase tracking-widest text-text-heading md:text-5xl">
                         STANDKART
                     </h2>
-                    <Image
-                        src={`${router.basePath}/program/standkart.png`}
-                        alt="standkart"
-                        width={1000}
-                        height={4000}
-                        className="h-auto w-full object-contain pt-16"
+                    <InteractiveStandMap
+                        companies={bedrifterItems}
+                        jobListings={jobListings}
                     />
                 </div>
             )}
@@ -305,10 +306,12 @@ export default function ProgramPage({
 export function getStaticProps() {
     const programItems = getCsvContent("program/program");
     const bedrifterItems = getBedrifter("program/bedrifter");
+    const jobListings = getVisibleJobListings();
     return {
         props: {
             programItems,
             bedrifterItems,
+            jobListings,
         },
     };
 }

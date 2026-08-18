@@ -6,20 +6,10 @@ import { BedriftItem, ProgramItem } from "@/types";
 import { getBedrifter } from "@/lib/getBedrifter";
 import { getCsvContent } from "@/lib/getFileContent";
 import { getVisibleJobListings, JobCsvRow } from "@/lib/getJobListings";
+import { getNextEvent } from "@/lib/getNextEvent";
 import InteractiveStandMap from "@/components/stand-map/InteractiveStandMap";
 
-function getEventNameOnDate(date = new Date()): string {
-    const year = date.getFullYear();
-
-    const mayFirst = new Date(year, 4, 1);
-    const janFirst = new Date(year, 0, 1);
-
-    return date >= janFirst && date < mayFirst
-        ? "ettermiddagen"
-        : "dagen";
-}
-
-const nextEventUp = getEventNameOnDate();
+const { name: nextEventUp, year: nextEventYear } = getNextEvent();
 
 type Tab = "program" | "bedrifter" | "standkart";
 
@@ -60,8 +50,6 @@ export default function ProgramPage({
     const isProgram = tab === "program";
     const isBedrifter = tab === "bedrifter";
     const isStandkart = tab === "standkart";
-
-    const date = new Date();
 
     const companiesWithLogos = bedrifterItems.filter((b) => b.logo);
     const hsp = companiesWithLogos.find((b) => b.spons === "hsp") ?? null;
@@ -131,7 +119,7 @@ export default function ProgramPage({
                 <div className="w-full flex flex-col items-center mt-22 mb-24 md:mt-[88px]">
                     <div className="w-full max-w-[1041px]">
                         <div className="mt-12 text-center font-mono text-lg">
-                            Program for {nextEventUp}@ifi {date.getFullYear()}
+                            Program for {nextEventUp}@ifi {nextEventYear}
                         </div>
                         {/* Logo */}
                         <div
@@ -294,10 +282,16 @@ export default function ProgramPage({
                     <h2 className="mb-12 pt-24 text-3xl font-bold uppercase tracking-widest text-text-heading md:text-5xl">
                         STANDKART
                     </h2>
-                    <InteractiveStandMap
-                        companies={bedrifterItems}
-                        jobListings={jobListings}
-                    />
+                    {bedrifterItems.length > 0 ? (
+                        <InteractiveStandMap
+                            companies={bedrifterItems}
+                            jobListings={jobListings}
+                        />
+                    ) : (
+                        <p className="text-center text-lg">
+                            Standkart for {nextEventUp}@ifi {nextEventYear} kommer snart
+                        </p>
+                    )}
                 </div>
             )}
         </main>

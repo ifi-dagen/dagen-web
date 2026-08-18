@@ -4,6 +4,7 @@
   --primary: #D0EEF3;
   --background: #FFFEFC;
   --foreground: #000;
+  --dagen-color: #008080;
 
   --overlay-bg: #F7FEFF;
   --overlay-card: #FFFEFC;
@@ -27,6 +28,8 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-accent: var(--accent);
+  --color-dagen-color: var(--dagen-color);
+
   --color-card-bg: var(--card-bg);
   --color-card-outline: var(--card-outline);
 

@@ -1,15 +1,19 @@
 import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/router";
 
-import standMapAsset from "@/assets/standkart-2026.svg";
 import { JobCsvRow } from "@/lib/getJobListings";
 import { BedriftItem } from "@/types";
 
 import StandDetails from "./StandDetails";
+import StandMapBase from "./StandMapBase";
 import StandMapVenueMarkers from "./StandMapVenueMarkers";
 import StandMapZoomControls from "./StandMapZoomControls";
 import StandMarker from "./StandMarker";
-import { STANDS, STAND_MAP_VIEW_BOX, StandDefinition } from "./standMapData";
+import {
+  getStandMapViewBox,
+  STANDS,
+  StandDefinition,
+} from "./standMapData";
 import {
   createStandMapLayout,
   isStandInVisibleZone,
@@ -43,6 +47,7 @@ export default function InteractiveStandMap({
     [companies]
   );
   const layout = useMemo(() => createStandMapLayout(companies), [companies]);
+  const viewBox = getStandMapViewBox(layout.hasSecondFloor);
   const visibleStands = useMemo(
     () => STANDS.filter((stand) => isStandInVisibleZone(stand.id, layout)),
     [layout]
@@ -147,20 +152,12 @@ export default function InteractiveStandMap({
           >
             <div ref={mapAreaRef} className="relative">
             <svg
-              viewBox={`${STAND_MAP_VIEW_BOX.x} ${STAND_MAP_VIEW_BOX.y} ${STAND_MAP_VIEW_BOX.width} ${STAND_MAP_VIEW_BOX.height}`}
+              viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}
               role="img"
               aria-label="Standkart for Dagen@IFI 2026"
               className="block h-auto w-full"
             >
-              <image
-                href={standMapAsset.src}
-                x={STAND_MAP_VIEW_BOX.x}
-                y={STAND_MAP_VIEW_BOX.y}
-                width={STAND_MAP_VIEW_BOX.width}
-                height={STAND_MAP_VIEW_BOX.height}
-                preserveAspectRatio="xMidYMid meet"
-                pointerEvents="none"
-              />
+              <StandMapBase layout={layout} />
 
               <StandMapVenueMarkers />
 
@@ -200,7 +197,7 @@ export default function InteractiveStandMap({
             {activeStand && (
               <div
                 className="absolute z-20 hidden w-80 md:block"
-                style={tooltipPosition(activeStand)}
+                style={tooltipPosition(activeStand, viewBox)}
                 onMouseEnter={cancelHoverClose}
                 onMouseLeave={scheduleHoverClose}
               >
@@ -212,7 +209,7 @@ export default function InteractiveStandMap({
               <div
                 ref={cardRef}
                 className="absolute z-20 w-80 md:hidden"
-                style={mobileCardPosition(activeStand)}
+                style={mobileCardPosition(activeStand, viewBox)}
                 aria-live="polite"
               >
                 {renderDetails(true)}

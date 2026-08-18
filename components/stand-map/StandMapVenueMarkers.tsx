@@ -7,17 +7,17 @@ export default function StandMapVenueMarkers() {
         width={120.375}
         height={66}
         rx={10.5}
-        fill="#D0EEF3"
-        stroke="#008080"
+        fill="var(--white)"
+        stroke="var(--dagen-color)"
         strokeWidth={1.25}
       />
       <text
         x={1526.438}
         y={1438.1}
-        fontFamily="Arial, Helvetica, sans-serif"
+        fontFamily="var(--font-sans), sans-serif"
         fontSize={20}
         fontWeight={700}
-        fill="#111827"
+        fill="var(--dagen-color)"
         textAnchor="middle"
         dominantBaseline="middle"
       >
@@ -27,17 +27,17 @@ export default function StandMapVenueMarkers() {
         cx={1373.625}
         cy={1461.375}
         r={54.375}
-        fill="#D0EEF3"
-        stroke="#008080"
+        fill="var(--primary)"
+        stroke="var(--dagen-color)"
         strokeWidth={0.5}
       />
       <text
         x={1374}
         y={1460}
-        fontFamily="Arial, Helvetica, sans-serif"
+        fontFamily="var(--font-sans), sans-serif"
         fontSize={14}
         fontWeight={700}
-        fill="#008080"
+        fill="var(--dagen-color)"
         textAnchor="middle"
         dominantBaseline="middle"
       >

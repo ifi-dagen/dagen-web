@@ -49,8 +49,8 @@ export default function StandMarker({
         width={stand.width}
         height={stand.height}
         rx={10.5}
-        fill="#d5e3ff"
-        stroke="#008080"
+        fill="var(--white)"
+        stroke="var(--dagen-color)"
         strokeWidth={1.25}
         pointerEvents="none"
       />
@@ -71,12 +71,12 @@ export default function StandMarker({
           y={stand.y + stand.height / 2}
           textAnchor="middle"
           dominantBaseline="middle"
-          fontFamily="Arial, Helvetica, sans-serif"
+          fontFamily="var(--font-sans), sans-serif"
           fontSize={8}
           fontWeight={700}
           textLength={textLength}
           lengthAdjust={textLength ? "spacingAndGlyphs" : undefined}
-          fill="#111827"
+          fill="var(--dagen-color)"
           pointerEvents="none"
         >
           {name}
@@ -94,10 +94,10 @@ export default function StandMarker({
         aria-label={`${name}.${jobText} Trykk for å se detaljer.`}
         aria-pressed={isPinned}
         fill={isActive ? "rgba(0, 128, 128, 0.24)" : "transparent"}
-        stroke={isActive ? "#005f5f" : "transparent"}
+        stroke={isActive ? "var(--dagen-color)" : "transparent"}
         strokeWidth={isActive ? 7 : 0}
         vectorEffect="non-scaling-stroke"
-        className="cursor-pointer outline-none transition-colors focus-visible:stroke-[7px] focus-visible:stroke-[#005f5f]"
+        className="cursor-pointer outline-none transition-colors focus-visible:stroke-[7px] focus-visible:stroke-dagen-color"
         onMouseEnter={onHoverStart}
         onMouseLeave={onHoverEnd}
         onFocus={onHoverStart}

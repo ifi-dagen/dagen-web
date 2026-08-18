@@ -6,12 +6,32 @@ export type StandDefinition = {
   height: number;
 };
 
+export type StandMapViewBox = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
 export const STAND_MAP_VIEW_BOX = {
   x: 0,
   y: 250,
   width: 2381.25,
   height: 1275,
 } as const;
+
+export const FIRST_FLOOR_VIEW_BOX = {
+  x: 0,
+  y: 900,
+  width: 2381.25,
+  height: 625,
+} as const;
+
+export function getStandMapViewBox(
+  hasSecondFloor: boolean
+): StandMapViewBox {
+  return hasSecondFloor ? STAND_MAP_VIEW_BOX : FIRST_FLOOR_VIEW_BOX;
+}
 
 // Geometry only. Company names and occupancy come exclusively from the CSV.
 export const STANDS: StandDefinition[] = [

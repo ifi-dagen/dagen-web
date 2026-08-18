@@ -1,13 +1,22 @@
-import { CSSProperties, useRef, useState } from "react";
+import { CSSProperties, useLayoutEffect, useRef, useState } from "react";
 
 const MIN_ZOOM = 0.75;
 const MAX_ZOOM = 2;
 const ZOOM_STEP = 0.25;
 const BASE_MIN_WIDTH = 1100;
+const INITIAL_CENTER_RATIO = 0.62;
 
 export function useStandMapZoom() {
   const [zoom, setZoom] = useState(1);
   const scrollerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller || scroller.scrollWidth <= scroller.clientWidth) return;
+
+    scroller.scrollLeft =
+      INITIAL_CENTER_RATIO * scroller.scrollWidth - scroller.clientWidth / 2;
+  }, []);
 
   const applyZoom = (nextZoom: number) => {
     const scroller = scrollerRef.current;

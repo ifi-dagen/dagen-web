@@ -11,13 +11,13 @@ import StandMapZoomControls from "./StandMapZoomControls";
 import StandMarker from "./StandMarker";
 import {
   getStandMapViewBox,
-  STANDS,
   StandDefinition,
 } from "./standMapData";
 import {
   createStandMapLayout,
   isStandInVisibleZone,
 } from "./standMapLayout";
+import { createStandDefinitions } from "./standMapStandLayout";
 import {
   companyNameKey,
   indexCompaniesByStand,
@@ -47,10 +47,11 @@ export default function InteractiveStandMap({
     [companies]
   );
   const layout = useMemo(() => createStandMapLayout(companies), [companies]);
+  const stands = useMemo(() => createStandDefinitions(companies), [companies]);
   const viewBox = getStandMapViewBox(layout.hasSecondFloor);
   const visibleStands = useMemo(
-    () => STANDS.filter((stand) => isStandInVisibleZone(stand.id, layout)),
-    [layout]
+    () => stands.filter((stand) => isStandInVisibleZone(stand.id, layout)),
+    [layout, stands]
   );
   const jobsByKey = useMemo(() => indexJobs(jobListings), [jobListings]);
 

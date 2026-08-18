@@ -20,12 +20,24 @@ export default function StandMapBase({ layout }: StandMapBaseProps) {
   const showLibrary = layout.visibleZoneIds.has("1300");
   const showMezzanine = layout.visibleZoneIds.has("2000");
   const showSecondFloorHall = layout.visibleZoneIds.has("2100");
+  const showLogoHall = layout.visibleZoneIds.has("2200");
   const firstFloorHallStartX = getFirstFloorHallStartX(
     layout.firstFloorHallVisibleThrough
   );
+  const floorLabelX = showLibrary ? 800 : 500;
 
   return (
     <g aria-label="Områder i standkartet" pointerEvents="none">
+      {showLogoHall && (
+        <rect
+          x={150}
+          y={646.75}
+          width={766 - 150}
+          height={162.25}
+          fill="var(--primary)"
+        />
+      )}
+
       {showSecondFloorHall && (
         <rect
           x={766}
@@ -102,12 +114,12 @@ export default function StandMapBase({ layout }: StandMapBaseProps) {
 
       {layout.hasSecondFloor && (
         <>
-          <text x={480} y={590} fontSize={104} {...labelProps}>
+          <text x={floorLabelX} y={590} fontSize={104} {...labelProps}>
             2. Etasje
           </text>
           <text
-            x={showLibrary ? 870 : 500}
-            y={1265}
+            x={floorLabelX}
+            y={showLibrary ? 1585 : 1265}
             fontSize={104}
             {...labelProps}
           >

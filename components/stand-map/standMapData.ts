@@ -42,6 +42,9 @@ export function getStandMapViewBox(
     return { ...FIRST_FLOOR_VIEW_BOX, x, width: right - x };
   }
 
+  const secondFloorViewBox = showLibrary
+    ? { ...STAND_MAP_VIEW_BOX, height: 1410 }
+    : STAND_MAP_VIEW_BOX;
   const combinedX = Math.min(STAND_MAP_VIEW_BOX.x, x);
   const combinedRight = Math.max(
     STAND_MAP_VIEW_BOX.x + STAND_MAP_VIEW_BOX.width,
@@ -49,7 +52,7 @@ export function getStandMapViewBox(
   );
 
   return {
-    ...STAND_MAP_VIEW_BOX,
+    ...secondFloorViewBox,
     x: combinedX,
     width: combinedRight - combinedX,
   };
@@ -77,6 +80,13 @@ export const STANDS: StandDefinition[] = [
   { id: "2103", x: 1300.875, y: 650.25, width: 64.5, height: 63.75 },
   { id: "2102", x: 1367.625, y: 649.5, width: 64.875, height: 64.875 },
   { id: "2101", x: 1435, y: 649.5, width: 64.5, height: 64.875 },
+  { id: "2201", x: 570, y: 650.25, width: 64.875, height: 64.875 },
+  { id: "2202", x: 502.5, y: 650.25, width: 64.875, height: 64.875 },
+  { id: "2203", x: 435, y: 650.25, width: 64.875, height: 64.875 },
+  { id: "2204", x: 367.5, y: 650.25, width: 64.875, height: 64.875 },
+  { id: "2205", x: 300, y: 650.25, width: 64.875, height: 64.875 },
+  { id: "2206", x: 232.5, y: 650.25, width: 64.875, height: 64.875 },
+  { id: "2207", x: 165, y: 650.25, width: 64.875, height: 64.875 },
   { id: "1005", x: 1187, y: 1035.375, width: 62, height: 90 },
   { id: "1004", x: 1252, y: 1035.375, width: 62, height: 90 },
   { id: "1003", x: 1187, y: 1129.125, width: 62, height: 90 },

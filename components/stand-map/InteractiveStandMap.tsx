@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/router";
 
 import { JobCsvRow } from "@/lib/getJobListings";
@@ -41,7 +41,7 @@ export default function InteractiveStandMap({
   const router = useRouter();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [pinnedId, setPinnedId] = useState<string | null>(null);
-  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const desktopCardRef = useRef<HTMLDivElement>(null);
 
   const companiesByStand = useMemo(
     () => indexCompaniesByStand(companies),
@@ -92,14 +92,23 @@ export default function InteractiveStandMap({
     scrollerRef,
   } = useStandMapZoom();
 
-  const cancelHoverClose = () => {
-    if (hoverTimer.current) clearTimeout(hoverTimer.current);
-  };
+  useEffect(() => {
+    if (!pinnedId) return;
 
-  const scheduleHoverClose = () => {
-    cancelHoverClose();
-    hoverTimer.current = setTimeout(() => setHoveredId(null), 120);
-  };
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest(`[data-stand-id="${pinnedId}"]`)) return;
+      if (desktopCardRef.current?.contains(target)) return;
+      if (cardRef.current?.contains(target)) return;
+
+      setPinnedId(null);
+      setHoveredId(null);
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePointer);
+  }, [cardRef, pinnedId]);
 
   const toggleStand = (stand: StandDefinition) => {
     const isClosing = pinnedId === stand.id;
@@ -192,11 +201,8 @@ export default function InteractiveStandMap({
                       jobCount={jobs.length}
                       isActive={stand.id === activeId}
                       isPinned={stand.id === pinnedId}
-                      onHoverStart={() => {
-                        cancelHoverClose();
-                        setHoveredId(stand.id);
-                      }}
-                      onHoverEnd={scheduleHoverClose}
+                      onHoverStart={() => setHoveredId(stand.id)}
+                      onHoverEnd={() => setHoveredId(null)}
                       onToggle={() => toggleStand(stand)}
                     />
                   );
@@ -206,10 +212,9 @@ export default function InteractiveStandMap({
 
             {activeStand && (
               <div
+                ref={desktopCardRef}
                 className="absolute z-20 hidden w-80 md:block"
                 style={tooltipPosition(activeStand, viewBox)}
-                onMouseEnter={cancelHoverClose}
-                onMouseLeave={scheduleHoverClose}
               >
                 {renderDetails(pinnedId === activeStand.id)}
               </div>

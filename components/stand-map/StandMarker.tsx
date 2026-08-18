@@ -90,6 +90,7 @@ export default function StandMarker({
         height={stand.height}
         rx={10.5}
         role="button"
+        data-stand-id={stand.id}
         tabIndex={0}
         aria-label={`${name}.${jobText} Trykk for å se detaljer.`}
         aria-pressed={isPinned}

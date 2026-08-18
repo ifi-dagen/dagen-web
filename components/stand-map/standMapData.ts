@@ -21,25 +21,37 @@ export const STAND_MAP_VIEW_BOX = {
 } as const;
 
 export const FIRST_FLOOR_VIEW_BOX = {
-  x: 0,
-  y: 900,
-  width: 2381.25,
-  height: 625,
+  y: 770,
+  height: 800,
 } as const;
 
 export function getStandMapViewBox(
   hasSecondFloor: boolean,
-  firstFloorHallStartX = 0
+  firstFloorHallStartX: number,
+  showLibrary: boolean,
+  showCanteen: boolean
 ): StandMapViewBox {
-  const viewBox = hasSecondFloor ? STAND_MAP_VIEW_BOX : FIRST_FLOOR_VIEW_BOX;
-  const x = firstFloorHallStartX < viewBox.x
-    ? firstFloorHallStartX - 20
-    : viewBox.x;
+  const firstFloorLeft = showLibrary
+    ? Math.min(firstFloorHallStartX, 300)
+    : firstFloorHallStartX;
+  const firstFloorRight = showCanteen ? 2367.875 : 1607;
+  const x = firstFloorLeft - 30;
+  const right = firstFloorRight + 30;
+
+  if (!hasSecondFloor) {
+    return { ...FIRST_FLOOR_VIEW_BOX, x, width: right - x };
+  }
+
+  const combinedX = Math.min(STAND_MAP_VIEW_BOX.x, x);
+  const combinedRight = Math.max(
+    STAND_MAP_VIEW_BOX.x + STAND_MAP_VIEW_BOX.width,
+    right
+  );
 
   return {
-    ...viewBox,
-    x,
-    width: viewBox.x + viewBox.width - x,
+    ...STAND_MAP_VIEW_BOX,
+    x: combinedX,
+    width: combinedRight - combinedX,
   };
 }
 
@@ -74,6 +86,16 @@ export const STANDS: StandDefinition[] = [
   { id: "1008", x: 1436.625, y: 1090.125, width: 62.625, height: 62.25 },
   { id: "1007", x: 1436.625, y: 1155, width: 62.625, height: 62.25 },
   { id: "1006", x: 1436.625, y: 1228.125, width: 62.625, height: 91.125 },
+  { id: "1301", x: 387.125, y: 985, width: 62.625, height: 62.625 },
+  { id: "1302", x: 452.125, y: 985, width: 62.625, height: 62.625 },
+  { id: "1303", x: 517.125, y: 985, width: 62.625, height: 62.625 },
+  { id: "1304", x: 315, y: 1114.75, width: 62.625, height: 62.625 },
+  { id: "1305", x: 315, y: 1179.625, width: 62.625, height: 62.625 },
+  { id: "1306", x: 315, y: 1244.5, width: 62.625, height: 62.625 },
+  { id: "1307", x: 582.375, y: 1049.875, width: 62.625, height: 62.625 },
+  { id: "1308", x: 582.375, y: 1114.75, width: 62.625, height: 62.625 },
+  { id: "1309", x: 582.375, y: 1179.625, width: 62.625, height: 62.625 },
+  { id: "1310", x: 582.375, y: 1244.5, width: 62.625, height: 62.625 },
   { id: "1207", x: 2089.125, y: 1134.375, width: 62.25, height: 62.625 },
   { id: "1208", x: 2155.5, y: 1134.375, width: 62.25, height: 62.625 },
   { id: "1205", x: 2089.125, y: 1199.625, width: 62.25, height: 62.25 },

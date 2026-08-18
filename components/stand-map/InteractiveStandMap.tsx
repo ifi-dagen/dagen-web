@@ -54,7 +54,9 @@ export default function InteractiveStandMap({
   );
   const viewBox = getStandMapViewBox(
     layout.hasSecondFloor,
-    firstFloorHallStartX
+    firstFloorHallStartX,
+    layout.visibleZoneIds.has("1300"),
+    layout.visibleZoneIds.has("1200")
   );
   const visibleStands = useMemo(
     () => stands.filter((stand) => isStandInVisibleZone(stand.id, layout)),

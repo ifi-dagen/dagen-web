@@ -17,6 +17,7 @@ const secondFloorBackgroundRight = 2030.375;
 
 export default function StandMapBase({ layout }: StandMapBaseProps) {
   const showCanteen = layout.visibleZoneIds.has("1200");
+  const showLibrary = layout.visibleZoneIds.has("1300");
   const showMezzanine = layout.visibleZoneIds.has("2000");
   const showSecondFloorHall = layout.visibleZoneIds.has("2100");
   const firstFloorHallStartX = getFirstFloorHallStartX(
@@ -54,6 +55,16 @@ export default function StandMapBase({ layout }: StandMapBaseProps) {
         </>
       )}
 
+      {showLibrary && (
+        <rect
+          x={300}
+          y={970}
+          width={360}
+          height={400}
+          fill="var(--primary)"
+        />
+      )}
+
       <rect
         x={firstFloorHallStartX}
         y={1325.5}
@@ -83,9 +94,9 @@ export default function StandMapBase({ layout }: StandMapBaseProps) {
 
       <rect
         x={1147.375}
-        y={1009.375}
+        y={970}
         width={359.875}
-        height={326.125}
+        height={400}
         fill="var(--primary)"
       />
 
@@ -94,7 +105,12 @@ export default function StandMapBase({ layout }: StandMapBaseProps) {
           <text x={480} y={590} fontSize={104} {...labelProps}>
             2. Etasje
           </text>
-          <text x={500} y={1265} fontSize={104} {...labelProps}>
+          <text
+            x={showLibrary ? 870 : 500}
+            y={1265}
+            fontSize={104}
+            {...labelProps}
+          >
             1. Etasje
           </text>
         </>
@@ -108,12 +124,18 @@ export default function StandMapBase({ layout }: StandMapBaseProps) {
 
       <text
         x={1327.3125}
-        y={990}
+        y={950}
         fontSize={72}
         {...labelProps}
       >
         Foajéen
       </text>
+
+      {showLibrary && (
+        <text x={480} y={950} fontSize={54} {...labelProps}>
+          Biblioteket
+        </text>
+      )}
 
       {showCanteen && (
         <text x={2201} y={1043} fontSize={72} {...labelProps}>

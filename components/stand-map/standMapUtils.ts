@@ -3,37 +3,19 @@ import { BedriftItem } from "@/types";
 
 import { STAND_MAP_VIEW_BOX, StandDefinition } from "./standMapData";
 
-const COMPANY_ALIASES: Record<string, string> = {
-  exitec: "exsitec",
-  exsitec: "exsitec",
-  ifskadeforsikring: "if",
-  norskregnesentral: "nr",
-  sparebank1utvikling: "sparebank1",
-  statensvegvesen: "statensvegvesen",
-  tieto: "tietoevry",
-  tietoevry: "tietoevry",
-};
-
-export function companyKey(name: string): string {
-  const normalized = name
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/&/g, "og")
-    .replace(/[^a-z0-9]/g, "");
-
-  return COMPANY_ALIASES[normalized] ?? normalized;
+export function companyNameKey(name: string): string {
+  return name.trim().toLowerCase();
 }
 
-export function indexCompanies(companies: BedriftItem[]) {
-  return new Map(companies.map((company) => [companyKey(company.name), company]));
+export function indexCompaniesByStand(companies: BedriftItem[]) {
+  return new Map(companies.map((company) => [company.stand, company]));
 }
 
 export function indexJobs(jobListings: JobCsvRow[]) {
   const jobsByCompany = new Map<string, JobCsvRow[]>();
 
   for (const job of jobListings) {
-    const key = companyKey(job.firma);
+    const key = companyNameKey(job.firma);
     jobsByCompany.set(key, [...(jobsByCompany.get(key) ?? []), job]);
   }
 

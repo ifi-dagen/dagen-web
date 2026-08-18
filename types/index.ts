@@ -13,6 +13,7 @@ export type ProgramItem = {
 };
 
 export type BedriftItem = {
+    stand: string;
     name: string;
     logo: string;
     spons: string;

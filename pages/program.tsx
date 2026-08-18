@@ -63,11 +63,12 @@ export default function ProgramPage({
 
     const date = new Date();
 
-    const hsp = bedrifterItems.find((b) => b.spons === "hsp") ?? null;
-    const spons = bedrifterItems
+    const companiesWithLogos = bedrifterItems.filter((b) => b.logo);
+    const hsp = companiesWithLogos.find((b) => b.spons === "hsp") ?? null;
+    const spons = companiesWithLogos
         .filter((b) => b.spons === "sponsor")
         .sort((a, b) => a.name.localeCompare(b.name))?? null;
-    const restBedrifer = bedrifterItems.filter((b) => b.spons !== "hsp" && b.spons !== "sponsor")
+    const restBedrifer = companiesWithLogos.filter((b) => b.spons !== "hsp" && b.spons !== "sponsor")
         .sort((a, b) => a.name.localeCompare(b.name));
 
     return (

@@ -22,7 +22,7 @@ function findLogoFilename(name: string, logoFromCsv?: string): string | null {
   const tried: string[] = [];
 
   // 1) Prøv logo-feltet direkte (om det finnes)
-  const logoRaw = (logoFromCsv ?? "").trim().toLowerCase();
+  const logoRaw = (logoFromCsv ?? "").trim();
   if (logoRaw) {
     // Hvis den allerede har endelse: prøv den
     if (logoRaw.includes(".")) {
@@ -53,32 +53,37 @@ function findLogoFilename(name: string, logoFromCsv?: string): string | null {
 }
 
 type BedriftCsvRow = {
+  stand?: string;
   name?: string;
   logo?: string;
   spons?: string;
 };
 
 export function getBedrifter(filePath: string): BedriftItem[] {
-  const parsed = getCsvContent<BedriftCsvRow>(filePath);
+  const parsed = getCsvContent<BedriftCsvRow>(filePath, { comments: "#" });
 
   const missing: string[] = [];
 
   const items = (parsed ?? [])
     .map((row) => ({
+      stand: row.stand?.trim() ?? "",
       name: row.name?.trim() ?? "",
       logo: row.logo?.trim() ?? "",
       spons: row.spons?.trim() ?? "",
     }))
-    .filter((row) => row.name)
+    .filter((row) => row.stand && row.name)
     .map((row) => {
       const found = findLogoFilename(row.name, row.logo);
-      if (!found) {
+      if (row.logo && !found) {
         missing.push(row.name);
-        return null;
       }
-      return { name: row.name, logo: found, spons: row.spons } satisfies BedriftItem;
-    })
-    .filter((x): x is BedriftItem => x !== null);
+      return {
+        stand: row.stand,
+        name: row.name,
+        logo: found ?? "",
+        spons: row.spons,
+      } satisfies BedriftItem;
+    });
 
   for (const name of missing) {
     console.error(`[getBedrifter] Logo not found for: ${name}`);

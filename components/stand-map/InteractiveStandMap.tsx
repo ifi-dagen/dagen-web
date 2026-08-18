@@ -6,12 +6,13 @@ import { JobCsvRow } from "@/lib/getJobListings";
 import { BedriftItem } from "@/types";
 
 import StandDetails from "./StandDetails";
+import StandMapVenueMarkers from "./StandMapVenueMarkers";
 import StandMapZoomControls from "./StandMapZoomControls";
 import StandMarker from "./StandMarker";
 import { STANDS, STAND_MAP_VIEW_BOX, StandDefinition } from "./standMapData";
 import {
-  companyKey,
-  indexCompanies,
+  companyNameKey,
+  indexCompaniesByStand,
   indexJobs,
   mobileCardPosition,
   tooltipPosition,
@@ -33,18 +34,22 @@ export default function InteractiveStandMap({
   const [pinnedId, setPinnedId] = useState<string | null>(null);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const companiesByKey = useMemo(() => indexCompanies(companies), [companies]);
+  const companiesByStand = useMemo(
+    () => indexCompaniesByStand(companies),
+    [companies]
+  );
   const jobsByKey = useMemo(() => indexJobs(jobListings), [jobListings]);
 
   const activeId = pinnedId ?? hoveredId;
-  const activeStand = STANDS.find((stand) => stand.id === activeId);
-  const activeCompany = activeStand
-    ? companiesByKey.get(companyKey(activeStand.name))
+  const activeStand = activeId
+    ? STANDS.find((stand) => stand.id === activeId)
     : undefined;
-  const activeJobs = activeStand
-    ? jobsByKey.get(companyKey(activeStand.name)) ?? []
+  const activeCompany = activeId ? companiesByStand.get(activeId) : undefined;
+  const activeName = activeCompany?.name ?? "";
+  const activeJobs = activeCompany
+    ? jobsByKey.get(companyNameKey(activeCompany.name)) ?? []
     : [];
-  const activeLogo = activeCompany?.logo ?? activeJobs.find((job) => job.logo)?.logo;
+  const activeLogo = activeCompany?.logo || activeJobs.find((job) => job.logo)?.logo;
   const activeLogoPath = activeLogo
     ? `${router.basePath}/logos/${activeLogo}`
     : undefined;
@@ -84,10 +89,10 @@ export default function InteractiveStandMap({
   };
 
   const renderDetails = (isPinned: boolean) =>
-    activeStand && (
+    activeStand && activeCompany && (
       <StandDetails
         stand={activeStand}
-        name={activeCompany?.name ?? activeStand.name}
+        name={activeName}
         logoPath={activeLogoPath}
         jobs={activeJobs}
         isPinned={isPinned}
@@ -148,19 +153,25 @@ export default function InteractiveStandMap({
                 pointerEvents="none"
               />
 
+              <StandMapVenueMarkers />
+
               <g aria-label="Bedriftsstander">
                 {STANDS.map((stand) => {
-                  const key = companyKey(stand.name);
-                  const company = companiesByKey.get(key);
-                  const jobs = jobsByKey.get(key) ?? [];
-                  const logoPath = company?.logo
-                    ? `${router.basePath}/logos/${company.logo}`
+                  const company = companiesByStand.get(stand.id);
+                  if (!company) return null;
+
+                  const name = company.name;
+                  const jobs = jobsByKey.get(companyNameKey(name)) ?? [];
+                  const logo = company?.logo || jobs.find((job) => job.logo)?.logo;
+                  const logoPath = logo
+                    ? `${router.basePath}/logos/${logo}`
                     : undefined;
 
                   return (
                     <StandMarker
                       key={stand.id}
                       stand={stand}
+                      name={name}
                       logoPath={logoPath}
                       jobCount={jobs.length}
                       isActive={stand.id === activeId}

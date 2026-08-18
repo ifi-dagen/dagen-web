@@ -39,7 +39,7 @@ export default function StandDetails({
 
         <div className="min-w-0 flex-1">
           <p className="m-0 font-mono text-xs uppercase tracking-wider text-text-link">
-            {stand.id.replace("stand-", "Stand ")}
+            Stand {stand.id}
           </p>
           <h3 className="mt-1 text-xl font-bold leading-tight text-text-heading">
             {name}

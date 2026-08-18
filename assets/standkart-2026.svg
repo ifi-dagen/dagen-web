@@ -10,7 +10,7 @@
       <rect x="1152.375" y="1014.375" width="349.875" height="316.125"/>
       <rect x="2039.625" y="1068.375" width="323.250" height="272.250"/>
     </g>
-    <g id="active-stands">
+    <g id="legacy-active-stands" display="none">
       <rect x="1892.250" y="358.125" width="64.875" height="64.875" rx="10.500" fill="#d5e3ff" stroke="#008080" stroke-width="1.25"/>
       <text x="1924.688" y="390.913" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="1000" fill="#111827" text-anchor="middle" dominant-baseline="middle">Cheffelo</text>
       <rect x="1960.125" y="358.500" width="64.500" height="64.500" rx="10.500" fill="#d5e3ff" stroke="#008080" stroke-width="1.25"/>

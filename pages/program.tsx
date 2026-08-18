@@ -290,7 +290,7 @@ export default function ProgramPage({
                         STANDKART
                     </h2>
                     <Image
-                        src={`${router.basePath}/program/standkart.png`}
+                        src={`${router.basePath}/program/standkart.svg`}
                         alt="standkart"
                         width={1000}
                         height={4000}

@@ -103,7 +103,7 @@ export default function JobCard({
                     <div className="px-16 pt-10 pb-8">
                         <div className="grid grid-cols-[1fr_auto] gap-6 items-start">
                             {/* Venstre: type + info */}
-                            <div>
+                            <div className="min-w-0">
                                 {/* Url-knapp, viser stillingstype i tekst */}
                                 <Link
                                     href={url}

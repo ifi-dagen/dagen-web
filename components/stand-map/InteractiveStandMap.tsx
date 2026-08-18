@@ -11,6 +11,10 @@ import StandMapZoomControls from "./StandMapZoomControls";
 import StandMarker from "./StandMarker";
 import { STANDS, STAND_MAP_VIEW_BOX, StandDefinition } from "./standMapData";
 import {
+  createStandMapLayout,
+  isStandInVisibleZone,
+} from "./standMapLayout";
+import {
   companyNameKey,
   indexCompaniesByStand,
   indexJobs,
@@ -38,11 +42,16 @@ export default function InteractiveStandMap({
     () => indexCompaniesByStand(companies),
     [companies]
   );
+  const layout = useMemo(() => createStandMapLayout(companies), [companies]);
+  const visibleStands = useMemo(
+    () => STANDS.filter((stand) => isStandInVisibleZone(stand.id, layout)),
+    [layout]
+  );
   const jobsByKey = useMemo(() => indexJobs(jobListings), [jobListings]);
 
   const activeId = pinnedId ?? hoveredId;
   const activeStand = activeId
-    ? STANDS.find((stand) => stand.id === activeId)
+    ? visibleStands.find((stand) => stand.id === activeId)
     : undefined;
   const activeCompany = activeId ? companiesByStand.get(activeId) : undefined;
   const activeName = activeCompany?.name ?? "";
@@ -156,7 +165,7 @@ export default function InteractiveStandMap({
               <StandMapVenueMarkers />
 
               <g aria-label="Bedriftsstander">
-                {STANDS.map((stand) => {
+                {visibleStands.map((stand) => {
                   const company = companiesByStand.get(stand.id);
                   if (!company) return null;
 

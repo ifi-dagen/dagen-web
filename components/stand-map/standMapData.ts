@@ -28,9 +28,19 @@ export const FIRST_FLOOR_VIEW_BOX = {
 } as const;
 
 export function getStandMapViewBox(
-  hasSecondFloor: boolean
+  hasSecondFloor: boolean,
+  firstFloorHallStartX = 0
 ): StandMapViewBox {
-  return hasSecondFloor ? STAND_MAP_VIEW_BOX : FIRST_FLOOR_VIEW_BOX;
+  const viewBox = hasSecondFloor ? STAND_MAP_VIEW_BOX : FIRST_FLOOR_VIEW_BOX;
+  const x = firstFloorHallStartX < viewBox.x
+    ? firstFloorHallStartX - 20
+    : viewBox.x;
+
+  return {
+    ...viewBox,
+    x,
+    width: viewBox.x + viewBox.width - x,
+  };
 }
 
 // Geometry only. Company names and occupancy come exclusively from the CSV.
@@ -74,13 +84,17 @@ export const STANDS: StandDefinition[] = [
   { id: "1210", x: 2272.875, y: 1196.625, width: 62.25, height: 62.25 },
   { id: "1211", x: 2272.875, y: 1261.5, width: 62.25, height: 62.625 },
   { id: "1212", x: 2272.875, y: 1326.375, width: 62.25, height: 62.625 },
-  { id: "1116", x: 8, y: 1403.25, width: 62.625, height: 62.625 },
-  { id: "1115", x: 72.375, y: 1403.25, width: 62.625, height: 62.625 },
-  { id: "1114", x: 137.25, y: 1403.25, width: 62.625, height: 62.625 },
-  { id: "1113", x: 222.375, y: 1403.25, width: 62.625, height: 62.625 },
-  { id: "1112", x: 318, y: 1403.25, width: 62.625, height: 62.625 },
-  { id: "1111", x: 433.875, y: 1403.25, width: 62.625, height: 62.625 },
-  { id: "1110", x: 498.75, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1120", x: -176, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1119", x: -111.125, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1118", x: -46.25, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1117", x: 38.625, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1116", x: 103.5, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1115", x: 168.375, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1114", x: 253.25, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1113", x: 318.125, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1112", x: 393, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1111", x: 457.875, y: 1403.25, width: 62.625, height: 62.625 },
+  { id: "1110", x: 532.75, y: 1403.25, width: 62.625, height: 62.625 },
   { id: "1109", x: 617.625, y: 1403.25, width: 62.625, height: 62.625 },
   { id: "1108", x: 682.5, y: 1403.25, width: 62.625, height: 62.625 },
   { id: "1107", x: 747.375, y: 1403.25, width: 62.625, height: 62.625 },
@@ -93,3 +107,11 @@ export const STANDS: StandDefinition[] = [
   { id: "1201", x: 1938.75, y: 1408.125, width: 62.625, height: 62.625 },
   { id: "1202", x: 2023.25, y: 1408.125, width: 62.625, height: 62.625 },
 ];
+
+export function getFirstFloorHallStartX(visibleThrough: number): number {
+  const lastVisibleStand = STANDS.find(
+    (stand) => stand.id === String(visibleThrough)
+  );
+
+  return (lastVisibleStand?.x ?? 747.375) - 10.375;
+}

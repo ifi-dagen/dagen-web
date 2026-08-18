@@ -17,6 +17,7 @@ export type StandMapLayout = {
   occupiedZoneIds: ReadonlySet<StandZoneId>;
   visibleZoneIds: ReadonlySet<StandZoneId>;
   hasSecondFloor: boolean;
+  firstFloorHallVisibleThrough: number;
 };
 
 const standZoneIds = new Set<string>(STAND_ZONE_IDS);
@@ -62,6 +63,14 @@ export function createStandMapLayout(
     visibleZoneIds.add("2200");
   }
 
+  const occupiedFirstFloorHallNumbers = [...occupiedStandIds]
+    .map(Number)
+    .filter((standNumber) => standNumber >= 1101 && standNumber <= 1120);
+  const highestFirstFloorHallNumber = Math.max(
+    1106,
+    ...occupiedFirstFloorHallNumbers
+  );
+
   return {
     occupiedStandIds,
     occupiedZoneIds,
@@ -70,6 +79,10 @@ export function createStandMapLayout(
       occupiedZoneIds.has("2000") ||
       occupiedZoneIds.has("2100") ||
       occupiedZoneIds.has("2200"),
+    firstFloorHallVisibleThrough: Math.min(
+      highestFirstFloorHallNumber + 1,
+      1120
+    ),
   };
 }
 

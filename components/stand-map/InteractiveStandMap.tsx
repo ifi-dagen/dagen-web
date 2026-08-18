@@ -10,6 +10,7 @@ import StandMapVenueMarkers from "./StandMapVenueMarkers";
 import StandMapZoomControls from "./StandMapZoomControls";
 import StandMarker from "./StandMarker";
 import {
+  getFirstFloorHallStartX,
   getStandMapViewBox,
   StandDefinition,
 } from "./standMapData";
@@ -48,7 +49,13 @@ export default function InteractiveStandMap({
   );
   const layout = useMemo(() => createStandMapLayout(companies), [companies]);
   const stands = useMemo(() => createStandDefinitions(companies), [companies]);
-  const viewBox = getStandMapViewBox(layout.hasSecondFloor);
+  const firstFloorHallStartX = getFirstFloorHallStartX(
+    layout.firstFloorHallVisibleThrough
+  );
+  const viewBox = getStandMapViewBox(
+    layout.hasSecondFloor,
+    firstFloorHallStartX
+  );
   const visibleStands = useMemo(
     () => stands.filter((stand) => isStandInVisibleZone(stand.id, layout)),
     [layout, stands]

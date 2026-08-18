@@ -1,3 +1,4 @@
+import { getFirstFloorHallStartX } from "./standMapData";
 import { StandMapLayout } from "./standMapLayout";
 
 type StandMapBaseProps = {
@@ -18,6 +19,9 @@ export default function StandMapBase({ layout }: StandMapBaseProps) {
   const showCanteen = layout.visibleZoneIds.has("1200");
   const showMezzanine = layout.visibleZoneIds.has("2000");
   const showSecondFloorHall = layout.visibleZoneIds.has("2100");
+  const firstFloorHallStartX = getFirstFloorHallStartX(
+    layout.firstFloorHallVisibleThrough
+  );
 
   return (
     <g aria-label="Områder i standkartet" pointerEvents="none">
@@ -51,9 +55,9 @@ export default function StandMapBase({ layout }: StandMapBaseProps) {
       )}
 
       <rect
-        x={0}
+        x={firstFloorHallStartX}
         y={1325.5}
-        width={1607}
+        width={1607 - firstFloorHallStartX}
         height={147.625}
         fill="var(--primary)"
       />
@@ -103,12 +107,12 @@ export default function StandMapBase({ layout }: StandMapBaseProps) {
       )}
 
       <text
-        x={1250}
+        x={1327.3125}
         y={990}
         fontSize={72}
         {...labelProps}
       >
-        Foajeen
+        Foajéen
       </text>
 
       {showCanteen && (

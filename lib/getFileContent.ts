@@ -20,7 +20,14 @@ export function getMarkdownContent(contentName: string): string {
 }
 
 // CSV
-export function getCsvContent<T extends Record<string, unknown>>( contentName: string ): T[] {
+type CsvContentOptions = {
+  comments?: string;
+};
+
+export function getCsvContent<T extends Record<string, unknown>>(
+  contentName: string,
+  options: CsvContentOptions = {}
+): T[] {
     const filePath = path.join(contentDir, `${contentName}.csv`);
 
     if (!fs.existsSync(filePath)) {
@@ -34,6 +41,7 @@ export function getCsvContent<T extends Record<string, unknown>>( contentName: s
       header: true,
       skipEmptyLines: true,
       transformHeader: (h) => h.toLowerCase().trim(),
+      ...(options.comments ? { comments: options.comments } : {}),
     });
 
     if (parsed.errors.length) {

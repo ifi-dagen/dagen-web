@@ -1,7 +1,7 @@
 import { GridIcon, ListIcon } from "@/components/icons/ButtonIcons";
 import JobCard from "@/components/JobCard";
 import JobFilter, { ALL_JOB_TYPES } from "@/components/JobFilter";
-import { getJobListings, JobCsvRow } from "@/lib/getJobListings";
+import { getJobListings, getVisibleJobListings, JobCsvRow } from "@/lib/getJobListings";
 import { useState, useLayoutEffect, useMemo, useRef } from "react";
 
 type StillingsannonserProps = {
@@ -225,48 +225,7 @@ export default function JobListingsPage({ jobListings: jobListings }: Stillingsa
 
 // Henter, filtrerer og sorterer annonser fra jobs.ts
 export async function getStaticProps() {
-  const jobs = getJobListings();
-
-  // Definerer "i dag" som dagens dato kl 00:00
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  // Earliest publishing date for summer jobs
-  const sep1 = new Date()
-  sep1.setMonth(8, 0) // 0-indexed, 8=september, 0=1st
-  sep1.setHours(0, 0, 0, 0)
-
-  // Cutoff for current year's summer jobs
-  // (if the deadline is later than june 1st, it is guaranteed to be for next
-  // year)
-  const jun1 = new Date()
-  jun1.setMonth(5, 0)
-  jun1.setHours(0, 0, 0, 0)
-
-  // Filtrer bort utgåtte frister og evt tidlige sommerjobber
-  const validJobs = jobs.filter((job) => {
-    // Handle expired jobs
-    const deadlineDate = new Date(job.frist);
-    if (deadlineDate < today) {
-        return false
-    }
-    
-    // We now know that the job isn't expired, and can check if it's an
-    // early summer job
-    if (job.stillingstype === "Sommerjobb" && deadlineDate > jun1 && today < sep1) {
-        return false
-    }
-    
-    // All ok
-    return true
-  });
-
-  // Sorter etter frister, FEFO (First Expired First Out)
-  validJobs.sort((a: JobCsvRow, b: JobCsvRow) => {
-    return new Date(a.frist).getTime() - new Date(b.frist).getTime();
-  });
-
   return {
-    props: { jobListings: validJobs },
+    props: { jobListings: getVisibleJobListings() },
   };
 }

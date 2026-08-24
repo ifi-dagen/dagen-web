@@ -41,7 +41,7 @@ export function getJobListings(): JobCsvRow[] {
 
     // Filtrer bort rader som mangler tittel,firmanavn,frist eller URL
     return (data as JobCsvRow[]).filter((job) => 
-        job.tittel && job.stillingstype && job.firma && job.frist && job.url && job.beskrivelse
+        job.tittel && job.stillingstype && job.firma && (job.frist || job.frist === "") && job.url && job.beskrivelse
     );
 }
 
@@ -54,7 +54,12 @@ export function getVisibleJobListings(now = new Date()): JobCsvRow[] {
 
     return getJobListings()
         .filter((job) => {
-            const deadline = new Date(job.frist);
+            let deadline: Date
+            if (!job.frist) {
+                deadline = new Date()
+            } else {
+                deadline = new Date(job.frist);
+            }
 
             if (deadline < today) return false;
 
@@ -65,7 +70,12 @@ export function getVisibleJobListings(now = new Date()): JobCsvRow[] {
             );
         })
         .sort(
-            (a, b) =>
-                new Date(a.frist).getTime() - new Date(b.frist).getTime()
+            (a, b) => {
+                if (!a.frist && !b.frist) return 0;
+                if (!a.frist) return 1;
+                if (!b.frist) return -1;
+
+                return new Date(a.frist).getTime() - new Date(b.frist).getTime()
+            }
         );
 }

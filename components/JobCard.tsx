@@ -75,7 +75,7 @@ export default function JobCard({
     }, [beskrivelse, isOpen, scale]);
 
 
-    const aria = `${stillingstype}, ${tittel} hos ${firma}, søknadsfrist ${formatDate(frist)}. ${beskrivelse}`;
+    const aria = `${stillingstype}, ${tittel} hos ${firma}, ${frist ? `søknadsfrist ${formatDate(frist)}` : ""}. ${beskrivelse}`;
 
     return (
         <div
@@ -129,9 +129,11 @@ export default function JobCard({
                                     <p className="text-[23.14px] leading-[43.7px] m-0">
                                         {"Bedrift: " + firma}
                                     </p>
-                                    <p className="text-[23.14px] leading-[43.7px] m-0">
-                                        {"Frist: " + formatDate(frist)}
-                                    </p>
+                                    {frist && (
+                                        <p className="text-[23.14px] leading-[43.7px] m-0">
+                                             {"Frist: " + formatDate(frist)}
+                                        </p>
+                                    )}
                                 </div>
                             </div>
 

@@ -41,7 +41,7 @@ function useContainerScale(
 
 
 export default function JobListingsPage({ jobListings: jobListings }: StillingsannonserProps) {
-  const [isGalleryView, setIsGalleryView] = useState(false);
+  const [isGalleryView, setIsGalleryView] = useState(true);
   const [selectedJobType, setSelectedJobType] = useState<string>(ALL_JOB_TYPES);
   const contentRef = useRef<HTMLDivElement>(null);
   const scale = useContainerScale(contentRef, 994.91, 1);

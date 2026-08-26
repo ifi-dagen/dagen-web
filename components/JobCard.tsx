@@ -166,6 +166,7 @@ export default function JobCard({
                                             "text-text-color",
                                             "text-[23.14px] leading-[43.7px]",
                                             "m-0",
+                                            "whitespace-pre-line",
                                             isOpen ? "" : "line-clamp-4",
                                             inline ? "pb-[43.7px]" : "",
                                         ].join(" ")}

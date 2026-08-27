@@ -286,6 +286,8 @@ export default function ProgramPage({
                         <InteractiveStandMap
                             companies={bedrifterItems}
                             jobListings={jobListings}
+                            eventName={nextEventUp}
+                            eventYear={nextEventYear}
                         />
                     ) : (
                         <p className="text-center text-lg">

@@ -6,6 +6,7 @@ import { BedriftItem } from "@/types";
 
 import StandDetails from "./StandDetails";
 import StandMapBase from "./StandMapBase";
+import StandMapExportMenu from "./StandMapExportMenu";
 import StandMapVenueMarkers from "./StandMapVenueMarkers";
 import StandMapZoomControls from "./StandMapZoomControls";
 import StandMarker from "./StandMarker";
@@ -32,16 +33,21 @@ import { useStandMapZoom } from "./useStandMapZoom";
 type InteractiveStandMapProps = {
   companies: BedriftItem[];
   jobListings: JobCsvRow[];
+  eventName: string;
+  eventYear: number;
 };
 
 export default function InteractiveStandMap({
   companies,
   jobListings,
+  eventName,
+  eventYear,
 }: InteractiveStandMapProps) {
   const router = useRouter();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [pinnedId, setPinnedId] = useState<string | null>(null);
   const desktopCardRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   const companiesByStand = useMemo(
     () => indexCompaniesByStand(companies),
@@ -141,13 +147,21 @@ export default function InteractiveStandMap({
       }}
       className="w-full"
     >
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-sm">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3 text-sm">
         <p className="m-0 font-sans">
           Hold over eller trykk på en stand for å se mer informasjon.
         </p>
-        <p className="m-0 font-mono text-xs md:hidden">
-          Dra kartet sidelengs for å utforske.
-        </p>
+        <div className="flex items-center gap-3">
+          <p className="m-0 hidden font-mono text-xs sm:block md:hidden">
+            Dra kartet sidelengs for å utforske.
+          </p>
+          <StandMapExportMenu
+            svgRef={svgRef}
+            viewBox={viewBox}
+            eventName={eventName}
+            eventYear={eventYear}
+          />
+        </div>
       </div>
 
       <div className="relative w-full">
@@ -171,9 +185,10 @@ export default function InteractiveStandMap({
           >
             <div ref={mapAreaRef} className="relative">
             <svg
+              ref={svgRef}
               viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}
               role="img"
-              aria-label="Standkart for Dagen@IFI 2026"
+              aria-label={`Standkart for ${eventName}@IFI ${eventYear}`}
               className="block h-auto w-full"
             >
               <StandMapBase layout={layout} />
